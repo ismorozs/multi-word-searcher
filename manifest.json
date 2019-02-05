@@ -1,0 +1,40 @@
+{
+
+  "manifest_version": 2,
+  "name": "Multi word searcher",
+  "version": "1.0",
+
+  "description": "Extension allows for searching texts through sub-strings separated by choosen amounts of characters",
+  "homepage_url": "https://github.com/ismorozs/multi-word-searcher",
+  "icons": {
+    "32": "icons/glass32.png",
+    "48": "icons/glass48.png",
+    "512": "icons/glass512.png"
+  },
+
+  "permissions": [
+    "activeTab",
+    "find"
+  ],
+
+  "browser_action": {
+    "default_icon": "icons/glass32.png",
+    "default_title": "Multi word searcher",
+    "default_popup": "popup/popup.html"
+  },
+
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      }
+    }
+  },
+
+  "options_ui": {
+    "page": "options/options.html"
+  },
+
+  "author": "Igor Morozov"
+}

@@ -1,0 +1,22 @@
+table {
+  width: 400px;
+  border-collapse: collapse;
+  margin-bottom: 20px
+}
+
+table, th, td {
+  border: 1px solid black;
+  text-align: center;
+  padding: 5px 0;
+}
+
+#removeAll {
+  text-align: center;
+  font-size: 15px;
+  padding: 5px 10px;
+  width: 200px;
+}
+
+br {
+  margin-bottom: 5px;
+}
