@@ -2,7 +2,7 @@
   if (window.hasRun) return;
   window.hasRun = true;
 
-  const uniqueClassPrefix = browser.runtime.id.split('@').join('');
+  const uniqueClassPrefix = browser.runtime.id.replace(/[{}@]/g, '');
   const uniqueExtensionClass = 'multi-string-search-extension-' + uniqueClassPrefix;
   const findHelperClass = uniqueExtensionClass + '-find-helper';
 
