@@ -179,25 +179,27 @@
 
       for (let i = 0; i < boundingRects.length; i++) {
         const rect = boundingRects[i];
-        const highlightElement = createHightlightElement(rect, scrollTop, scrollLeft, data);
 
-        highlightElement.classList.add(uniqueExtensionClass + data.searchId);
+        const highlightElement = createHightlightElement(rect, scrollTop, scrollLeft, data);
         document.body.appendChild(highlightElement);
 
         highlightData.els.push(highlightElement);
       }
 
-      highlightData.top = scrollTop + boundingRects[0].top;
+      const topPosition = scrollTop + boundingRects[0].top;
+
+      highlightData.top = topPosition;
       highlightData.left = scrollLeft + boundingRects[0].left;
+
+      const scrollBarMark = createScrollbarMark(topPosition, data, rangeIdx);
+      document.body.appendChild(scrollBarMark);
 
       HIGHLIGHTINGS_POSITIONS[data.searchId].push(highlightData);
     });
   }
 
   function createHightlightElement (rect, scrollTop, scrollLeft, data) {
-    const highlightElement = document.createElement('span');
-
-    const styles = {
+    const highlightElement = createElement('span', {
       position: 'absolute',
       height: rect.height + 'px',
       width: rect.width + 'px',
@@ -207,13 +209,40 @@
       'pointer-events': 'none',
       background: 'rgba(' +  data.highlightColor + ', 0.25)',
       'outline-width': '3px',
-    };
+    });
 
-    for (let attr in styles) {
-      highlightElement.style.setProperty(attr, styles[attr], 'important');
-    }
+    highlightElement.classList.add(uniqueExtensionClass + data.searchId);
 
     return highlightElement;
+  }
+
+  function createScrollbarMark (topPosition, data, rangeIdx) {
+    const scrollBarMark = createElement('span', {
+      position: 'fixed',
+      height: '5px',
+      width: '15px',
+      top: window.innerHeight / document.body.scrollHeight * topPosition + 'px',
+      right: '0px',
+      'z-index': 2147483647,
+      cursor: 'pointer',
+      background: 'rgba(' +  data.highlightColor + ', 0.5)',
+    });
+
+    scrollBarMark.title = data.searchString;
+    scrollBarMark.onclick = () => moveToHighlighting({ searchId: data.searchId, id: rangeIdx });
+    scrollBarMark.classList.add(uniqueExtensionClass + data.searchId);
+
+    return scrollBarMark;
+  }
+
+  function createElement (type, styles) {
+    const el = document.createElement(type);
+
+    for (let attr in styles) {
+      el.style.setProperty(attr, styles[attr], 'important');
+    }
+
+    return el;
   }
 
   function moveToHighlighting (data) {

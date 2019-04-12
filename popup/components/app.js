@@ -82,7 +82,6 @@ Couli.define('app',
       },
 
       keyup: (e, el, ci) => {
-        console.log(e.keyCode)
         if (Object.values(KEYBOARD_KEYS).indexOf(e.keyCode) < 0) {
           return;
         }
@@ -427,7 +426,8 @@ function search (ci) {
   const searchStrings = ci.get('searchStrings').value();
   const currentSearchIdx = ci.get('currentSearchIdx');
   const highlightColor = ci.get('color');
-  const caseSensitive = ci.get('caseSensitive')
+  const caseSensitive = ci.get('caseSensitive');
+  const searchString = searchStrings.map((strObj) => strObj.string).join(' ');
 
   FIND_API_INPUT_BUG_FIX_BEFORE(() => {
 
@@ -440,7 +440,8 @@ function search (ci) {
         firstFoundPart: foundResults,
         searchRefinements: searchStrings,
         highlightColor,
-        caseSensitive
+        caseSensitive,
+        searchString,
       }, (response) => {
         
         const foundResults = response.foundResults;
