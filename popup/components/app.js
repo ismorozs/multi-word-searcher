@@ -78,7 +78,7 @@ Couli.define('app',
 
       contextmenu: (e, el, ci) => {
         e.preventDefault();
-        removeHighlightings(ci);
+        removeSearch(ci, e.shiftKey);
       },
 
       keyup: (e, el, ci) => {
@@ -104,7 +104,7 @@ Couli.define('app',
 
           case KEYBOARD_KEYS.DELETE:
           case KEYBOARD_KEYS.r:
-            removeHighlightings(ci);
+            removeSearch(ci, e.shiftKey);
             return;
 
           case KEYBOARD_KEYS.w:
@@ -147,7 +147,7 @@ Couli.define('app',
 
   removeSearch: {
     events: {
-      click: (e, el, ci) => removeHighlightings(ci)
+      click: (e, el, ci) => removeSearch(ci, e.shiftKey)
     },
     class: ($) => ({
       hidden: $.searchStrings.length === 1 && !$.searchStrings[0].string.length && !$.searchHappened
@@ -509,13 +509,28 @@ function moveToHighlighting (searchId, id) {
   sendMessageToCurrentTab('moveToHighlighting', { searchId, id: id - 1 })
 }
 
-function removeHighlightings (ci) {
-  const currentSearchIdx = ci.get('currentSearchIdx');
-  sendMessageToCurrentTab('removeHighlightings', { searchId: currentSearchIdx });
-  const newSearch = window.STATE.resetCurrentSearch();
-  ci.set(newSearch);
+function removeSearch (ci, all) {
+  all ? removeAllSearches(ci) : removeCurrentSearch(ci);
+
+  const newSearchState = window.STATE.getCurrentSearch();
+  ci.set(newSearchState);
   ci.applyChanges();
   setTimeout(() => ci.markup('currentSearchIdx').focus(), 0);
+}
+
+function removeCurrentSearch (ci) {
+  const currentSearchIdx = ci.get('currentSearchIdx');
+  window.STATE.resetSearch(currentSearchIdx);
+  removeHighlightings(currentSearchIdx);
+}
+
+function removeAllSearches (ci) {
+  window.STATE.resetAllSearches();
+  window.STATE.COLORS.forEach((el, i) => removeHighlightings(i));
+}
+
+function removeHighlightings (searchId) {
+  sendMessageToCurrentTab('removeHighlightings', { searchId });
 }
 
 function refineFindings (opts, cb) {

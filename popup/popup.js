@@ -73,7 +73,7 @@ function onMessage (message) {
 
 function sendMessageToCurrentTab (action, payload, cb) {
   cb = cb || (() => {});
-  const callbackId = Date.now() + action;
+  const callbackId = Date.now() + Math.random() + action;
   addMessageListener (action, callbackId, cb);
 
   const message = Object.assign({ action, callbackId, senderId: browser.runtime.id }, payload);

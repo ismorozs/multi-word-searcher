@@ -33,7 +33,11 @@ window.STATE = (function () {
     }
   }
 
-  var state = {};
+  function resetSearch (idx) {
+    state.searches[idx] = initiateSearchOpts(COLORS[idx], idx);
+  }
+
+  let state = {};
 
   return {
     COLORS,
@@ -49,7 +53,7 @@ window.STATE = (function () {
         search.searchHappened = foundResults
       });
     },
-    setDefault: function () { state = DEFAULT_STATE; console.log(state) },
+    setDefault: () => state = DEFAULT_STATE,
     searchesLength: () => state.searches.length,
     getSearch: (idx) => state.searches[idx],
     getCurrentSearch: () => state.searches[ state.currentSearchIdx ],
@@ -57,7 +61,8 @@ window.STATE = (function () {
       state.searches[ search.currentSearchIdx ] = search;
       state.currentSearchIdx = search.currentSearchIdx;
     },
-    resetCurrentSearch: () => state.searches[ state.currentSearchIdx ] = initiateSearchOpts(COLORS[state.currentSearchIdx], state.currentSearchIdx)
+    resetAllSearches: () => COLORS.forEach((c, idx) => resetSearch(idx)),
+    resetSearch,
   };
 
 })();
