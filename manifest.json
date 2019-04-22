@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "Multi word searcher",
-  "version": "1.0.3",
+  "version": "1.0.4",
 
   "description": "Extension allows for searching texts through sub-strings separated by choosen amounts of characters",
   "homepage_url": "https://github.com/ismorozs/multi-word-searcher",
@@ -30,6 +30,10 @@
         "mac": "MacCtrl+Shift+F"
       }
     }
+  },
+
+  "background": {
+    "scripts": ["background-script.js"]
   },
 
   "options_ui": {

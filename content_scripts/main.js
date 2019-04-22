@@ -229,10 +229,17 @@
     });
 
     scrollBarMark.title = data.searchString;
-    scrollBarMark.onclick = () => moveToHighlighting({ searchId: data.searchId, id: rangeIdx });
+    scrollBarMark.onclick = () => {
+      moveToHighlighting({ searchId: data.searchId, id: rangeIdx });
+      updateHighlightState(data.searchId, rangeIdx + 1);
+    };
     scrollBarMark.classList.add(uniqueExtensionClass + data.searchId);
 
     return scrollBarMark;
+  }
+
+  function updateHighlightState (currentSearchIdx, shownResultNumber, url) {
+    browser.runtime.sendMessage({ action: 'updateHighlightState', senderId: browser.runtime.id, currentSearchIdx, shownResultNumber, url: window.location.href });
   }
 
   function createElement (type, styles) {

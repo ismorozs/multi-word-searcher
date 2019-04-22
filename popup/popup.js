@@ -20,7 +20,8 @@ function getCurrentUrl () {
 
 function setupGlobalEvents (url) {
   window.addEventListener("unload", () => {
-    window.localStorage.setItem(url, window.STATE.toJSON());
+    window.STATE.saveState(url);
+    browser.runtime.sendMessage({ action: 'notifyBackgroundScript', message: 'popupClosed' });
   });
 
   return url;
@@ -29,7 +30,7 @@ function setupGlobalEvents (url) {
 function setupState (url) {
 
   try {
-    window.STATE.setFromJSON( window.localStorage.getItem(url))
+    window.STATE.loadState(url);
 
     if (window.STATE.isEmpty()) {
       window.STATE.setDefault();
@@ -37,6 +38,8 @@ function setupState (url) {
   } catch (e) {
     window.STATE.setDefault();
   }
+
+  browser.runtime.sendMessage({ action: 'notifyBackgroundScript', message: 'popupOpened' });
 }
 
 function loadPreviouslyFound (state) {
@@ -64,11 +67,13 @@ function getCurrentTab () {
 }
 
 function onMessage (message) {
-  if (!message.action || !message.callbackId) {
-    return;
+  if (message.action) {
+
+    if (message.callbackId) {
+      MESSAGE_LISTENERS[message.action][message.callbackId](message);
+      delete MESSAGE_LISTENERS[message.action][message.callbackId];
+    }
   }
-  MESSAGE_LISTENERS[message.action][message.callbackId](message);
-  delete MESSAGE_LISTENERS[message.action][message.callbackId];
 }
 
 function sendMessageToCurrentTab (action, payload, cb) {

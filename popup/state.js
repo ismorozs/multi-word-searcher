@@ -41,10 +41,6 @@ window.STATE = (function () {
 
   return {
     COLORS,
-    raw: () => state,
-    set: (newState) => state = newState,
-    toJSON: () => JSON.stringify(state),
-    setFromJSON: (jsonState) => state = JSON.parse(jsonState),
     isEmpty: () => !Object.keys(state).length,
     addFindings: (findings) => {
       state.searches.forEach((search, i) => {
@@ -63,6 +59,8 @@ window.STATE = (function () {
     },
     resetAllSearches: () => COLORS.forEach((c, idx) => resetSearch(idx)),
     resetSearch,
+    saveState: (url) => window.localStorage.setItem(url, JSON.stringify(state)),
+    loadState: (url) => state = JSON.parse( window.localStorage.getItem(url) )
   };
 
 })();
