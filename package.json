@@ -1,0 +1,25 @@
+{
+  "name": "multi-word-search",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ismorozs/multi-word-searcher.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ismorozs/multi-word-searcher/issues"
+  },
+  "homepage": "https://github.com/ismorozs/multi-word-searcher#readme",
+  "devDependencies": {
+    "couli": "0.0.9",
+    "html-loader": "^0.5.5",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5"
+  }
+}

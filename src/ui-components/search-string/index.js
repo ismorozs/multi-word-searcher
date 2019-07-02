@@ -1,4 +1,7 @@
-(function () {
+import Couli from 'couli';
+
+import markup from './markup.html';
+import styles from './styles';
 
 const ACTIVE_SEARCH_INPUT_LENGTH = 150;
 const MAX_INPUT_WIDTH = 255;
@@ -10,13 +13,7 @@ const ENTER_KEY = 13;
 const BACKSPACE_KEY = 8;
 const ADD_SIGN_PADDING = 12;
 
-Couli.define('search-string',
-  `<li>
-    <input x-b="string" type="text" class="string">
-    <input x-b="distance" type="text" class="distance" title="Distance between substrings">
-    <button x-b="remove" tabindex="-1" title="Remove substring"></button>
-    <button x-b="addNew" tabindex="-1" title="Add new substring"></button>
-  </li>`, {
+Couli.define('search-string', markup, {
 
   focus: {},
 
@@ -144,112 +141,8 @@ Couli.define('search-string',
     }
   }
 
-}, {
-
-  '': {
-    position: 'relative',
-    display: 'inline-block',
-    marginLeft: SPACE_BETWEEN_INPUTS,
-    marginTop: 5,
-    marginBottom: 14,
-  },
-
-  string: {
-    boxSizing: 'border-box',
-    fontSize: 15,
-    width: ACTIVE_SEARCH_INPUT_LENGTH,
-    '-webkit-appearance': 'none',
-    borderWidth: 0,
-    borderBottom: '2px solid black',
-  },
-
-  'string:focus': {
-    outline: 'none',
-    borderColor: 'LimeGreen'
-  },
-
-  distance: {
-    width: SPACE_BETWEEN_INPUTS - 10,
-    position: 'absolute',
-    left: -30,
-    top: -17,
-    '-webkit-appearance': 'none',
-    borderWidth: 0,
-    borderBottom: '1px solid black',
-  },
-
-  'distance:focus': {
-    outline: 'none',
-    borderColor: 'LimeGreen'
-  },
-
-  '.hidden': {
-    display: 'none'
-  },
-
-  'addNew, remove': {
-    width: 10,
-    height: 10,
-    padding: 0,
-    position: 'absolute',
-    border: 'none',
-  },
-
-  addNew: {
-    right: -14,
-    bottom: 4,
-  },
-
-  remove: {
-    left: -14,
-    bottom: 4,
-  },
-
-  'addNew::before, addNew::after, remove::before, remove::after': {
-    content: "''",
-    display: 'block',
-    position: 'absolute',
-    background: 'black',
-    cursor: 'pointer',
-    width: '100%',
-  },
-
-  'addNew::before, addNew::after': {
-    background: 'DarkGreen',
-    height: 2,
-    top: 5,
-  },
-
-  'addNew:hover::before, addNew:hover::after': {
-    background: 'LimeGreen',
-  },
-
-  'remove::before, remove::after': {
-    background: 'DarkRed',
-    height: 2,
-    top: 5,
-  },
-
-  'remove:hover::before, remove:hover::after': {
-    background: 'OrangeRed',
-  },
-
-  'addNew::before': {
-    transform: 'rotate(90deg)',
-  },
-
-  'remove::before': {
-    transform: 'rotate(45deg)',
-  },
-
-  'remove::after': {
-    transform: 'rotate(-45deg)',
-  }
-
-});
+}, styles({ SPACE_BETWEEN_INPUTS, ACTIVE_SEARCH_INPUT_LENGTH }));
 
 function toNumberOrZero (str) {
   return +str || 0;
 }
-
-})();
