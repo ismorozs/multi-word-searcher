@@ -1,3 +1,5 @@
+import { EXTENSION_ID } from '../../../common/constants';
+
 export default (vars) => ({
 
   '': {
@@ -6,6 +8,10 @@ export default (vars) => ({
     fontFamily: 'sans-serif',
     width: vars.APP_WIDTH,
     marginTop: 18,
+    marginLeft: 10,
+    marginRight: 10,
+    color: 'black',
+    lineHeight: 'normal',
   },
 
   'button': {
@@ -14,7 +20,22 @@ export default (vars) => ({
     '-webkit-appearance': 'none',
     border: '2px solid black',
     cursor: 'pointer',
-    verticalAlign: 'top,'
+    color: 'black',
+    fontWeight: '400',
+    fontFamily: 'sans-serif',
+    padding: '0 8px',
+    lineHeight: 'normal',
+    wordWrap: 'normal',
+    borderRadius: 0,
+    height: 24,
+  },
+
+  'input': {
+    fontFamily: 'sans-serif',
+    lineHeight: 'normal',
+    padding: '1px 1px',
+    fontSize: 15,
+    height: 24,
   },
 
   'button:hover': {
@@ -48,11 +69,11 @@ export default (vars) => ({
   },
 
   searchButton: {
-    width: 45,
+    width: 50,
   },
 
   caseButton: {
-    width: 20,
+    width: 22,
     marginLeft: 2,
     paddingLeft: 0,
     paddingRight: 1,
@@ -63,9 +84,8 @@ export default (vars) => ({
     position: 'relative',
   },
 
-  currentSearchIdx: {
-    width: 20,
-    height: 22,
+  searchId: {
+    width: 22,
     paddingLeft: 1,
     paddingRight: 1,
   },
@@ -106,11 +126,11 @@ export default (vars) => ({
     transform: 'rotate(-45deg)',
   },
 
-  'currentSearchIdx:focus': {
+  'searchId:focus': {
     color: 'DarkGreen',
     borderColor: 'LimeGreen',
     outline: '1px solid LimeGreen',
-    animation: 'outline_blinker 1.3s linear infinite'
+    animation: `'${EXTENSION_ID}_outline_blinker' 1.3s linear infinite`
   },
 
   '.hidden': {
@@ -119,7 +139,7 @@ export default (vars) => ({
 
   results: {
     paddingTop: 3,
-    paddingBottom: 5,
+    paddingBottom: 9,
     overflow: 'auto',
   },
 
@@ -130,7 +150,7 @@ export default (vars) => ({
     verticalAlign: 'middle',
   },
 
-  shownResultNumber: {
+  highlightPosition: {
     display: 'inline-block',
     paddingTop: 9,
     paddingRight: 3,
@@ -205,7 +225,8 @@ export default (vars) => ({
   moveLeft: {
     padding: 0,
     verticalAlign: 'top',
-    marginTop: 4,
+    marginTop: 5,
+    height: 14,
     border: 'none',
     borderTop: '7px solid transparent',
     borderRight: '7px solid black',
@@ -215,7 +236,8 @@ export default (vars) => ({
   moveRight: {
     padding: 0,
     verticalAlign: 'top',
-    marginTop: 4,
+    marginTop: 5,
+    height: 14,
     border: 'none',
     borderTop: '7px solid transparent',
     borderLeft: '7px solid black',

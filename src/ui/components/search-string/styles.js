@@ -15,6 +15,9 @@ export default (vars) => ({
     '-webkit-appearance': 'none',
     borderWidth: 0,
     borderBottom: '2px solid black',
+    background: 'white',
+    color: 'black',
+    padding: 1,
   },
 
   'string:focus': {
@@ -30,6 +33,10 @@ export default (vars) => ({
     '-webkit-appearance': 'none',
     borderWidth: 0,
     borderBottom: '1px solid black',
+    background: 'white',
+    color: 'black',
+    fontSize: 13,
+    height: 16,
   },
 
   'distance:focus': {

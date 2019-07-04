@@ -4,33 +4,27 @@ export function getCurrentTab () {
   return browser.tabs.query({ active: true, currentWindow: true });
 }
 
-export function sendMessageToCurrentTab (action, payload, cb) {
-  return sendMessage(action, { toCurrentTab: true, ...payload }, cb);
-}
-
 export function sendMessage (action, payload, cb) {
   const callbackId = payload.callbackId || saveCallback(action, cb);
   const message = { action, callbackId, ...payload };
 
-  if (payload.toCurrentTab === true) {
+  if (window.__IS_BACKGROUND_SCRIPT__) {
     return getCurrentTab().then((tab) => browser.tabs.sendMessage(tab[0].id, message));
   }
 
   return browser.runtime.sendMessage(message);
 }
 
-export function onMessage (message, actions = {}) {
+export async function onMessage (message, actions = {}) {
   if (message.isAnswer) {
-    try {
-      MESSAGE_LISTENERS[message.callbackId](message);
-      delete MESSAGE_LISTENERS[message.callbackId];
-      return;
-    } catch (e) {}
+    MESSAGE_LISTENERS[message.callbackId](message);
+    delete MESSAGE_LISTENERS[message.callbackId];
+    return;
   }
 
   if (actions[message.action]) {
-    const result = actions[ message.action ](message);
-
+    const result = await actions[ message.action ](message);
+    
     if (message.callbackId) {
       sendMessage(message.action, { callbackId: message.callbackId, isAnswer: true, ...result });
     }
