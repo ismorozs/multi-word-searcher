@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/ismorozs/multi-word-searcher#readme",
   "devDependencies": {
-    "couli": "0.0.10",
+    "couli": "0.0.11",
     "html-loader": "0.5.5",
     "webpack": "4.35.2",
     "webpack-cli": "3.3.5"

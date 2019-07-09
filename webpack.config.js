@@ -26,6 +26,6 @@ module.exports = {
     colors: true
   },
 
-  devtool: 'inline-source-map'
+  devtool: false,
 
 };
