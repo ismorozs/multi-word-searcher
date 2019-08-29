@@ -1,9 +1,9 @@
-import Store from '../common/store';
+import Store from './store';
 import { EXTENSION_ID, FIND_HELPER_CLASS } from '../common/constants';
 
-import { createElement } from '../ui/index';
-import highlightingStyles from '../ui/components/highlighting/styles';
-import scrollBarMarkStyles from '../ui/components/scrollbarMark/styles';
+import { createElement } from './ui/index';
+import highlightingStyles from './ui/components/highlighting/styles';
+import scrollBarMarkStyles from './ui/components/scrollbarMark/styles';
 
 const HIGHLIGHTINGS_POSITIONS = [];
 

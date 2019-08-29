@@ -13,7 +13,7 @@ export default (vars) => ({
     fontSize: 15,
     width: vars.ACTIVE_SEARCH_INPUT_LENGTH,
     '-webkit-appearance': 'none',
-    borderWidth: 0,
+    borderWidth: '0',
     borderBottom: '2px solid black',
     background: 'white',
     color: 'black',

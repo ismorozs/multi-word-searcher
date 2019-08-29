@@ -1,30 +1,12 @@
 import Couli from 'couli';
-import Store from '../../../common/store';
+import Store from '../../../store';
 
+import { KEYBOARD_KEYS } from '../../../../common/constants';
 import markup from './markup.html';
 import styles from './styles';
 
 const APP_WIDTH = 390;
 const MAX_INPUT_WIDTH = 245;
-const KEYBOARD_KEYS = Array(10).fill(48).reduce((a , v, i) => (a[i] = 48 + i) && a , {})
-Object.assign(KEYBOARD_KEYS, {
-  ESC: 27,
-  ENTER: 13,
-  DELETE: 46,
-  w: 87,
-  e: 69,
-  r: 82,
-  a: 65,
-  s: 83,
-  d: 68,
-  f: 70,
-  c: 67,
-  b: 66,
-  UP: 38,
-  LEFT: 37,
-  DOWN: 40,
-  RIGHT: 39,
-});
 
 Couli.define('controls', markup, {
 
@@ -50,7 +32,7 @@ Couli.define('controls', markup, {
     }
   },
 
-  searchButton: [{ click: (e, el, ci) => Store.search( ci.get('searchStrings').value() ).then(() => ci.markup('searchId').focus()) }],
+  searchButton: [{ click: (e, el, ci) => Store.startSearch().then(() => ci.markup('searchId').focus()) }],
 
   searchId: {
     events: {
@@ -58,11 +40,12 @@ Couli.define('controls', markup, {
 
       contextmenu: (e, el, ci) => {
         e.preventDefault();
-        Store.removeSearch(e.shiftKey).then(() => ci.markup('searchId').focus());
+        Store.removeSearch({ all: e.shiftKey }).then(() => ci.markup('searchId').focus());
       },
 
       keyup: (e, el, ci) => {
-        if (Object.values(KEYBOARD_KEYS).indexOf(e.keyCode) < 0) {
+        const { SHIFT, CTRL, ALT, BACKSPACE } = KEYBOARD_KEYS;
+        if (Object.values(KEYBOARD_KEYS).indexOf(e.keyCode) < 0 || [SHIFT, CTRL, ALT, BACKSPACE].includes(e.keyCode)) {
           return;
         }
 
@@ -79,16 +62,16 @@ Couli.define('controls', markup, {
 
           case KEYBOARD_KEYS.ENTER:
           case KEYBOARD_KEYS.e:
-            Store.search( ci.get('searchStrings').value() ).then(() => ci.markup('searchId').focus());
+            Store.startSearch().then(() => ci.markup('searchId').focus());
             return;
 
           case KEYBOARD_KEYS.DELETE:
           case KEYBOARD_KEYS.r:
-            Store.removeSearch(e.shiftKey).then(() => ci.markup('searchId').focus());
+            Store.removeSearch({ all: e.shiftKey }).then(() => ci.markup('searchId').focus());
             return;
 
           case KEYBOARD_KEYS.w:
-            document.querySelectorAll('.string')[ ci.get('lastFocused') ].focus();
+            ci.down('searchStrings').get(0).markup('string').focus();
             return;
 
           case KEYBOARD_KEYS.LEFT:
@@ -120,10 +103,7 @@ Couli.define('controls', markup, {
     },
     style: ($) => ({
       backgroundColor: 'rgba(' +  $.color + ', 0.35)',
-    }),
-    hooks: {
-      update: (el) => el.focus()
-    }
+    })
   },
 
   moveLeft: [{ click: (e, el, ci) => Store.moveThroughSearch({ searchId: ci.get('searchId') - 1 }) }],
@@ -132,7 +112,7 @@ Couli.define('controls', markup, {
 
   removeSearch: {
     events: {
-      click: (e, el, ci) => Store.removeSearch(e.shiftKey).then(() => ci.markup('searchId').focus())
+      click: (e, el, ci) => Store.removeSearch({ all: e.shiftKey }).then(() => ci.markup('searchId').focus())
     },
     class: ($) => ({
       hidden: $.searchStrings.length === 1 && !$.searchStrings[0].string.length && !$.searchHappened
@@ -167,10 +147,14 @@ Couli.define('controls', markup, {
     hooks: {
       mount: (el, data, ci) => {
         ci.set( Store.getCurrentSearch() );
-        Store.addListener((store) => ci.set( store.getCurrentSearch() ));
-        setTimeout(() => {
-          ci.markup('searchId').focus();
-        }, 0);
+        Store.HTMLElement('searchId', ci.markup('searchId'));
+        Store.addListener((store) => {
+          ci.set( store.getCurrentSearch() );
+
+          if (store.inputFocusNeeded()) {
+            ci.down('searchStrings').get(0).markup('string').focus();
+          }
+        });
       }
     }
   }

@@ -1,4 +1,4 @@
-import { EXTENSION_ID } from '../../../common/constants';
+import { EXTENSION_ID } from '../../../../common/constants';
 
 export default (vars) => ({
 
@@ -28,19 +28,23 @@ export default (vars) => ({
     wordWrap: 'normal',
     borderRadius: 0,
     height: 24,
+    minHeight: 'auto',
+    boxShadow: 'none',
   },
 
   'input': {
     fontFamily: 'sans-serif',
     lineHeight: 'normal',
-    padding: '1px 1px',
+    padding: '1px 1px !important',
     fontSize: 15,
     height: 24,
   },
 
   'button:hover': {
     color: 'DarkGreen',
-    borderColor: 'LimeGreen'
+    borderColor: 'LimeGreen',
+    backgroundColor: 'transparent',
+    boxShadow: 'none',
   },
 
   'button:focus': {

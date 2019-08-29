@@ -1,4 +1,4 @@
-import { EXTENSION_ID, FIND_HELPER_CLASS } from './constants';
+import { EXTENSION_ID, FIND_HELPER_CLASS } from './../common/constants';
 import Store from './store';
 
 export let stylesString = Store.COLORS.map((color, idx) => `

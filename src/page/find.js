@@ -4,20 +4,18 @@ import { FIND_API_INPUT_BUG_FIX_BEFORE, FIND_API_INPUT_BUG_FIX_AFTER } from './f
 
 export default find;
 
-function find (searchStrings, caseSensitive, cb) {
+function find (searchStrings, caseSensitive) {
   FIND_API_INPUT_BUG_FIX_BEFORE();
   
-  sendMessage('find', {
-    string: searchStrings.shift().string,
+  return sendMessage('find', {
+    string: searchStrings[0].string,
     caseSensitive,
-  }, ({ foundResults }) => {
+  }).then(({ foundResults }) => {
     
     FIND_API_INPUT_BUG_FIX_AFTER();
 
     const allTextNodes = getAllTextNodes();
-    const finalResults = filterRanges(foundResults, searchStrings, caseSensitive, allTextNodes);
-
-    cb(finalResults);
+    return filterRanges(foundResults, searchStrings.slice(1), caseSensitive, allTextNodes);
   });
 }
 

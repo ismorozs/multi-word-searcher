@@ -6,6 +6,7 @@ export default (vars) => ({
     border: '3px solid black',
     zIndex: '2147483647',
     boxSizing: 'border-box',
+    padding: 0,
     ...vars.INITIAL_POPUP_POSITION
   },
 

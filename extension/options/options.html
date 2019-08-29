@@ -8,10 +8,11 @@
 
   <body>
     <h3>How to use</h3>
-    <p>Press ENTER when focused on input to create a new input for entering an additional substring<br>
-    Set a number in a smaller input that will correspond to a maximum allowed distance in characters for searcing between two substrings<br>
-    Press BACKSPACE on empty input to remove it<br>
-    If empty input loses focus it's removed as well</p>
+    <p>
+      Click the green plus sign to the right of the current input to create a new input for entering an additional substring<br>
+      Click the red minus sign to the left of the current input to remove it<br>
+      Set a number in a smaller input that will correspond to a maximum allowed distance in characters for searcing between two substrings<br>
+    </p>
 
     <h3>Hot Keys</h1>
     <table>
@@ -23,14 +24,36 @@
       </tbody>
     </table>
 
-    <h3>When search group button (colored with number inside) is in focus</h3>
+    <h3>When an input is in focus</h3>
+    <table>
+      <th>Key</th><th>Action</th>
+      <tbody>
+          <tr>
+              <td>ENTER</td><td>Start search</td>
+            </tr>
+          <tr>
+            <td>SHIFT+ENTER</td><td>Create a new substring</td>
+          </tr>
+          <tr>
+            <td>CTRL+ENTER</td><td>Split the current substring on a few smaller substrings using whitespace (' ') as delimiter</td>
+          </tr>
+          <tr>
+            <td>ALT+ENTER</td><td>Focus on Search group button</td>
+          </tr>
+          <tr>
+            <td>BACKSPACE</td><td>Remove the current substring (if empty)</td>
+          </tr>
+        </tbody>
+    </table>
+
+    <h3>When Search group button (colored with number inside) is in focus</h3>
     <table>
       <tr>
         <th>Key</th><th>Action</th>
       </tr>
       <tbody>
         <tr>
-          <td>w</td><td>Focus search input</td>
+          <td>w</td><td>Focus on the search input</td>
         </tr>
         <tr>
           <td>c</td><td>Switch case-sensitivity</td>

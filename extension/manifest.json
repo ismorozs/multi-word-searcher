@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "Multi word searcher",
-  "version": "1.0.8",
+  "version": "1.0.9",
 
   "description": "Extension allows for searching texts through sub-strings separated by choosen amounts of characters",
   "homepage_url": "https://github.com/ismorozs/multi-word-searcher",
@@ -14,7 +14,9 @@
 
   "permissions": [
     "activeTab",
-    "find"
+    "find",
+    "menus",
+    "tabs"
   ],
 
   "browser_action": {

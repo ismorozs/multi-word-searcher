@@ -1,15 +1,15 @@
 import Couli from 'couli';
-import Store from './common/store';
-import './ui/components/search-string/index';
-import './ui/components/controls/index';
-import './ui/components/popup/index';
+import Store from './page/store';
+import './page/ui/components/search-string/index';
+import './page/ui/components/controls/index';
+import './page/ui/components/popup/index';
 
 import { EXTENSION_ID } from './common/constants';
 
 import { onMessage, sendMessage } from './common/interaction';
-import { appendStyles, stylesString } from './common/styles';
+import { appendStyles, stylesString } from './page/global-styles';
 
-import actions from './actions/page';
+import actions from './page/actions';
 
 appendStyles(stylesString);
 initializePopup();

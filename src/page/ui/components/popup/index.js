@@ -1,6 +1,6 @@
 import Couli from 'couli';
 import styles from './styles';
-import Store from '../../../common/store';
+import Store from '../../../store';
 
 const INITIAL_POPUP_POSITION = { top: 20, left: 'auto', right: 20 };
 
@@ -19,7 +19,7 @@ Couli.define('popup',
     hooks: {
       update: (el, value, ci) => {
         if (value) {
-          ci.down('controls').markup('searchId').focus();
+          ci.down('controls').down('searchStrings').get(0).markup('string').focus();
         }
       }
     }
@@ -38,8 +38,8 @@ Couli.define('popup',
             click: (e, el, ci) => Store.moveThroughSearch({ searchId: ci.get('idx') }, true),
             contextmenu: (e, el, ci) => {
               e.preventDefault();
-              Store.removeSearch(e.shiftKey, ci.get('idx')).then(() =>
-                ci.up().up().down('controls').markup('searchId').focus()
+              Store.removeSearch({ all: e.shiftKey, idx: ci.get('idx') }).then(() =>
+                ci.down('controls').down('searchStrings').get(0).markup('string').focus()
               );
             },
           }

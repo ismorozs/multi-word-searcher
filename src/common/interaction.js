@@ -1,24 +1,26 @@
-const MESSAGE_LISTENERS = {};
+const PROMISES_RESOLVES = {};
 
 export function getCurrentTab () {
   return browser.tabs.query({ active: true, currentWindow: true });
 }
 
-export function sendMessage (action, payload, cb) {
-  const callbackId = payload.callbackId || saveCallback(action, cb);
+export function sendMessage (action, payload) {
+  const { callbackId, promise } = payload.callbackId || saveCallback(action);
   const message = { action, callbackId, ...payload };
 
   if (window.__IS_BACKGROUND_SCRIPT__) {
-    return getCurrentTab().then((tab) => browser.tabs.sendMessage(tab[0].id, message));
+    getCurrentTab().then((tab) => browser.tabs.sendMessage(tab[0].id, message));
+  } else {
+    browser.runtime.sendMessage(message);
   }
 
-  return browser.runtime.sendMessage(message);
+  return promise;
 }
 
 export async function onMessage (message, actions = {}) {
   if (message.isAnswer) {
-    MESSAGE_LISTENERS[message.callbackId](message);
-    delete MESSAGE_LISTENERS[message.callbackId];
+    PROMISES_RESOLVES[message.callbackId](message);
+    delete PROMISES_RESOLVES[message.callbackId];
     return;
   }
 
@@ -32,12 +34,10 @@ export async function onMessage (message, actions = {}) {
 }
 
 function saveCallback (action, cb) {
-  if (!cb) {
-    return;
-  }
-
   const callbackId = Date.now() + Math.random() + action;
-  MESSAGE_LISTENERS[callbackId] = cb;
 
-  return callbackId;
+  return {
+    promise: new Promise ((res) => PROMISES_RESOLVES[ callbackId ] = res),
+    callbackId
+  };
 }
