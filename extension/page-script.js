@@ -2562,7 +2562,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COLORS", function() { return COLORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FIND_SUGGESTION", function() { return FIND_SUGGESTION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "KEYBOARD_KEYS", function() { return KEYBOARD_KEYS; });
-const EXTENSION_ID = 'multi-string-search-extension-' + browser.runtime.id.replace(/[{}@]/g, '');
+const EXTENSION_ID = 'multi-word-searcher-webextension-unique-id';
 const FIND_HELPER_CLASS = EXTENSION_ID + '-find-helper';
 
 const COLORS = [

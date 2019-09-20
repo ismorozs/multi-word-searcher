@@ -1,4 +1,4 @@
-export const EXTENSION_ID = 'multi-string-search-extension-' + browser.runtime.id.replace(/[{}@]/g, '');
+export const EXTENSION_ID = 'multi-word-searcher-webextension-unique-id';
 export const FIND_HELPER_CLASS = EXTENSION_ID + '-find-helper';
 
 export const COLORS = [
