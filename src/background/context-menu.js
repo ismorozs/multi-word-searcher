@@ -1,147 +1,58 @@
-import { COLORS, FIND_SUGGESTION } from '../common/constants';
+import createContextMenu from 'webextension-contextmenu';
+import { FIND_SUGGESTION } from '@common/constants';
 import State from './state';
 import actions from './actions';
+import { getCurrentTab } from './helpers';
 
-const ICONS_PATH = '/icons/context-menu/';
-const SMALL_ICON_NAME = '-16.png';
-const BIG_ICON_NAME = '-32.png';
-const SMALL_REMOVE_ICON_NAME = 'remove-16.png';
-const BIG_REMOVE_ICON_NAME = 'remove-32.png';
+export async function updateContextMenu () {
+  const { recentSearches } = State.get();
+  const { id } = await getCurrentTab();
+  const { searches } = State.getTabState(id);
 
-const CONTEXT_MENU = {
-  MAIN: 'MAIN',
-  FIND: 'F',
-  REMOVE_SUBMENU: 'REMOVE_SUBMENU',
-  REMOVE: 'R',
-  REMOVE_SEPARATOR: 'REMOVE_SEPARATOR',
-  REMOVE_ALL: 'X',
-  REMOVE_ALL_SEPARATOR: 'REMOVE_ALL_SEPARATOR'
-};
+  const newSearchOption = searches.every((s) => s) ? {} : {
+    "New...": () => actions.openSearchGroup()
+  }
 
-export function initContextMenu () {
-  browser.menus.create({
-    id: CONTEXT_MENU.MAIN,
-    title: FIND_SUGGESTION,
-    contexts: ["all"]
-  });
-  
-  COLORS.forEach((color, i) => browser.menus.create({
-    id: CONTEXT_MENU.FIND + i.toString(),
-    parentId: CONTEXT_MENU.MAIN,
-    title: '',
-    icons: {
-      16: ICONS_PATH + i + SMALL_ICON_NAME,
-      32: ICONS_PATH + i + BIG_ICON_NAME,
+  const activeSearchOptions = searches
+    .map((s, i) => [
+      s,
+      {
+        Open: () => actions.openSearchGroup(i),
+        Remove: () => actions.removeSearch(id, i),
+      },
+    ])
+    .filter(([s]) => s);
+
+  if (activeSearchOptions.length) {
+    activeSearchOptions.unshift(['separator1', null]);
+    activeSearchOptions.push(
+      ["separator2", null],
+      ["Remove all active", () => actions.removeAllSearches(id)],
+    );
+  }
+
+  let recentSearchesSubmenu = {};
+  const recentSearchesOptions = recentSearches.filter((s) => s).map((s) => [
+    s,
+    {
+      Find: () => actions.openSearchGroup(undefined, s),
+      Remove: () => actions.removeRecentSearch(s),
     },
-  }));  
-}
+  ]);
 
-export function onContextMenuClicked (info, tab) {
-  switch (info.menuItemId[0]) {
-    case CONTEXT_MENU.FIND:
-      actions.openSearchGroup(tab, info.menuItemId[1]);
-      return;
-
-    case CONTEXT_MENU.REMOVE:
-      actions.removeSearch(info.menuItemId[1]);
-      return;
-
-    case CONTEXT_MENU.REMOVE_ALL:
-      actions.removeSearch(-1);
-      return;
-  }
-}
-
-export function updateContextMenu ({ tabId }) {
-  const { remove, update, create } = browser.menus;
-  const popupState = State.getTabState(tabId);
-  
-  if (!popupState) {
-    actions.removeAllContextMenus({ tabId });
-    return;
+  if (recentSearchesOptions.length) {
+    recentSearchesSubmenu = {
+      separator3: null,
+      "Recent Searches": Object.fromEntries(recentSearchesOptions),
+      "Remove All Recent": () => actions.removeRecentSearch(),
+    };
   }
 
-  const searchesExist = areSearchesExist(popupState);
-
-  let prepareContextMenu = Promise.resolve();
-
-  if (searchesExist !== popupState.removeMenus || State.contextMenuShown() !== popupState.removeMenus) {
-    prepareContextMenu = switchRemoveOptions(searchesExist);
-    State.setContextMenuState(tabId, searchesExist);
-    State.contextMenuShown(searchesExist);
-
-    if (!searchesExist) {
-      return;
-    }
-  }
-  
-  prepareContextMenu.then(() => {
-    COLORS.forEach((c, i) => {
-      const title = popupState.searches[i] || '';
-      update( CONTEXT_MENU.FIND + i, { title } );
-  
-      remove(CONTEXT_MENU.REMOVE + i).then(() => {
-        if (title) {
-          create({
-            id: CONTEXT_MENU.REMOVE + i,
-            title,
-            parentId: CONTEXT_MENU.REMOVE_SUBMENU,
-            icons: {
-              16: ICONS_PATH + i + SMALL_ICON_NAME,
-              32: ICONS_PATH + i + BIG_ICON_NAME
-            },
-          }, () => {});
-        }
-      });
-  
-    });
-  });
-}
-
-function areSearchesExist (popupState) {
-  if (!popupState.searches.length) {
-    return false;
-  }
-
-  return popupState.searches.some((el) => !!el);
-}
-
-function switchRemoveOptions (bool) {
-  const { create } = browser.menus;
-
-  if (bool) {
-    create({ id: CONTEXT_MENU.REMOVE_SEPARATOR, parentId: CONTEXT_MENU.MAIN, type: 'separator', contexts: ['all'] });  
-    create({
-      id: CONTEXT_MENU.REMOVE_SUBMENU,
-      title: 'Remove',
-      parentId: CONTEXT_MENU.MAIN,
-      contexts: ['all'],
-      icons: { 16: ICONS_PATH + SMALL_REMOVE_ICON_NAME, 32: ICONS_PATH + BIG_REMOVE_ICON_NAME }
-    });
-    create({ id: CONTEXT_MENU.REMOVE_ALL, title: 'Remove all', parentId: CONTEXT_MENU.REMOVE_SUBMENU, contexts: ['all'] });
-    create({ id: CONTEXT_MENU.REMOVE_ALL_SEPARATOR, parentId: CONTEXT_MENU.REMOVE_SUBMENU, type: 'separator', contexts: ['all'] });
-
-    return Promise.resolve();
-  }
-
-  return resetContextMenu();
-}
-
-export function resetContextMenu () {
-  const { remove } = browser.menus
-  return new Promise ((res) => {
-    remove(CONTEXT_MENU.REMOVE_ALL)
-      .then(() => remove(CONTEXT_MENU.REMOVE_ALL_SEPARATOR)
-        .then(() => remove(CONTEXT_MENU.REMOVE_SEPARATOR)
-          .then(() => remove(CONTEXT_MENU.REMOVE_SUBMENU)
-            .then(() => {
-
-              COLORS.forEach((c, i) => {
-                browser.menus.update(CONTEXT_MENU.FIND + i, { title: '' });
-                browser.menus.remove(CONTEXT_MENU.REMOVE + i)
-              });
-
-              res();
-            }))));
+  createContextMenu({
+    [FIND_SUGGESTION]: {
+      ...newSearchOption,
+      ...Object.fromEntries(activeSearchOptions),
+      ...recentSearchesSubmenu,
+    },
   });
 }

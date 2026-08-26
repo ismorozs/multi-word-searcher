@@ -1,7 +1,6 @@
-import { EXTENSION_ID, FIND_HELPER_CLASS } from './../common/constants';
-import Store from './store';
+import { FIND_HELPER_CLASS, COLORS } from '@common/constants';
 
-export let stylesString = Store.COLORS.map((color, idx) => `
+export let stylesString = COLORS.map((color, idx) => `
   @keyframes ${FIND_HELPER_CLASS}${idx} {
     0% {
       outline-color: rgba(${color}, 1);
@@ -22,7 +21,7 @@ export let stylesString = Store.COLORS.map((color, idx) => `
 `).join('');
 
 stylesString += `
-  @keyframes ${EXTENSION_ID}_outline_blinker {
+  @keyframes outline_blinker {
     50% {
       outline-color: rgba(0, 0, 0, 0);
     }

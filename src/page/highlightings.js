@@ -1,5 +1,5 @@
 import Store from './store';
-import { EXTENSION_ID, FIND_HELPER_CLASS } from '../common/constants';
+import { EXTENSION_ID, FIND_HELPER_CLASS } from '@common/constants';
 
 import { createElement } from './ui/index';
 import highlightingStyles from './ui/components/highlighting/styles';
@@ -14,33 +14,37 @@ export default {
   switchBlinking,
 }
 
-function createHighlightings (ranges, data) {
+function createHighlightings (stringPositions, data) {
   removeHighlightings(data.searchId);
 
   const doc = document.documentElement;
   const scrollLeft = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0);
   const scrollTop = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0);
 
-  ranges.forEach((range, rangeIdx) => {
-    const boundingRects = range.getClientRects();
-    const topPosition = scrollTop + boundingRects[0].top;
+  stringPositions.forEach((stringPositions, stringIdx) => {
+    const topPosition = scrollTop + stringPositions[0].top;
 
     const highlightData = {
       els: [],
       top: topPosition,
-      left: scrollLeft + boundingRects[0].left
+      left: scrollLeft + stringPositions[0].left,
     };
 
-    for (let i = 0; i < boundingRects.length; i++) {
-      const rect = boundingRects[i];
+    for (let i = 0; i < stringPositions.length; i++) {
+      const rect = stringPositions[i];
 
-      const highlightElement = createHightlightElement(rect, scrollTop, scrollLeft, data);
+      const highlightElement = createHightlightElement(
+        rect,
+        scrollTop,
+        scrollLeft,
+        data,
+      );
       document.body.appendChild(highlightElement);
 
       highlightData.els.push(highlightElement);
     }
 
-    const scrollBarMark = createScrollbarMark(topPosition, data, rangeIdx);
+    const scrollBarMark = createScrollbarMark(topPosition, data, stringIdx);
     document.body.appendChild(scrollBarMark);
 
     HIGHLIGHTINGS_POSITIONS[data.searchId].push(highlightData);
@@ -66,8 +70,8 @@ function createScrollbarMark (topPosition, data, rangeIdx) {
 
   scrollBarMark.title = data.searchString;
   scrollBarMark.onclick = () => {
+    Store.setCurrentSearch(data.searchId, true);
     jumpTo(data.searchId, rangeIdx);
-    Store.moveThroughSearch({ searchId: data.searchId, highlightPosition: rangeIdx + 1 });
   };
   scrollBarMark.classList.add(EXTENSION_ID + data.searchId);
 

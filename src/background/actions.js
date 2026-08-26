@@ -1,65 +1,83 @@
-import { sendMessage } from '../common/interaction';
-import State from './state';
-import { updateContextMenu, resetContextMenu } from './context-menu';
+const browser = require("webextension-polyfill/dist/browser-polyfill.min");
+
+import Message from "@common/messages";
+import State from "./state";
+import { getCurrentTab } from "./helpers";
+import { updateContextMenu } from "./context-menu";
 
 export default {
-  find,
   closingTab,
   closingPopup,
   switchPopup,
   openSearchGroup,
-  setContextMenu,
+  addSearchToContextMenu,
   removeSearch,
-  removeAllContextMenus,
+  removeAllSearches,
+  removeRecentSearch,
 };
 
-async function find ({ string, caseSensitive }) {
-  const foundResults = await browser.find.find(string, { includeRangeData: true, caseSensitive });
-  return { foundResults };
-}
-
-function closingTab ({ tabId }) {
+export function closingTab({ tabId }) {
   State.setTabState(tabId, undefined);
 }
 
-function closingPopup ({ tabId }) {
-  State.setPopupState(tabId, false);
+export function closingPopup({ tabId }) {
+  State.setTabState(tabId, { open: false });
 }
 
-function switchPopup ({ id: tabId }, noClosing) {
-  const popupState = State.getTabState(tabId);
+function switchPopup({ id }, noClosing) {
+  let popupState = State.getTabState(id);
 
-  if (!popupState.initialized) {
-    return initializePopup(tabId);
+  if (!popupState?.initialized) {
+    popupState = initializePopup(id);
   }
 
-  const newPopupState = !popupState.open || !!noClosing;
-  return sendMessage('popupState', { open: newPopupState }).then(() => State.setPopupState(tabId, newPopupState));
+  const open = !popupState.open || !!noClosing;
+  return Message.popupState({ open }).then(() =>
+    State.setTabState(id, { open }),
+  );
 }
 
-function initializePopup (tabId) {
-  return browser.tabs.executeScript({ file: '/page-script.js' })
-    .then(() => sendMessage('saveTabId', { tabId }))
-    .then(() => State.setTabState(tabId, { open: true, searches: [], removeMenus: false, initialized: true }));
+async function initializePopup(tabId) {
+  await executeScript(tabId, "/page-script.js");
+  Message.saveTabId({ tabId });
+  State.initTabState(tabId);
 }
 
-
-function openSearchGroup ({ id }, idx) {
-  switchPopup({ id }, true).then(() => sendMessage('openSearchGroup', { idx }));
+async function openSearchGroup(searchGroupId, searchString) {
+  const tab = await getCurrentTab();
+  await switchPopup(tab, true);
+  const idx = searchGroupId >= 0 ? searchGroupId : (await State.getEmptySearchId(tab));
+  Message.openSearchGroup({ idx, searchString });
 }
 
-function removeSearch (idx) {
-  sendMessage('removeSearch', { idx });
+function removeSearch(tabId, idx) {
+  addSearchToContextMenu({ tabId, idx, string: undefined });
+  Message.removeSearch({ idx });
 }
 
-function setContextMenu ({ tabId, idx, string }) {
+function removeAllSearches (tabId) {
+  State.getTabState(tabId).searches.forEach((s, i) => s && removeSearch(tabId, i));
+}
+
+export function addSearchToContextMenu({ tabId, idx, string }) {
   State.setSearchInTab(tabId, idx, string);
-  updateContextMenu({ tabId })
+  updateContextMenu()
 }
 
-function removeAllContextMenus ({ tabId }) {
-  resetContextMenu();
+async function executeScript(tabId, file) {
+  try {
+    return await browser.scripting.executeScript({
+      target: {
+        tabId,
+      },
+      files: [file],
+    });
+  } catch (e) {
+    return await browser.tabs.executeScript(tabId, { file });
+  }
+}
 
-  State.setTabState(tabId, { ...State.getTabState(tabId), searches: [], removeMenus: false });
-  State.contextMenuShown(false);
+function removeRecentSearch (str) {
+  State.removeRecentSearch(str);
+  updateContextMenu();
 }

@@ -1,0 +1,235 @@
+.container {
+  font-size: 15px;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  width: 390px;
+  margin: 18px 10px 14px;
+  color: black;
+  line-height: normal;
+}
+
+button {
+  background: none;
+  font-size: 15px;
+  appearance: none;
+  border: 2px solid black;
+  cursor: pointer;
+  color: black;
+  font-weight: 400;
+  font-family: sans-serif;
+  padding: 0 8px;
+  line-height: normal;
+  word-wrap: normal;
+  border-radius: 0px;
+  height: 24px;
+  min-height: auto;
+  box-shadow: none;
+}
+
+input {
+  font-family: sans-serif;
+  line-height: normal;
+  padding: 1px 1px !important;
+  font-size: 15px;
+  height: 24px;
+}
+
+button:hover {
+  color: DarkGreen;
+  border-color: LimeGreen;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:active {
+  outline: 1px solid LimeGreen;
+}
+
+.upper-buttons {
+  float: right;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.search-strings {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  display: inline-block;
+  width: 245px;
+}
+
+.search-string:first-child {
+  margin-left: 0px;
+}
+
+.search-button {
+  width: 50px;
+}
+
+.case-button {
+  width: 22px;
+  margin-left: 2px;
+  padding-left: 0px;
+  padding-right: 1px;
+}
+
+.search-constrols {
+  display: inline-block;
+  position: relative;
+}
+
+.search-id {
+  width: 22px;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+
+.remove-search {
+  position: absolute;
+  padding: 0px;
+  width: 14px;
+  height: 14px;
+  top: -16px;
+  right: -5px;
+}
+
+.remove-search::before, .remove-search::after {
+  content: '';
+  display: block;
+  position: absolute;
+  background: black;
+  width: 100%;
+  height: 2px;
+  top: 4px;
+  cursor: pointer;
+}
+
+.remove-search:hover {
+  border-color: OrangeRed;
+}
+
+.remove-search:hover::before, .remove-search:hover::after {
+  background: DarkRed;
+}
+
+.remove-search::before {
+  transform: rotate(45deg);
+}
+
+.remove-search::after {
+  transform: rotate(-45deg);
+}
+
+.search-id:focus {
+  color: DarkGreen;
+  border-color: LimeGreen;
+  outline: 1px solid LimeGreen;
+  animation: outline_blinker 1.3s linear infinite;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.results {
+  overflow: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 18px;
+  gap: 5px;
+}
+
+.controls {
+  display: flex;
+  gap: 5px;
+}
+
+.highlight-position {
+  display: inline-block;
+  padding-left: 5px;
+  padding-top: 3px;
+  vertical-align: middle;
+}
+
+.blink {
+  height: 23px;
+  vertical-align: bottom;
+}
+
+.move-up, .move-down {
+  width: 32px;
+  height: 23px;
+  position: relative;
+}
+
+.move-up::before, .move-up::after, .move-down::before, .move-down::after {
+  content: '';
+  display: block;
+  position: absolute;
+  background: black;
+  width: 13px;
+  height: 3px;
+  top: 8px;
+}
+
+.move-up:hover::before, .move-up:hover::after, .move-down:hover::before, .move-down:hover::after {
+  background: DarkGreen;
+}
+
+.move-up::before, .move-down::before {
+  left: 4px;
+}
+
+.move-up::after, .move-down::after {
+  right: 4px;
+}
+
+.move-down::before  {
+  transform: rotate(45deg);
+}
+
+.move-down::after  {
+  transform: rotate(-45deg);
+}
+
+.move-up::before  {
+  transform: rotate(-45deg);
+}
+
+.move-up::after  {
+  transform: rotate(45deg);
+}
+
+.move-left:hover {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.move-right:hover {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+}
+
+.move-left, .move-right {
+  padding: 0px;
+  vertical-align: top;
+  margin-top: 5px;
+  height: 14px;
+  border: none;
+  border-top: 7px solid transparent;
+  border-right: 7px solid black;
+  border-bottom: 7px solid transparent;
+}
+
+.move-right {
+  border-right: 0px solid transparent;
+  border-left: 7px solid black;
+}

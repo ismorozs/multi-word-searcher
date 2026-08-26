@@ -1,0 +1,57 @@
+.container {
+  background: white;
+  border: 3px solid black;
+  box-sizing: border-box;
+  padding: 0;
+  z-index: 2147483645;
+}
+
+.topbar {
+  height: 15px;
+  border-bottom: 1px solid black;
+  cursor: grab;
+  position: relative;
+  background: #d6f5d6;
+  box-sizing: border-box;
+}
+
+.tabs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.close {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 32px;
+  cursor: pointer;
+  border-left: 1px solid black;
+  background:rgba(255, 79, 43, 0.85);
+}
+
+.close:hover {
+  background: rgb(255, 79, 43)
+}
+
+.close::before, .close::after {
+  content: '';
+  display: block;
+  position: absolute;
+  background: black;
+  width: 11px;
+  height: 2px;
+  top: 6px;
+  left: 11px;
+  cursor: pointer;
+}
+
+.close::before {
+  transform: rotate(45deg);
+}
+
+.close::after {
+  transform: rotate(-45deg);
+}

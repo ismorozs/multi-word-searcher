@@ -1,10 +1,12 @@
+const browser = require("webextension-polyfill/dist/browser-polyfill.min");
+
 const PROMISES_RESOLVES = {};
 
-export function getCurrentTab () {
+export function getCurrentTab() {
   return browser.tabs.query({ active: true, currentWindow: true });
 }
 
-export function sendMessage (action, payload) {
+export function sendMessage(action, payload) {
   const { callbackId, promise } = payload.callbackId || saveCallback(action);
   const message = { action, callbackId, ...payload };
 
@@ -17,7 +19,7 @@ export function sendMessage (action, payload) {
   return promise;
 }
 
-export async function onMessage (message, actions = {}) {
+export async function onMessage(message, actions = {}) {
   if (message.isAnswer) {
     PROMISES_RESOLVES[message.callbackId](message);
     delete PROMISES_RESOLVES[message.callbackId];
@@ -25,19 +27,23 @@ export async function onMessage (message, actions = {}) {
   }
 
   if (actions[message.action]) {
-    const result = await actions[ message.action ](message);
-    
+    const result = await actions[message.action](message);
+
     if (message.callbackId) {
-      sendMessage(message.action, { callbackId: message.callbackId, isAnswer: true, ...result });
+      sendMessage(message.action, {
+        callbackId: message.callbackId,
+        isAnswer: true,
+        ...result,
+      });
     }
   }
 }
 
-function saveCallback (action, cb) {
+function saveCallback(action, cb) {
   const callbackId = Date.now() + Math.random() + action;
 
   return {
-    promise: new Promise ((res) => PROMISES_RESOLVES[ callbackId ] = res),
-    callbackId
+    promise: new Promise((res) => (PROMISES_RESOLVES[callbackId] = res)),
+    callbackId,
   };
 }

@@ -1,41 +1,76 @@
-import { sendMessage } from '../common/interaction';
-
-import { FIND_API_INPUT_BUG_FIX_BEFORE, FIND_API_INPUT_BUG_FIX_AFTER } from './fixes';
-
 export default find;
 
-function find (searchStrings, caseSensitive) {
-  FIND_API_INPUT_BUG_FIX_BEFORE();
-  
-  return sendMessage('find', {
-    string: searchStrings[0].string,
-    caseSensitive,
-  }).then(({ foundResults }) => {
-    
-    FIND_API_INPUT_BUG_FIX_AFTER();
+function find(searchStrings, caseSensitive) {
+  const allTextNodes = getAllTextNodes();
 
-    const allTextNodes = getAllTextNodes();
-    return filterRanges(foundResults, searchStrings.slice(1), caseSensitive, allTextNodes);
-  });
+  return filterRanges(
+    findStartRanges(searchStrings[0].string, caseSensitive, allTextNodes),
+    searchStrings.slice(1),
+    caseSensitive,
+    allTextNodes,
+  );
 }
 
-function getAllTextNodes () {
+function findStartRanges (string, caseSensitive, allTextNodes) {
+  const ranges = [];
+
+  for (let i = 0; i < allTextNodes.length; i++) {
+    const textNode = allTextNodes[i];
+    let textContent = textNode.textContent;
+    let searchString = string;
+
+    if (!caseSensitive) {
+      textContent = textContent.toLowerCase();
+      searchString = searchString.toLowerCase();
+    }
+
+    let startOffset = -1;
+    let endOffset = 0;
+    do {
+      startOffset = textContent.indexOf(searchString, endOffset);
+      endOffset = startOffset + string.length;
+    
+      if (startOffset >= 0) {
+        ranges.push({
+          startTextNodePos: i,
+          startOffset,
+          endTextNodePos: i,
+          endOffset,
+        });
+      }
+    } while (startOffset >= 0)
+    
+  }
+
+  return ranges;
+}
+
+function getAllTextNodes() {
   const allTextNodes = [];
-  const walker = document.createTreeWalker(document, window.NodeFilter.SHOW_TEXT, null, false);
+  const walker = document.createTreeWalker(
+    document,
+    window.NodeFilter.SHOW_TEXT,
+    null,
+    false,
+  );
   let node;
-  while(node = walker.nextNode()) {
+  while ((node = walker.nextNode())) {
     allTextNodes.push(node);
   }
   return allTextNodes;
 }
 
-function filterRanges (firstFoundPart, searchRefinements, caseSensitive, allTextNodes) {
+function filterRanges(
+  startStringRanges,
+  searchRefinements,
+  caseSensitive,
+  allTextNodes,
+) {
   const finalRanges = [];
-  firstFoundPart.rangeData.forEach((rangeOpts) => {
-
-    let endNodePos = rangeOpts.endTextNodePos;
-    let endNode = allTextNodes[rangeOpts.endTextNodePos];
-    let endOffset = rangeOpts.endOffset;
+  startStringRanges.forEach((startRange) => {
+    let endNodePos = startRange.endTextNodePos;
+    let endNode = allTextNodes[startRange.endTextNodePos];
+    let endOffset = startRange.endOffset;
 
     for (let i = 0; i < searchRefinements.length; i++) {
       const refinement = searchRefinements[i];
@@ -48,15 +83,16 @@ function filterRanges (firstFoundPart, searchRefinements, caseSensitive, allText
       let prevNodesLength = 0;
 
       do {
-
         let nodeValueLength = nextNode.nodeValue.length;
         if (nextOffset > nodeValueLength) {
           nextOffset = nodeValueLength;
         }
 
         const matchPos = isStringInRange(
-          endNode, endOffset,
-          nextNode, nextOffset,
+          endNode,
+          endOffset,
+          nextNode,
+          nextOffset,
           refinement.string,
           caseSensitive,
         );
@@ -64,7 +100,8 @@ function filterRanges (firstFoundPart, searchRefinements, caseSensitive, allText
         if (matchPos >= 0) {
           success = true;
           endNode = nextNode;
-          endOffset = endOffset + matchPos - prevNodesLength + refinement.string.length;
+          endOffset =
+            endOffset + matchPos - prevNodesLength + refinement.string.length;
           break;
         }
 
@@ -72,8 +109,7 @@ function filterRanges (firstFoundPart, searchRefinements, caseSensitive, allText
         nextOffset = remainingSearchDistance;
         prevNodesLength += nodeValueLength;
         nextNode = allTextNodes[++endNodePos];
-
-      } while ( remainingSearchDistance > 0 && !success && nextNode )
+      } while (remainingSearchDistance > 0 && !success && nextNode);
 
       if (!success) {
         return;
@@ -81,9 +117,9 @@ function filterRanges (firstFoundPart, searchRefinements, caseSensitive, allText
     }
 
     try {
-      const startNode = allTextNodes[rangeOpts.startTextNodePos];
+      const startNode = allTextNodes[startRange.startTextNodePos];
       const range = new Range();
-      range.setStart(startNode, rangeOpts.startOffset);
+      range.setStart(startNode, startRange.startOffset);
       range.setEnd(endNode, endOffset);
 
       finalRanges.push(range);
@@ -93,10 +129,17 @@ function filterRanges (firstFoundPart, searchRefinements, caseSensitive, allText
   return finalRanges;
 }
 
-function isStringInRange(startNode, startOffset, endNode, endOffset, string, caseSensitive) {
+function isStringInRange(
+  startNode,
+  startOffset,
+  endNode,
+  endOffset,
+  string,
+  caseSensitive,
+) {
   const range = new Range();
   range.setStart(startNode, startOffset);
-  range.setEnd(endNode,  endOffset);
+  range.setEnd(endNode, endOffset);
   let rangeText = range.toString();
 
   if (!caseSensitive) {

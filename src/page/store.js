@@ -1,348 +1,293 @@
-import actions from './actions';
+import Varstor from 'varstor';
 import Highlightings from './highlightings';
+import Message from '@common/messages';
 import find from './find';
-import { COLORS, KEYBOARD_KEYS } from '../common/constants';
+import { COLORS, KEYBOARD_KEYS } from '@common/constants';
+import { toNumberOrZero, fromFlatStringToStructure, fromStructureToFlatString } from '@common/helpers';
 
-const LISTENERS = [];
+Varstor.add({
+  popupOpen: false,
+  tabId: null,
+  searches: COLORS.map((c, i) => initiateSearchOpts(i, "")),
+  searchId: 0,
+  searchIdEl: null,
+  currentSearch: (searches, searchId) => searches[searchId],
+});
 
-const store = {
-  COLORS,
-  getCurrentSearch,
-  addListener,
-  tabId,
+export default {
+  ...Varstor,
   startSearch,
-  moveThroughSearch,
+  removeSearch,
   switchCaseSensitivity,
   switchBlink,
-  removeSearch,
   getPopupData,
   setPopupState,
   closePopup,
   setCurrentSearch,
-  setupSearch,
-  getCurrentString,
-  handleInputActivity,
+  updateCurrentSearch,
+  setCurrentHighlight,
+  handleSearchStringInput,
+  changeSearchStringFocus,
   removeSearchString,
   addNewSearchString,
   updateStringDistance,
-  inputFocusNeeded,
-  HTMLElement,
-};
-
-const STATE = {
-  popupOpen: true,
-  tabId: null,
-  searches: COLORS.map((c, i) => initiateSearchOpts(i, '')),
-  searchId: 1,
-  inputFocusNeeded: false,
-  HTMLElements: {},
 };
 
 function initiateSearchOpts (i, string) {
   return {
-    searchStrings: initiateSearchStrings(string),
+    searchStrings: fromFlatStringToStructure(string),
     foundResults: 0,
     lastFocused: 0,
     searchHappened: false,
     highlightPosition: 0,
     color: COLORS[i],
-    searchId: i,
+    id: i,
     caseSensitive: false,
-  }
+  };
 }
 
-function initiateSearchStrings (strings) {
-  const splitStrings = strings.split(' ');
-  return splitStrings.map((string, i) => {
-    const distance = !i ? null : 1;
-    return { string, first: !i, focus: !i, distance };
-  });
+function setCurrentSearch (i, noMove) {
+  Varstor.set({ searchId: +i });
+
+  const { highlightPosition } = Varstor.get().searches[i];
+  !noMove &&
+    highlightPosition &&
+    Highlightings.moveTo(+i, highlightPosition - 1);
 }
 
-function getCurrentSearch () {
-  return STATE.searches[ STATE.searchId ];
+function updateCurrentSearch (searchString) {
+  const { searches, searchId } = Varstor.get();
+  searches[searchId] = initiateSearchOpts(searchId, searchString);
+
+  Varstor.set({ searches });
 }
 
-function setCurrentSearch (i) {
-  STATE.searchId = +i;
-  return runListeners();
-}
+function setCurrentHighlight (i) {
+  const { searches, searchId } = Varstor.get();
+  const currentSearch = searches[searchId];
 
-function setupSearch (i, string) {
-  return STATE.searches[ i ] = initiateSearchOpts(+i, string);
+  currentSearch.highlightPosition = i;
+  Highlightings.moveTo(searchId, i - 1);
+
+  Varstor.set({ searches });
 }
 
 function startSearch () {
-  const search = getCurrentSearch();
-  const { searchId, color, caseSensitive, searchStrings } = search;
-  const searchString = searchStrings.map((strObj) => strObj.string).join(' ');
-  actions.setContextMenu(searchId, searchString);
+  const { searches, searchId, tabId } = Varstor.get();
+  const currentSearch = searches[searchId];
+  const { id, color, caseSensitive, searchStrings } = currentSearch;
+  const searchString = fromStructureToFlatString(searchStrings);
 
-  return find(searchStrings, caseSensitive).then((foundResults) => {
-    Highlightings.create(foundResults, { searchId, color, searchString });
+  Message.addSearchToContextMenu({ tabId, idx: searchId, string: searchString });
 
-    const changeObj = { foundResults: foundResults.length, searchHappened: true, blinkSet: false, searchStrings };
+  const foundRanges = find(searchStrings, caseSensitive);
+  const visibleResults = foundRanges.map((r) => r.getClientRects()).filter((r) => r.length);
+  Highlightings.create(visibleResults, { searchId: id, color, searchString });
 
-    if (foundResults.length) {
-      changeObj.highlightPosition = 1;
-      Highlightings.moveTo(searchId, 0);
-    }
-
-    Object.assign(search, changeObj);
-    runListeners();
+  Object.assign(currentSearch, {
+    foundResults: visibleResults.length,
+    searchHappened: true,
+    blinkSet: false,
   });
-}
 
-function moveThroughSearch (opts, withMove) {
-  const searchId = adjustNumberToBoundaries(opts.searchId, 0, STATE.searches.length - 1, STATE.searchId);
-  STATE.searchId = searchId;
-  const search = getCurrentSearch();
-
-  const highlightPosition = adjustNumberToBoundaries(opts.highlightPosition, 1, search.foundResults, search.highlightPosition);
-  search.highlightPosition = highlightPosition;
-
-  if (withMove && highlightPosition) {
-    Highlightings.moveTo(searchId, highlightPosition - 1);
+  if (visibleResults.length) {
+    currentSearch.highlightPosition = 1;
+    Highlightings.moveTo(id, 0);
   }
 
-  return runListeners();
+  Varstor.set({ searches });
 }
 
-function adjustNumberToBoundaries (num, min, max, def) {
-  switch (num) {
-    case min - 1:
-      return max;
-
-    case undefined:
-      return def;
-
-    case max + 1:
-      return min;
-  }
-
-  return num;
-}
-
-function removeSearch ({ all, idx }) {
+function removeSearch ({ all, idx, fromBackground }) {
+  const { searchId, tabId } = Varstor.get();
 
   if (all) {
-    removeAllSearches();
-    actions.removeAllContextMenus();
-
+    removeAllSearches(tabId);
   } else {
-    const searchId = typeof idx === 'undefined' ? STATE.searchId : idx;
-    removeSearchByIdx(searchId);
-    actions.setContextMenu(searchId, '');
+    const searchIdx = typeof idx === 'undefined' ? searchId : idx;
+    removeSearchByIdx(tabId, searchIdx, fromBackground);
   }
-
-  return runListeners();
 }
 
-function removeSearchByIdx (idx) {
-  STATE.searches[idx] = initiateSearchOpts(idx, '');
+function removeSearchByIdx(tabId, idx, fromBackground) {
+  const { searches } = Varstor.get();
+  searches[idx] = initiateSearchOpts(idx, "");
+  !fromBackground && Message.addSearchToContextMenu({
+    tabId,
+    idx,
+    string: undefined,
+  });
+  Varstor.set({ searches });
   Highlightings.remove(idx);
 }
 
-function removeAllSearches () {
-  COLORS.forEach((c, idx) => removeSearchByIdx(idx));
+function removeAllSearches (tabId) {
+  COLORS.forEach((c, idx) => removeSearchByIdx(tabId, idx));
 }
 
 function switchBlink () {
-  const search = getCurrentSearch();
+  const { searches, searchId } = Varstor.get();
+  const currentSearch = searches[searchId];
 
-  if (!search.foundResults) {
+  if (!currentSearch.foundResults) {
     return;
   }
 
-  const operation = search.blinkSet ? 'remove' : 'add';
+  const operation = currentSearch.blinkSet ? 'remove' : 'add';
 
-  Highlightings.switchBlinking(search.searchId, operation);
+  Highlightings.switchBlinking(currentSearch.id, operation);
 
-  search.blinkSet = !search.blinkSet;
-  return runListeners();
-}
-
-function getCurrentString () {
-  return getCurrentSearch().searchStrings.map(({ string }) => string).join(' ');
+  currentSearch.blinkSet = !currentSearch.blinkSet;
+  Varstor.set({ searches });
 }
 
 function switchCaseSensitivity () {
-  const caseSensitive = STATE.searches[ STATE.searchId ].caseSensitive;
-  STATE.searches[ STATE.searchId ].caseSensitive = !caseSensitive;
-  return runListeners();
-}
-
-function addListener (fn) {
-  LISTENERS.push(fn);
-}
-
-function runListeners () {
-  LISTENERS.forEach((fn) => fn(store));
-  return Promise.resolve();
-}
-
-function tabId (id) {
-  if (id) {
-    return STATE.tabId = id
-  }
-
-  return STATE.tabId;
+  const { searches, searchId } = Varstor.get();
+  const currentSearch = searches[searchId];
+  currentSearch.caseSensitive = !currentSearch.caseSensitive;
+  Varstor.set({ searches });
 }
 
 function getPopupData () {
+  const { popupOpen, searches } = Varstor.get();
   return {
-    open: STATE.popupOpen,
-    searches: STATE.searches.filter((el) => el.searchHappened).map((el) => ({
+    open: popupOpen,
+    searches: searches.filter((el) => el.searchHappened).map((el) => ({
       color: el.color,
       string: el.searchStrings.map((string) => string.string).join(' '),
-      idx: el.searchId,
+      idx: el.id,
     }))
   }
 }
 
 function closePopup () {
-  actions.notifyOfClosing().then(() => setPopupState(false));
+  const { tabId } = Varstor.get();
+  Message.closingPopup({ tabId });
+  setPopupState(false);
 }
 
 function setPopupState (open) {
-  STATE.popupOpen = open;
-  return runListeners();
+  Varstor.set({ popupOpen: open });
 }
 
-function handleInputActivity (e, idx) {
-  const search = getCurrentSearch();
-  const { searchStrings, lastFocused } = search;
-  const currentString = searchStrings[ lastFocused ];
+function handleSearchStringInput (e) {
+  const { searchIdEl, searches, searchId } = Varstor.get();
+  const currentSearch = searches[searchId];
+  const { searchStrings, lastFocused } = currentSearch;
+  const currentString = searchStrings[lastFocused];
 
-  if (e.keyCode) {
-
-    if (e.keyCode === KEYBOARD_KEYS.ENTER) {
-
-      if (e.shiftKey) {
-        currentString.focus = false;
-
-        searchStrings.splice(lastFocused + 1, 0, { string: '', focus: true, distance: 1 });
-        search.lastFocused = lastFocused + 1;
-
-        return runListeners();
-      }
-
-      if (e.ctrlKey) {
-        const newSearchStrings = splitSearchString(currentString);
-
-        if (lastFocused === 0) {
-          newSearchStrings[0].first = true;
-          newSearchStrings[0].distance = null;
-        }
-
-        newSearchStrings.slice(-1)[0].focus = true;
-
-        searchStrings.splice.apply(searchStrings, [lastFocused, 1].concat(newSearchStrings));
-        search.lastFocused = lastFocused + newSearchStrings.length - 1;
-
-        return runListeners();
-      }
-
-      if (e.altKey) {
-        HTMLElement('searchId').focus();
-        return;
-      }
-
-      return startSearch();
+  if (e.keyCode === KEYBOARD_KEYS.ENTER) {
+    if (e.shiftKey) {
+      return addNewSearchString();
     }
 
-    if (e.keyCode === KEYBOARD_KEYS.BACKSPACE && !currentString.string.length && searchStrings.length > 1) {
-      searchStrings[ lastFocused - 1 ].focus = true;
-      search.lastFocused = lastFocused - 1;
-      searchStrings.splice(lastFocused, 1);
-
-      runListeners();
-      return;
+    if (e.ctrlKey) {
+      return splitSearchString();
     }
 
+    if (e.altKey) {
+      return searchIdEl.focus();
+    }
+
+    return startSearch();
   }
 
-  if (e.type === 'click') {
-    currentString.focus = false;
-    searchStrings[ idx ].focus = true;
-    search.lastFocused = idx;
-
-    runListeners();
-    return;
-  }
-
-  if ([KEYBOARD_KEYS.CTRL, KEYBOARD_KEYS.SHIFT, KEYBOARD_KEYS.ALT].includes(e.keyCode)) {
-    return;
+  if (
+    e.keyCode === KEYBOARD_KEYS.BACKSPACE &&
+    !currentString.string.length &&
+    searchStrings.length > 1
+  ) {
+    return removeSearchString();
   }
 
   currentString.string = e.target.value;
-  runListeners();
+  Varstor.set({ searches });
 }
 
 function removeSearchString () {
-  const search = getCurrentSearch();
-  const { searchStrings, lastFocused } = search;
+  const { searches, searchId } = Varstor.get();
+  const currentSearch = searches[searchId];
+  const { searchStrings, lastFocused } = currentSearch;
 
   searchStrings[ lastFocused - 1 ].focus = true;
-  search.lastFocused = lastFocused - 1;
+  currentSearch.lastFocused = lastFocused - 1;
   searchStrings.splice(lastFocused, 1);
 
-  runListeners();
+  Varstor.set({ searches });
 }
 
 function addNewSearchString () {
-  const search = getCurrentSearch();
-  const { searchStrings, lastFocused } = search;
+  const { searchId, searches } = Varstor.get();
+  const currentSearch = searches[searchId];
+  const { searchStrings, lastFocused } = currentSearch;
+  const currentString = searchStrings[lastFocused];
 
-  searchStrings[ lastFocused ].focus = false;
-  searchStrings.splice(lastFocused + 1, 0, { string: '', focus: true, distance: 1 });
-  search.lastFocused = lastFocused + 1;
-
-  runListeners();
-}
-
-function updateStringDistance (distance, idx) {
-  const search = getCurrentSearch();
-  search.searchStrings[ idx ].distance = toNumberOrZero(distance);
-  runListeners();
-}
-
-function toNumberOrZero (str) {
-  return +str || 0;
-}
-
-function inputFocusNeeded (bool) {
-  if (bool) {
-    STATE.inputFocusNeeded = bool;
+  if (!currentString.string) {
     return;
   }
 
-  if (STATE.inputFocusNeeded) {
-    STATE.inputFocusNeeded = false;
-    return true;
-  }
+  searchStrings[ lastFocused ].focus = false;
+  searchStrings.splice(lastFocused + 1, 0, { string: '', focus: true, distance: 1 });
+  currentSearch.lastFocused = lastFocused + 1;
+
+  Varstor.set({ searches });
 }
 
-function splitSearchString (searchString) {
-  const words = searchString.string.split(' ');
+function updateStringDistance (distance, idx) {
+  const { searches, searchId } = Varstor.get();
+  const currentSearch = searches[searchId];
 
-  if (words.length === 1) {
-    return [searchString];
-  }
+  currentSearch.searchStrings[idx].distance = toNumberOrZero(distance);
 
-  return words.map((string, i) => ({
-    string,
-    distance: 1,
-    focus: false,
-  }));
+  Varstor.set({ searches });
 }
 
-function HTMLElement (name, value) {
-  if (value) {
-    return STATE.HTMLElements[name] = value;
+function splitSearchString () {
+  const { searches, searchId } = Varstor.get();
+  const currentSearch = searches[searchId];
+  const { searchStrings, lastFocused } = currentSearch;
+  const currentString = searchStrings[lastFocused];
+
+  const words = currentString.string.split(' ');
+
+  const newSearchStrings =
+    words.length === 1
+      ? [currentString]
+      : words.map((string, i) => ({
+          string,
+          distance: 1,
+          focus: false,
+        }));
+
+  if (lastFocused === 0) {
+    newSearchStrings[0].first = true;
+    newSearchStrings[0].distance = null;
   }
 
-  return STATE.HTMLElements[name];
+  newSearchStrings.slice(-1)[0].focus = true;
+
+  searchStrings.splice.apply(
+    searchStrings,
+    [lastFocused, 1].concat(newSearchStrings),
+  );
+  currentSearch.lastFocused = lastFocused + newSearchStrings.length - 1;
+
+  Varstor.set({ searches });
 }
 
-export default store;
+function changeSearchStringFocus(idx) {
+  const { searches, searchId } = Varstor.get();
+  const currentSearch = searches[searchId];
+  const { searchStrings, lastFocused } = currentSearch;
+  const currentString = searchStrings[lastFocused];
+
+  if (!currentString.string && lastFocused !== 0) {
+    searchStrings.splice(lastFocused, 1);
+  }
+
+  currentString.focus = false;
+  searchStrings[idx].focus = true;
+  currentSearch.lastFocused = idx;
+
+  Varstor.set({ searches });
+}
