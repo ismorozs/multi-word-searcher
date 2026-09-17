@@ -33,3 +33,5 @@ export function appendStyles (styleStr) {
   styleEl.appendChild( document.createTextNode(styleStr) );
   document.head.appendChild(styleEl);
 }
+
+appendStyles(stylesString);

@@ -24,11 +24,11 @@ export function closingPopup({ tabId }) {
   State.setTabState(tabId, { open: false });
 }
 
-function switchPopup({ id }, noClosing) {
+async function switchPopup({ id }, noClosing) {
   let popupState = State.getTabState(id);
 
   if (!popupState?.initialized) {
-    popupState = initializePopup(id);
+    popupState = await initializePopup(id);
   }
 
   const open = !popupState.open || !!noClosing;
@@ -40,7 +40,7 @@ function switchPopup({ id }, noClosing) {
 async function initializePopup(tabId) {
   await executeScript(tabId, "/page-script.js");
   Message.saveTabId({ tabId });
-  State.initTabState(tabId);
+  return State.initTabState(tabId);
 }
 
 async function openSearchGroup(searchGroupId, searchString) {
@@ -50,8 +50,8 @@ async function openSearchGroup(searchGroupId, searchString) {
   Message.openSearchGroup({ idx, searchString });
 }
 
-function removeSearch(tabId, idx) {
-  addSearchToContextMenu({ tabId, idx, string: undefined });
+async function removeSearch(tabId, idx) {
+  await addSearchToContextMenu({ tabId, idx, string: undefined });
   Message.removeSearch({ idx });
 }
 
@@ -59,9 +59,9 @@ function removeAllSearches (tabId) {
   State.getTabState(tabId).searches.forEach((s, i) => s && removeSearch(tabId, i));
 }
 
-export function addSearchToContextMenu({ tabId, idx, string }) {
+export async function addSearchToContextMenu({ tabId, idx, string }) {
   State.setSearchInTab(tabId, idx, string);
-  updateContextMenu()
+  await updateContextMenu()
 }
 
 async function executeScript(tabId, file) {

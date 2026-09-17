@@ -1,5 +1,5 @@
 import Varstor from 'varstor';
-import { COLORS } from '@common/constants';
+import { COLORS, RECENT_SEARCHES_LIMIT } from '@common/constants';
 
 const EMPTY_OBJECT = { searches: [undefined] };
 
@@ -31,6 +31,8 @@ function initTabState (tabId) {
     initialized: true,
   };
   Varstor.set({ tabs });
+
+  return tabs[tabId];
 }
 
 function setTabState (tabId, state) {
@@ -41,12 +43,10 @@ function setTabState (tabId, state) {
 }
 
 function setSearchInTab (tabId, searchId, string) {
-  const { tabs, recentSearches } = Varstor.get();
+  const { tabs } = Varstor.get();
   tabs[tabId].searches[searchId] = string;
-  if (!recentSearches.includes(string)) {
-    recentSearches.unshift(string);
-  }
-  Varstor.set({ tabs, recentSearches });
+  addRecentSearch(string)
+  Varstor.set({ tabs });
 }
 
 async function getEmptySearchId ({ id }) {
@@ -54,6 +54,29 @@ async function getEmptySearchId ({ id }) {
   const emptySlot = searches.findIndex((s) => !s);
 
   return emptySlot >= 0 ? emptySlot : searches.length - 1;
+}
+
+function addRecentSearch (str) {
+  const { recentSearches } = Varstor.get();
+
+  if (!str) {
+    return;
+  }
+
+  const recentIdx = recentSearches.indexOf(str);
+
+  if (recentIdx < 0) {
+    if (recentSearches.length === RECENT_SEARCHES_LIMIT) {
+      recentSearches.pop();
+    }
+
+  } else {
+    recentSearches.splice(recentIdx, 1);
+  }
+
+  recentSearches.unshift(str);
+
+  Varstor.set({ recentSearches });
 }
 
 function removeRecentSearch (str) {

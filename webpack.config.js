@@ -35,13 +35,13 @@ module.exports = {
   devtool: false,
 
   resolve: {
- 		alias: {
+    alias: {
       "@page": path.resolve(__dirname, "src/page"),
       "@background": path.resolve(__dirname, "src/background"),
       "@common": path.resolve(__dirname, "src/common"),
-		}
-	},
-
+    }
+  },
+  
   plugins: [
     new CopyPlugin({
       patterns: [

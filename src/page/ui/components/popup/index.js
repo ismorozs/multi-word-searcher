@@ -21,7 +21,7 @@ export default create(
     searches: [],
     container_style: (open) => ({ display: open ? "block" : "none" }),
     close_click: () => Store.closePopup(),
-    onChange: (changes, { set, get }) => {
+    onChange: (changes, { set }) => {
       if (changes > 0) {
         set(Store.getPopupData());
 

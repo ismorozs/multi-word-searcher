@@ -4,30 +4,43 @@ import State from './state';
 import actions from './actions';
 import { getCurrentTab } from './helpers';
 
+const MENU_TEXT = {
+  NEW: "New ...",
+  OPEN: "Open",
+  REMOVE: "Remove",
+  REMOVE_ALL_ACTIVE: "Remove all active",
+  FIND: "Find",
+  RECENT_SEARCHES: "Recent searches",
+  REMOVE_ALL_RECENT: "Remove all recent",
+}
+
+function separator (str) {
+  return `${Date.now()}${str}`;
+};
+
 export async function updateContextMenu () {
   const { recentSearches } = State.get();
   const { id } = await getCurrentTab();
   const { searches } = State.getTabState(id);
 
   const newSearchOption = searches.every((s) => s) ? {} : {
-    "New...": () => actions.openSearchGroup()
+    [MENU_TEXT.NEW]: () => actions.openSearchGroup()
   }
 
   const activeSearchOptions = searches
     .map((s, i) => [
       s,
       {
-        Open: () => actions.openSearchGroup(i),
-        Remove: () => actions.removeSearch(id, i),
+        [MENU_TEXT.OPEN]: () => actions.openSearchGroup(i),
+        [MENU_TEXT.REMOVE]: () => actions.removeSearch(id, i),
       },
     ])
     .filter(([s]) => s);
 
   if (activeSearchOptions.length) {
-    activeSearchOptions.unshift(['separator1', null]);
+    activeSearchOptions.unshift([separator(1), null]);
     activeSearchOptions.push(
-      ["separator2", null],
-      ["Remove all active", () => actions.removeAllSearches(id)],
+      [MENU_TEXT.REMOVE_ALL_ACTIVE, () => actions.removeAllSearches(id)],
     );
   }
 
@@ -35,16 +48,16 @@ export async function updateContextMenu () {
   const recentSearchesOptions = recentSearches.filter((s) => s).map((s) => [
     s,
     {
-      Find: () => actions.openSearchGroup(undefined, s),
-      Remove: () => actions.removeRecentSearch(s),
+      [MENU_TEXT.FIND]: () => actions.openSearchGroup(undefined, s),
+      [MENU_TEXT.REMOVE]: () => actions.removeRecentSearch(s),
     },
   ]);
 
   if (recentSearchesOptions.length) {
     recentSearchesSubmenu = {
-      separator3: null,
-      "Recent Searches": Object.fromEntries(recentSearchesOptions),
-      "Remove All Recent": () => actions.removeRecentSearch(),
+      [separator(2)]: null,
+      [MENU_TEXT.RECENT_SEARCHES]: Object.fromEntries(recentSearchesOptions),
+      [MENU_TEXT.REMOVE_ALL_RECENT]: () => actions.removeRecentSearch(),
     };
   }
 

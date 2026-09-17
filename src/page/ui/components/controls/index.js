@@ -194,7 +194,9 @@ export default create(
         );
         Store.onChange(
           ["popupOpen"],
-          (popupOpen) => popupOpen && focusInput(markup),
+          (popupOpen) => {
+            popupOpen && focusInput(markup)
+          },
         );
       }
     },

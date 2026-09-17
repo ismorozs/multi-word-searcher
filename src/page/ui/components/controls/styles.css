@@ -144,6 +144,7 @@ button:active {
   align-items: center;
   margin-top: 18px;
   gap: 5px;
+  height: 26px;
 }
 
 .controls {

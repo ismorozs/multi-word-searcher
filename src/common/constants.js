@@ -3,6 +3,8 @@ export const FIND_HELPER_CLASS = EXTENSION_ID + '-find-helper';
 
 export const FLAT_STRING_DELIMITER = "~";
 
+export const RECENT_SEARCHES_LIMIT = 20;
+
 export const COLORS = [
   "60, 180, 75",
   "230, 25, 75",
