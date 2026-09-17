@@ -5,6 +5,7 @@ import State from "./state";
 import { getCurrentTab } from "./helpers";
 import { updateContextMenu } from "./context-menu";
 
+
 export default {
   closingTab,
   closingPopup,
@@ -14,6 +15,7 @@ export default {
   removeSearch,
   removeAllSearches,
   removeRecentSearch,
+  openPage,
 };
 
 export function closingTab({ tabId }) {
@@ -80,4 +82,8 @@ async function executeScript(tabId, file) {
 function removeRecentSearch (str) {
   State.removeRecentSearch(str);
   updateContextMenu();
+}
+
+function openPage (url) {
+  browser.tabs.create({ active: true, url });
 }

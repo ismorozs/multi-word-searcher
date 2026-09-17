@@ -5,6 +5,11 @@ export const FLAT_STRING_DELIMITER = "~";
 
 export const RECENT_SEARCHES_LIMIT = 20;
 
+export const PAGE_URLS = {
+  SETTINGS: "/options/options.html",
+  HOW_TO_USE: "/options/howtouse.html",
+};
+
 export const COLORS = [
   "60, 180, 75",
   "230, 25, 75",

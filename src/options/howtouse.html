@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="options.css"/>
+  </head>
+
+  <body>
+    <h3>How to use</h3>
+    <p>
+      Click the green plus sign to the right of the current input to create a new input for entering an additional substring<br>
+      Click the red minus sign to the left of the current input to remove it<br>
+      Set a number in a smaller input that will correspond to a maximum allowed distance in characters for searcing between two substrings<br>
+    </p>
+
+    <h3>Hot Keys</h1>
+    <table>
+      <tr><th>Key</th><th>Action</th></tr>
+      <tbody>
+        <tr>
+          <td>Ctrl + Shift + F</td><td>Open extension</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>When an input is in focus</h3>
+    <table>
+      <th>Key</th><th>Action</th>
+      <tbody>
+          <tr>
+              <td>ENTER</td><td>Start search</td>
+            </tr>
+          <tr>
+            <td>SHIFT+ENTER</td><td>Create a new substring</td>
+          </tr>
+          <tr>
+            <td>CTRL+ENTER</td><td>Split the current substring on a few smaller substrings using whitespace (' ') as delimiter</td>
+          </tr>
+          <tr>
+            <td>ALT+ENTER</td><td>Focus on Search group button</td>
+          </tr>
+          <tr>
+            <td>BACKSPACE</td><td>Remove the current substring (if empty)</td>
+          </tr>
+        </tbody>
+    </table>
+
+    <h3>When Search group button (colored with number inside) is in focus</h3>
+    <table>
+      <tr>
+        <th>Key</th><th>Action</th>
+      </tr>
+      <tbody>
+        <tr>
+          <td>w</td><td>Focus on the search input</td>
+        </tr>
+        <tr>
+          <td>c</td><td>Switch case-sensitivity</td>
+        </tr>
+        <tr>
+          <td>b</td><td>Switch blinking of found strings</td>
+        </tr>
+        <tr>
+          <td>e / ENTER</td><td>Start search</td>
+        </tr>
+        <tr>
+          <td>r / DELETE</td><td>Remove search</td>
+        </tr>
+        <tr>
+          <td>a / LEFT</td><td>Switch to previous group</td>
+        </tr>
+        <tr>
+          <td>f / RIGHT</td><td>Switch to next group</td>
+        </tr>
+        <tr>
+          <td>s / UP</td><td>Move to previous found string</td>
+        </tr>
+        <tr>
+          <td>d / DOWN</td><td>Move to next found string</td>
+        </tr>
+      </tbody>
+    </table>
+    <script type="text/javascript" src="options.js"></script>
+  </body>
+</html>

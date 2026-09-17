@@ -1186,6 +1186,7 @@ const browser = __webpack_require__(/*! webextension-polyfill/dist/browser-polyf
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   closingTab,
   closingPopup,
@@ -1195,6 +1196,7 @@ const browser = __webpack_require__(/*! webextension-polyfill/dist/browser-polyf
   removeSearch,
   removeAllSearches,
   removeRecentSearch,
+  openPage,
 });
 
 function closingTab({ tabId }) {
@@ -1263,6 +1265,11 @@ function removeRecentSearch (str) {
   (0,_context_menu__WEBPACK_IMPORTED_MODULE_3__.updateContextMenu)();
 }
 
+function openPage (url) {
+  browser.tabs.create({ active: true, url });
+}
+
+
 /***/ },
 
 /***/ "./src/background/context-menu.js"
@@ -1296,6 +1303,7 @@ const MENU_TEXT = {
   FIND: "Find",
   RECENT_SEARCHES: "Recent searches",
   REMOVE_ALL_RECENT: "Remove all recent",
+  OPTIONS: "Settings",
 }
 
 function separator (str) {
@@ -1350,6 +1358,8 @@ async function updateContextMenu () {
       ...newSearchOption,
       ...Object.fromEntries(activeSearchOptions),
       ...recentSearchesSubmenu,
+      [separator(3)]: null,
+      [MENU_TEXT.OPTIONS]: () => _actions__WEBPACK_IMPORTED_MODULE_3__["default"].openPage(_common_constants__WEBPACK_IMPORTED_MODULE_1__.PAGE_URLS.SETTINGS)
     },
   });
 }
@@ -1520,6 +1530,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   FIND_SUGGESTION: () => (/* binding */ FIND_SUGGESTION),
 /* harmony export */   FLAT_STRING_DELIMITER: () => (/* binding */ FLAT_STRING_DELIMITER),
 /* harmony export */   KEYBOARD_KEYS: () => (/* binding */ KEYBOARD_KEYS),
+/* harmony export */   PAGE_URLS: () => (/* binding */ PAGE_URLS),
 /* harmony export */   RECENT_SEARCHES_LIMIT: () => (/* binding */ RECENT_SEARCHES_LIMIT)
 /* harmony export */ });
 const EXTENSION_ID = 'multi-word-searcher-webextension-unique-id';
@@ -1528,6 +1539,11 @@ const FIND_HELPER_CLASS = EXTENSION_ID + '-find-helper';
 const FLAT_STRING_DELIMITER = "~";
 
 const RECENT_SEARCHES_LIMIT = 20;
+
+const PAGE_URLS = {
+  SETTINGS: "/options/options.html",
+  HOW_TO_USE: "/options/howtouse.html",
+};
 
 const COLORS = [
   "60, 180, 75",

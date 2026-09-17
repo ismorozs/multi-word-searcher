@@ -1,5 +1,5 @@
 import createContextMenu from 'webextension-contextmenu';
-import { FIND_SUGGESTION } from '@common/constants';
+import { FIND_SUGGESTION, PAGE_URLS } from "@common/constants";
 import State from './state';
 import actions from './actions';
 import { getCurrentTab } from './helpers';
@@ -12,6 +12,7 @@ const MENU_TEXT = {
   FIND: "Find",
   RECENT_SEARCHES: "Recent searches",
   REMOVE_ALL_RECENT: "Remove all recent",
+  OPTIONS: "Settings",
 }
 
 function separator (str) {
@@ -66,6 +67,8 @@ export async function updateContextMenu () {
       ...newSearchOption,
       ...Object.fromEntries(activeSearchOptions),
       ...recentSearchesSubmenu,
+      [separator(3)]: null,
+      [MENU_TEXT.OPTIONS]: () => actions.openPage(PAGE_URLS.SETTINGS)
     },
   });
 }
