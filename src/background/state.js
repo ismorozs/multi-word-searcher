@@ -43,15 +43,22 @@ function initTabState (tabId) {
 
 function setTabState (tabId, state) {
   const { tabs } = Varstor.get();
-  const prevTabState = tabs[tabId];
+  let prevTabState = tabs[tabId];
+
+  if (!prevTabState) {
+    prevTabState = initTabState(tabId);
+  }
+
   tabs[tabId] = state ? { ...prevTabState, ...state } : EMPTY_OBJECT;
   Varstor.set({ tabs });
 }
 
-function setSearchInTab (tabId, searchId, string) {
+async function setSearchInTab (tabId, searchId, string) {
   const { tabs } = Varstor.get();
-  tabs[tabId].searches[searchId] = string;
-  addRecentSearch(string)
+  if (tabs[tabId]) {
+    tabs[tabId].searches[searchId] = string;
+  }
+  await addRecentSearch(string)
   Varstor.set({ tabs });
 }
 
@@ -62,7 +69,7 @@ async function getEmptySearchId ({ id }) {
   return emptySlot >= 0 ? emptySlot : searches.length - 1;
 }
 
-function addRecentSearch (str) {
+async function addRecentSearch (str) {
   const { recentSearches } = Varstor.get();
 
   if (!str) {
@@ -82,7 +89,7 @@ function addRecentSearch (str) {
 
   recentSearches.unshift(str);
 
-  Varstor.set({ recentSearches });
+  await Varstor.set({ recentSearches });
 }
 
 function removeRecentSearch (str) {

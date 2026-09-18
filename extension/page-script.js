@@ -183,7 +183,7 @@ function createAccessor(key, storageType) {
   Object.assign(accessor, {
     valueOf: () => STATE[key].value,
     toString: () => STATE[key].value,
-    set: (value) => setValue(key, value, storageType),
+    set: async (value) => await setValue(key, value, storageType),
     onChange: (cb) => STATE[key].listeners.push(cb),
     removeListener: (removeCb) =>
       (STATE[key].listeners = STATE[key].listeners.filter(
@@ -203,9 +203,9 @@ function createAccessor(key, storageType) {
   });
 }
 
-function setValue (key, value, storageType) {
+async function setValue (key, value, storageType) {
   if (STORAGE.IS_AVAILABE(storageType)) {
-    const isAutoUpdate = STORAGE.SET_VALUE(storageType, key, value);
+    const isAutoUpdate = await STORAGE.SET_VALUE(storageType, key, value);
     if (isAutoUpdate) {
       return;
     }
@@ -230,7 +230,7 @@ function onStateChange (changes) {
   }
 
   for (const key in realChanges) {
-    STATE[key].listeners.forEach((cb) => cb(STATE[key].value, getNamespaceValues(key), realChanges[key]));
+    STATE[key].listeners.forEach(async (cb) => await cb(STATE[key].value, getNamespaceValues(key), realChanges[key]));
   }
 }
 
@@ -270,7 +270,7 @@ function getNamespaceAccessors (namespace, cb) {
   return cb.call(null, accessors, createStore(namespace()));
 }
 
-function setState (namespace, changes) {
+async function setState (namespace, changes) {
   const noKeys = !Object.keys(changes).length;
 
   if (noKeys) {
@@ -278,7 +278,7 @@ function setState (namespace, changes) {
   } else {
     for (const [k,v] of Object.entries(changes)) {
       _validation__WEBPACK_IMPORTED_MODULE_3__.isValid.Setting(namespace(k));
-      ACCESSORS[namespace(k)].set(v);
+      await ACCESSORS[namespace(k)].set(v);
     };
   }
 
@@ -354,7 +354,7 @@ function createStore (_namespace) {
     add: (state) => addState(namespace, state, false),
     addPersistent: (state) => addState(namespace, state, true),
     get: (arg) => getState(namespace, arg),
-    set: (changes) => setState(namespace, changes),
+    set: async (changes) => await setState(namespace, changes),
     resetAll: () => resetAllState(namespace),
     onChange: (keys, cb) => addStateLitener(namespace, keys, cb),
     removeListener: (keys, cb) => removeStateListener(namespace, keys, cb),
@@ -372,16 +372,16 @@ function createStore (_namespace) {
 /*!**************************!*\
   !*** ./src/namespace.js ***!
   \**************************/
-(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_11308__) {
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_11368__) {
 
-__nested_webpack_require_11308__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_11308__.d(__nested_webpack_exports__, {
+__nested_webpack_require_11368__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_11368__.d(__nested_webpack_exports__, {
 /* harmony export */   addNamespace: () => (/* binding */ addNamespace),
 /* harmony export */   getByNamespace: () => (/* binding */ getByNamespace),
 /* harmony export */   namespacify: () => (/* binding */ namespacify),
 /* harmony export */   splitFullKey: () => (/* binding */ splitFullKey)
 /* harmony export */ });
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_11308__(/*! ./helpers */ "./src/helpers.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_11368__(/*! ./helpers */ "./src/helpers.js");
 
 
 const NAMESPACE_DELIMITER = "::";
@@ -423,10 +423,10 @@ function namespacify (namespace, obj) {
 /*!************************!*\
   !*** ./src/storage.js ***!
   \************************/
-(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_12898__) {
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_12958__) {
 
-__nested_webpack_require_12898__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_12898__.d(__nested_webpack_exports__, {
+__nested_webpack_require_12958__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_12958__.d(__nested_webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 function updateFromLocalStorage(state) {
@@ -449,8 +449,8 @@ function isStorageAvailable(storageType) {
   return storageType;
 }
 
-function setStorageValue(storageType, key, value) {
-  window.localStorage.setItem(key, value);
+async function setStorageValue(storageType, key, value) {
+  await window.localStorage.setItem(key, value);
   return false;
 }
 
@@ -468,14 +468,14 @@ function setStorageValue(storageType, key, value) {
 /*!***************************!*\
   !*** ./src/validation.js ***!
   \***************************/
-(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_14054__) {
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_14126__) {
 
-__nested_webpack_require_14054__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_14054__.d(__nested_webpack_exports__, {
+__nested_webpack_require_14126__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_14126__.d(__nested_webpack_exports__, {
 /* harmony export */   isValid: () => (/* binding */ isValid)
 /* harmony export */ });
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_14054__(/*! . */ "./src/index.js");
-/* harmony import */ var _namespace__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_14054__(/*! ./namespace */ "./src/namespace.js");
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_14126__(/*! . */ "./src/index.js");
+/* harmony import */ var _namespace__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_14126__(/*! ./namespace */ "./src/namespace.js");
 
 
 
@@ -514,7 +514,7 @@ const isValid = {
 /******/ 	const __webpack_module_cache__ = {};
 /******/ 	
 /******/ 	// The require function
-/******/ 	function __nested_webpack_require_15446__(moduleId) {
+/******/ 	function __nested_webpack_require_15518__(moduleId) {
 /******/ 		// Check if module is in cache
 /******/ 		const cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
@@ -534,7 +534,7 @@ const isValid = {
 /******/ 			e.code = 'MODULE_NOT_FOUND';
 /******/ 			throw e;
 /******/ 		}
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __nested_webpack_require_15446__);
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __nested_webpack_require_15518__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -544,13 +544,13 @@ const isValid = {
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter/value functions for harmony exports
-/******/ 		__nested_webpack_require_15446__.d = (exports, definition) => {
+/******/ 		__nested_webpack_require_15518__.d = (exports, definition) => {
 /******/ 			if(Array.isArray(definition)) {
 /******/ 				var i = 0;
 /******/ 				while(i < definition.length) {
 /******/ 					var key = definition[i++];
 /******/ 					var binding = definition[i++];
-/******/ 					if(!__nested_webpack_require_15446__.o(exports, key)) {
+/******/ 					if(!__nested_webpack_require_15518__.o(exports, key)) {
 /******/ 						if(binding === 0) {
 /******/ 							Object.defineProperty(exports, key, { enumerable: true, value: definition[i++] });
 /******/ 						} else {
@@ -560,7 +560,7 @@ const isValid = {
 /******/ 				}
 /******/ 			} else {
 /******/ 				for(var key in definition) {
-/******/ 					if(__nested_webpack_require_15446__.o(definition, key) && !__nested_webpack_require_15446__.o(exports, key)) {
+/******/ 					if(__nested_webpack_require_15518__.o(definition, key) && !__nested_webpack_require_15518__.o(exports, key)) {
 /******/ 						Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 					}
 /******/ 				}
@@ -570,13 +570,13 @@ const isValid = {
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
-/******/ 		__nested_webpack_require_15446__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 		__nested_webpack_require_15518__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__nested_webpack_require_15446__.r = (exports) => {
+/******/ 		__nested_webpack_require_15518__.r = (exports) => {
 /******/ 			if(Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
@@ -589,7 +589,7 @@ const isValid = {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	let __nested_webpack_exports__ = __nested_webpack_require_15446__("./src/index.js");
+/******/ 	let __nested_webpack_exports__ = __nested_webpack_require_15518__("./src/index.js");
 /******/ 	__nested_webpack_exports__ = __nested_webpack_exports__["default"];
 /******/ 	
 /******/ 	return __nested_webpack_exports__;
@@ -782,9 +782,13 @@ async function onMessage (message, actions = {}) {
     return;
   }
 
+  if (message.isAnswer) {
+    return;
+  }
+
   if (actions[message.action]) {
     const payload = await actions[message.action](message.payload);
-    sendMessage(message.action, payload, message.resultId);
+    sendMessage(message.action, payload, message.resultId, true);
   }
 }
 
@@ -797,8 +801,8 @@ function sendMessageForResult(action, payload, messagesId) {
   return promise;
 }
 
-async function sendMessage (action, payload, resultId) {
-  const message = { action, payload, resultId };
+async function sendMessage (action, payload, resultId, isAnswer) {
+  const message = { action, payload, resultId, isAnswer };
 
   if (isBackgroundScript()) {
     const [tab] = await getCurrentTab();

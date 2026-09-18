@@ -15,14 +15,17 @@ export default create(
   `
     .container {
       display: flex;
+      height: 33px;
       gap: 8px;
     }
 
     .string {
       margin: 0;
-      padding-top: 6px;
+      padding-top: 9px;
       padding-bottom: 0px;
       border-bottom: 2px solid black;
+      padding-left: 7px;
+      padding-right: 7px;
     }
 
     .distance {
@@ -32,8 +35,8 @@ export default create(
       border-bottom: 2px solid black;
       margin-top: 6px;
       margin-bottom: 10px;
-      padding-left: 3px;
-      padding-right: 3px;
+      padding-left: 7px;
+      padding-right: 7px;
     }
 
     .container:first-child .distance {

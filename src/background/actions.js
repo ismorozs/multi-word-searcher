@@ -3,7 +3,6 @@ const browser = require("webextension-polyfill/dist/browser-polyfill.min");
 import Message from "@common/messages";
 import State from "./state";
 import { getCurrentTab } from "./helpers";
-import { updateContextMenu } from "./context-menu";
 
 
 export default {
@@ -65,7 +64,6 @@ function removeAllSearches (tabId) {
 
 export async function addSearchToContextMenu({ tabId, idx, string }) {
   State.setSearchInTab(tabId, idx, string);
-  await updateContextMenu()
 }
 
 async function executeScript(tabId, file) {
@@ -84,7 +82,6 @@ async function executeScript(tabId, file) {
 function removeRecentSearch (string) {
   State.removeRecentSearch(string);
   Message.removeRecentSearch({ string })
-  updateContextMenu();
 }
 
 function addFavoriteSearch (string) {

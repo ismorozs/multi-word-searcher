@@ -77,7 +77,7 @@ export async function updateContextMenu () {
     };
   }
 
-  createContextMenu({
+  await createContextMenu({
     [FIND_SUGGESTION]: {
       [MENU_TEXT.NEW]: () => actions.openSearchGroup(),
       ...Object.fromEntries(activeSearchOptions),

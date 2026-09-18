@@ -57,6 +57,7 @@ export default create(
   },
   `
     .searches-container {
+      font-family: sans-serif;
       display: flex;
       font-size: 18px;
       margin-left: 50px;

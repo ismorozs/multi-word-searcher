@@ -207,7 +207,7 @@ function createAccessor(key, storageType) {
   Object.assign(accessor, {
     valueOf: () => STATE[key].value,
     toString: () => STATE[key].value,
-    set: (value) => setValue(key, value, storageType),
+    set: async (value) => await setValue(key, value, storageType),
     onChange: (cb) => STATE[key].listeners.push(cb),
     removeListener: (removeCb) =>
       (STATE[key].listeners = STATE[key].listeners.filter(
@@ -227,9 +227,9 @@ function createAccessor(key, storageType) {
   });
 }
 
-function setValue (key, value, storageType) {
+async function setValue (key, value, storageType) {
   if (STORAGE.IS_AVAILABE(storageType)) {
-    const isAutoUpdate = STORAGE.SET_VALUE(storageType, key, value);
+    const isAutoUpdate = await STORAGE.SET_VALUE(storageType, key, value);
     if (isAutoUpdate) {
       return;
     }
@@ -254,7 +254,7 @@ function onStateChange (changes) {
   }
 
   for (const key in realChanges) {
-    STATE[key].listeners.forEach((cb) => cb(STATE[key].value, getNamespaceValues(key), realChanges[key]));
+    STATE[key].listeners.forEach(async (cb) => await cb(STATE[key].value, getNamespaceValues(key), realChanges[key]));
   }
 }
 
@@ -294,7 +294,7 @@ function getNamespaceAccessors (namespace, cb) {
   return cb.call(null, accessors, createStore(namespace()));
 }
 
-function setState (namespace, changes) {
+async function setState (namespace, changes) {
   const noKeys = !Object.keys(changes).length;
 
   if (noKeys) {
@@ -302,7 +302,7 @@ function setState (namespace, changes) {
   } else {
     for (const [k,v] of Object.entries(changes)) {
       _validation__WEBPACK_IMPORTED_MODULE_3__.isValid.Setting(namespace(k));
-      ACCESSORS[namespace(k)].set(v);
+      await ACCESSORS[namespace(k)].set(v);
     };
   }
 
@@ -378,7 +378,7 @@ function createStore (_namespace) {
     add: (state) => addState(namespace, state, false),
     addPersistent: (state) => addState(namespace, state, true),
     get: (arg) => getState(namespace, arg),
-    set: (changes) => setState(namespace, changes),
+    set: async (changes) => await setState(namespace, changes),
     resetAll: () => resetAllState(namespace),
     onChange: (keys, cb) => addStateLitener(namespace, keys, cb),
     removeListener: (keys, cb) => removeStateListener(namespace, keys, cb),
@@ -396,17 +396,17 @@ function createStore (_namespace) {
 /*!**************************!*\
   !*** ./src/namespace.js ***!
   \**************************/
-(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_22123__) {
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_22183__) {
 
 "use strict";
-__nested_webpack_require_22123__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_22123__.d(__nested_webpack_exports__, {
+__nested_webpack_require_22183__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_22183__.d(__nested_webpack_exports__, {
 /* harmony export */   addNamespace: () => (/* binding */ addNamespace),
 /* harmony export */   getByNamespace: () => (/* binding */ getByNamespace),
 /* harmony export */   namespacify: () => (/* binding */ namespacify),
 /* harmony export */   splitFullKey: () => (/* binding */ splitFullKey)
 /* harmony export */ });
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_22123__(/*! ./helpers */ "./src/helpers.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_22183__(/*! ./helpers */ "./src/helpers.js");
 
 
 const NAMESPACE_DELIMITER = "::";
@@ -448,11 +448,11 @@ function namespacify (namespace, obj) {
 /*!************************!*\
   !*** ./src/storage.js ***!
   \************************/
-(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_23727__) {
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_23787__) {
 
 "use strict";
-__nested_webpack_require_23727__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_23727__.d(__nested_webpack_exports__, {
+__nested_webpack_require_23787__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_23787__.d(__nested_webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 function updateFromLocalStorage(state) {
@@ -475,8 +475,8 @@ function isStorageAvailable(storageType) {
   return storageType;
 }
 
-function setStorageValue(storageType, key, value) {
-  window.localStorage.setItem(key, value);
+async function setStorageValue(storageType, key, value) {
+  await window.localStorage.setItem(key, value);
   return false;
 }
 
@@ -494,15 +494,15 @@ function setStorageValue(storageType, key, value) {
 /*!***************************!*\
   !*** ./src/validation.js ***!
   \***************************/
-(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_24897__) {
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_24969__) {
 
 "use strict";
-__nested_webpack_require_24897__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_24897__.d(__nested_webpack_exports__, {
+__nested_webpack_require_24969__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_24969__.d(__nested_webpack_exports__, {
 /* harmony export */   isValid: () => (/* binding */ isValid)
 /* harmony export */ });
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_24897__(/*! . */ "./src/index.js");
-/* harmony import */ var _namespace__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_24897__(/*! ./namespace */ "./src/namespace.js");
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_24969__(/*! . */ "./src/index.js");
+/* harmony import */ var _namespace__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_24969__(/*! ./namespace */ "./src/namespace.js");
 
 
 
@@ -539,16 +539,16 @@ const isValid = {
 /*!*************************************!*\
   !*** ./src/webextension-storage.js ***!
   \*************************************/
-(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_26296__) {
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_26368__) {
 
 "use strict";
-__nested_webpack_require_26296__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_26296__.d(__nested_webpack_exports__, {
+__nested_webpack_require_26368__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_26368__.d(__nested_webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   isBackgroundScript: () => (/* binding */ isBackgroundScript),
 /* harmony export */   isSessionStorageSupport: () => (/* binding */ isSessionStorageSupport)
 /* harmony export */ });
-const browser = __nested_webpack_require_26296__(/*! webextension-polyfill/dist/browser-polyfill.min */ "./node_modules/webextension-polyfill/dist/browser-polyfill.min.js");
+const browser = __nested_webpack_require_26368__(/*! webextension-polyfill/dist/browser-polyfill.min */ "./node_modules/webextension-polyfill/dist/browser-polyfill.min.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   GET_TYPE: getStorageType,
@@ -572,8 +572,8 @@ async function updateStateFromStorage(state, type) {
   return Object.assign(state, await browser.storage[type].get());
 }
 
-function setStorageValue(type, key, value) {
-  browser.storage[type].set({ [key]: value });
+async function setStorageValue(type, key, value) {
+  await browser.storage[type].set({ [key]: value });
   return true;
 }
 
@@ -597,7 +597,7 @@ function isBackgroundScript() {
 /******/ 	const __webpack_module_cache__ = {};
 /******/ 	
 /******/ 	// The require function
-/******/ 	function __nested_webpack_require_28090__(moduleId) {
+/******/ 	function __nested_webpack_require_28174__(moduleId) {
 /******/ 		// Check if module is in cache
 /******/ 		const cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
@@ -617,7 +617,7 @@ function isBackgroundScript() {
 /******/ 			e.code = 'MODULE_NOT_FOUND';
 /******/ 			throw e;
 /******/ 		}
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_28090__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_28174__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -627,13 +627,13 @@ function isBackgroundScript() {
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter/value functions for harmony exports
-/******/ 		__nested_webpack_require_28090__.d = (exports, definition) => {
+/******/ 		__nested_webpack_require_28174__.d = (exports, definition) => {
 /******/ 			if(Array.isArray(definition)) {
 /******/ 				var i = 0;
 /******/ 				while(i < definition.length) {
 /******/ 					var key = definition[i++];
 /******/ 					var binding = definition[i++];
-/******/ 					if(!__nested_webpack_require_28090__.o(exports, key)) {
+/******/ 					if(!__nested_webpack_require_28174__.o(exports, key)) {
 /******/ 						if(binding === 0) {
 /******/ 							Object.defineProperty(exports, key, { enumerable: true, value: definition[i++] });
 /******/ 						} else {
@@ -643,7 +643,7 @@ function isBackgroundScript() {
 /******/ 				}
 /******/ 			} else {
 /******/ 				for(var key in definition) {
-/******/ 					if(__nested_webpack_require_28090__.o(definition, key) && !__nested_webpack_require_28090__.o(exports, key)) {
+/******/ 					if(__nested_webpack_require_28174__.o(definition, key) && !__nested_webpack_require_28174__.o(exports, key)) {
 /******/ 						Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 					}
 /******/ 				}
@@ -653,13 +653,13 @@ function isBackgroundScript() {
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
-/******/ 		__nested_webpack_require_28090__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 		__nested_webpack_require_28174__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__nested_webpack_require_28090__.r = (exports) => {
+/******/ 		__nested_webpack_require_28174__.r = (exports) => {
 /******/ 			if(Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
@@ -675,13 +675,13 @@ let __nested_webpack_exports__ = {};
 /*!*****************************!*\
   !*** ./src/webextension.js ***!
   \*****************************/
-__nested_webpack_require_28090__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_28090__.d(__nested_webpack_exports__, {
+__nested_webpack_require_28174__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_28174__.d(__nested_webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_28090__(/*! . */ "./src/index.js");
-/* harmony import */ var _webextension_storage__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_28090__(/*! ./webextension-storage */ "./src/webextension-storage.js");
-const browser = __nested_webpack_require_28090__(/*! webextension-polyfill/dist/browser-polyfill.min */ "./node_modules/webextension-polyfill/dist/browser-polyfill.min.js");
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_28174__(/*! . */ "./src/index.js");
+/* harmony import */ var _webextension_storage__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_28174__(/*! ./webextension-storage */ "./src/webextension-storage.js");
+const browser = __nested_webpack_require_28174__(/*! webextension-polyfill/dist/browser-polyfill.min */ "./node_modules/webextension-polyfill/dist/browser-polyfill.min.js");
 
 
 
@@ -891,9 +891,13 @@ async function onMessage (message, actions = {}) {
     return;
   }
 
+  if (message.isAnswer) {
+    return;
+  }
+
   if (actions[message.action]) {
     const payload = await actions[message.action](message.payload);
-    sendMessage(message.action, payload, message.resultId);
+    sendMessage(message.action, payload, message.resultId, true);
   }
 }
 
@@ -906,8 +910,8 @@ function sendMessageForResult(action, payload, messagesId) {
   return promise;
 }
 
-async function sendMessage (action, payload, resultId) {
-  const message = { action, payload, resultId };
+async function sendMessage (action, payload, resultId, isAnswer) {
+  const message = { action, payload, resultId, isAnswer };
 
   if (isBackgroundScript()) {
     const [tab] = await getCurrentTab();
@@ -1291,10 +1295,12 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _background_message_answers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @background/message-answers */ "./src/background/message-answers.js");
 /* harmony import */ var _background_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @background/actions */ "./src/background/actions.js");
-/* harmony import */ var _background_context_menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./background/context-menu */ "./src/background/context-menu.js");
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_background_message_answers__WEBPACK_IMPORTED_MODULE_0__, _background_actions__WEBPACK_IMPORTED_MODULE_1__, _background_context_menu__WEBPACK_IMPORTED_MODULE_2__]);
-([_background_message_answers__WEBPACK_IMPORTED_MODULE_0__, _background_actions__WEBPACK_IMPORTED_MODULE_1__, _background_context_menu__WEBPACK_IMPORTED_MODULE_2__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+/* harmony import */ var _background_state__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @background/state */ "./src/background/state.js");
+/* harmony import */ var _background_context_menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./background/context-menu */ "./src/background/context-menu.js");
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_background_message_answers__WEBPACK_IMPORTED_MODULE_0__, _background_actions__WEBPACK_IMPORTED_MODULE_1__, _background_state__WEBPACK_IMPORTED_MODULE_2__, _background_context_menu__WEBPACK_IMPORTED_MODULE_3__]);
+([_background_message_answers__WEBPACK_IMPORTED_MODULE_0__, _background_actions__WEBPACK_IMPORTED_MODULE_1__, _background_state__WEBPACK_IMPORTED_MODULE_2__, _background_context_menu__WEBPACK_IMPORTED_MODULE_3__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 const browser = __webpack_require__(/*! webextension-polyfill/dist/browser-polyfill.min */ "./node_modules/webextension-polyfill/dist/browser-polyfill.min.js");
+
 
 
 
@@ -1302,12 +1308,17 @@ const browser = __webpack_require__(/*! webextension-polyfill/dist/browser-polyf
 
 browser.browserAction.onClicked.addListener((tab) => _background_actions__WEBPACK_IMPORTED_MODULE_1__["default"].switchPopup(tab));
 
-browser.tabs.onActivated.addListener(_background_context_menu__WEBPACK_IMPORTED_MODULE_2__.updateContextMenu);
-browser.tabs.onUpdated.addListener(_background_context_menu__WEBPACK_IMPORTED_MODULE_2__.updateContextMenu);
+browser.tabs.onActivated.addListener(_background_context_menu__WEBPACK_IMPORTED_MODULE_3__.updateContextMenu);
+browser.tabs.onUpdated.addListener(_background_context_menu__WEBPACK_IMPORTED_MODULE_3__.updateContextMenu);
 
-browser.storage.local.onChanged.addListener(_background_context_menu__WEBPACK_IMPORTED_MODULE_2__.updateContextMenu);
+_background_state__WEBPACK_IMPORTED_MODULE_2__["default"].onChange(
+  ["favoriteSearches", "recentSearches", "tabs"],
+  async () => {
+    await (0,_background_context_menu__WEBPACK_IMPORTED_MODULE_3__.updateContextMenu)()
+  },
+);
 
-(0,_background_context_menu__WEBPACK_IMPORTED_MODULE_2__.updateContextMenu)();
+(0,_background_context_menu__WEBPACK_IMPORTED_MODULE_3__.updateContextMenu)();
 
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
@@ -1332,11 +1343,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @common/messages */ "./src/common/messages.js");
 /* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./state */ "./src/background/state.js");
 /* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helpers */ "./src/background/helpers.js");
-/* harmony import */ var _context_menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./context-menu */ "./src/background/context-menu.js");
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_state__WEBPACK_IMPORTED_MODULE_1__, _context_menu__WEBPACK_IMPORTED_MODULE_3__]);
-([_state__WEBPACK_IMPORTED_MODULE_1__, _context_menu__WEBPACK_IMPORTED_MODULE_3__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_state__WEBPACK_IMPORTED_MODULE_1__]);
+var __webpack_async_dependencies_result__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+_state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_async_dependencies_result__[0];
 const browser = __webpack_require__(/*! webextension-polyfill/dist/browser-polyfill.min */ "./node_modules/webextension-polyfill/dist/browser-polyfill.min.js");
-
 
 
 
@@ -1402,7 +1412,6 @@ function removeAllSearches (tabId) {
 
 async function addSearchToContextMenu({ tabId, idx, string }) {
   _state__WEBPACK_IMPORTED_MODULE_1__["default"].setSearchInTab(tabId, idx, string);
-  await (0,_context_menu__WEBPACK_IMPORTED_MODULE_3__.updateContextMenu)()
 }
 
 async function executeScript(tabId, file) {
@@ -1421,7 +1430,6 @@ async function executeScript(tabId, file) {
 function removeRecentSearch (string) {
   _state__WEBPACK_IMPORTED_MODULE_1__["default"].removeRecentSearch(string);
   _common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].removeRecentSearch({ string })
-  ;(0,_context_menu__WEBPACK_IMPORTED_MODULE_3__.updateContextMenu)();
 }
 
 function addFavoriteSearch (string) {
@@ -1542,7 +1550,7 @@ async function updateContextMenu () {
     };
   }
 
-  webextension_contextmenu__WEBPACK_IMPORTED_MODULE_0___default()({
+  await webextension_contextmenu__WEBPACK_IMPORTED_MODULE_0___default()({
     [_common_constants__WEBPACK_IMPORTED_MODULE_1__.FIND_SUGGESTION]: {
       [MENU_TEXT.NEW]: () => _actions__WEBPACK_IMPORTED_MODULE_3__["default"].openSearchGroup(),
       ...Object.fromEntries(activeSearchOptions),
@@ -1676,15 +1684,22 @@ function initTabState (tabId) {
 
 function setTabState (tabId, state) {
   const { tabs } = varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().get();
-  const prevTabState = tabs[tabId];
+  let prevTabState = tabs[tabId];
+
+  if (!prevTabState) {
+    prevTabState = initTabState(tabId);
+  }
+
   tabs[tabId] = state ? { ...prevTabState, ...state } : EMPTY_OBJECT;
   varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().set({ tabs });
 }
 
-function setSearchInTab (tabId, searchId, string) {
+async function setSearchInTab (tabId, searchId, string) {
   const { tabs } = varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().get();
-  tabs[tabId].searches[searchId] = string;
-  addRecentSearch(string)
+  if (tabs[tabId]) {
+    tabs[tabId].searches[searchId] = string;
+  }
+  await addRecentSearch(string)
   varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().set({ tabs });
 }
 
@@ -1695,7 +1710,7 @@ async function getEmptySearchId ({ id }) {
   return emptySlot >= 0 ? emptySlot : searches.length - 1;
 }
 
-function addRecentSearch (str) {
+async function addRecentSearch (str) {
   const { recentSearches } = varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().get();
 
   if (!str) {
@@ -1715,7 +1730,7 @@ function addRecentSearch (str) {
 
   recentSearches.unshift(str);
 
-  varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().set({ recentSearches });
+  await varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().set({ recentSearches });
 }
 
 function removeRecentSearch (str) {
