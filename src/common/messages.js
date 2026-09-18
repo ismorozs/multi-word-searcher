@@ -8,4 +8,9 @@ export default createMessages([
   "saveTabId",
   "removeSearch",
   "closingTab",
+  "getSearches",
+  "addToRecent",
+  "removeRecentSearch",
+  "addFavoriteSearch",
+  "removeFavoriteSearch",
 ]);

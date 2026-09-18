@@ -15,6 +15,8 @@ export default {
   removeSearch,
   removeAllSearches,
   removeRecentSearch,
+  addFavoriteSearch,
+  removeFavoriteSearch,
   openPage,
 };
 
@@ -79,9 +81,20 @@ async function executeScript(tabId, file) {
   }
 }
 
-function removeRecentSearch (str) {
-  State.removeRecentSearch(str);
+function removeRecentSearch (string) {
+  State.removeRecentSearch(string);
+  Message.removeRecentSearch({ string })
   updateContextMenu();
+}
+
+function addFavoriteSearch (string) {
+  State.addFavoriteSearch(string);
+  Message.addFavoriteSearch({ string });
+}
+
+function removeFavoriteSearch (string) {
+  State.removeFavoriteSearch(string);
+  Message.removeFavoriteSearch({ string })
 }
 
 function openPage (url) {

@@ -10,64 +10,80 @@ const MENU_TEXT = {
   REMOVE: "Remove",
   REMOVE_ALL_ACTIVE: "Remove all active",
   FIND: "Find",
-  RECENT_SEARCHES: "Recent searches",
-  REMOVE_ALL_RECENT: "Remove all recent",
-  OPTIONS: "Settings",
-}
+  RECENT_SEARCHES: "Recent",
+  REMOVE_ALL_RECENT: "Remove all",
+  FAVORITE_SEARCHES: "Saved",
+  REMOVE_ALL_FAVORITE: "Remove all",
+  OPTIONS: "Customize",
+};
 
 function separator (str) {
   return `${Date.now()}${str}`;
 };
 
 export async function updateContextMenu () {
-  const { recentSearches } = State.get();
+  const { recentSearches, favoriteSearches } = State.get();
   const { id } = await getCurrentTab();
   const { searches } = State.getTabState(id);
 
-  const newSearchOption = searches.every((s) => s) ? {} : {
-    [MENU_TEXT.NEW]: () => actions.openSearchGroup()
-  }
-
   const activeSearchOptions = searches
-    .map((s, i) => [
-      s,
-      {
-        [MENU_TEXT.OPEN]: () => actions.openSearchGroup(i),
-        [MENU_TEXT.REMOVE]: () => actions.removeSearch(id, i),
-      },
-    ])
+    .map((s, i) => [s, () => actions.openSearchGroup(i)])
     .filter(([s]) => s);
 
   if (activeSearchOptions.length) {
-    activeSearchOptions.unshift([separator(1), null]);
+    activeSearchOptions.unshift([separator(0), null]);
     activeSearchOptions.push(
+      [separator(1), null],
       [MENU_TEXT.REMOVE_ALL_ACTIVE, () => actions.removeAllSearches(id)],
     );
   }
 
-  let recentSearchesSubmenu = {};
-  const recentSearchesOptions = recentSearches.filter((s) => s).map((s) => [
+  let favoriteSearchesSubmenu = {};
+  const favoriteSearchesOptions = favoriteSearches.map((s) => [
     s,
-    {
-      [MENU_TEXT.FIND]: () => actions.openSearchGroup(undefined, s),
-      [MENU_TEXT.REMOVE]: () => actions.removeRecentSearch(s),
-    },
+    () => actions.openSearchGroup(undefined, s),
+  ]);
+
+  if (favoriteSearchesOptions.length) {
+    favoriteSearchesOptions.push(
+      [separator(2), null],
+      [MENU_TEXT.REMOVE_ALL_FAVORITE, () => actions.removeFavoriteSearch()],
+    );
+    favoriteSearchesSubmenu = {
+      [separator(3)]: null,
+      [MENU_TEXT.FAVORITE_SEARCHES]: Object.fromEntries(
+        favoriteSearchesOptions,
+      ),
+    };
+  }
+
+
+  let recentSearchesSubmenu = {};
+  const recentSearchesOptions = recentSearches.map((s) => [
+    s,
+    () => actions.openSearchGroup(undefined, s),
   ]);
 
   if (recentSearchesOptions.length) {
+    recentSearchesOptions.push(
+      [separator(4), null],
+      [MENU_TEXT.REMOVE_ALL_RECENT, () => actions.removeRecentSearch()],
+    );
     recentSearchesSubmenu = {
-      [separator(2)]: null,
-      [MENU_TEXT.RECENT_SEARCHES]: Object.fromEntries(recentSearchesOptions),
-      [MENU_TEXT.REMOVE_ALL_RECENT]: () => actions.removeRecentSearch(),
+      ...(favoriteSearchesOptions.length ? {} : { [separator(5)]: null }),
+      [MENU_TEXT.RECENT_SEARCHES]: Object.fromEntries(
+        recentSearchesOptions,
+      ),
     };
   }
 
   createContextMenu({
     [FIND_SUGGESTION]: {
-      ...newSearchOption,
+      [MENU_TEXT.NEW]: () => actions.openSearchGroup(),
       ...Object.fromEntries(activeSearchOptions),
+      ...favoriteSearchesSubmenu,
       ...recentSearchesSubmenu,
-      [separator(3)]: null,
+      [separator(6)]: null,
       [MENU_TEXT.OPTIONS]: () => actions.openPage(PAGE_URLS.SETTINGS)
     },
   });

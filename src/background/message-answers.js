@@ -1,14 +1,16 @@
 import Message from '@common/messages';
-import {
-  closingPopup,
-  closingTab,
-  addSearchToContextMenu,
-} from "./actions";
+import State from './state';
+import actions from "./actions";
 
-Message.closingTab(({ tabId }) => closingTab({ tabId }));
-Message.closingPopup(({ tabId }) => closingPopup({ tabId }));
+Message.closingTab(({ tabId }) => actions.closingTab({ tabId }));
+Message.closingPopup(({ tabId }) => actions.closingPopup({ tabId }));
 
 Message.addSearchToContextMenu(({ tabId, idx, string }) =>
-  addSearchToContextMenu({ tabId, idx, string }),
+  actions.addSearchToContextMenu({ tabId, idx, string }),
 );
 
+Message.getSearches(() => State.get())
+
+Message.removeRecentSearch(({ string }) => actions.removeRecentSearch(string));
+Message.addFavoriteSearch(({ string }) => actions.addFavoriteSearch(string));
+Message.removeFavoriteSearch(({ string }) => actions.removeFavoriteSearch(string));

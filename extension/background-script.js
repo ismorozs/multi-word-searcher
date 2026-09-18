@@ -1,10 +1,10 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/varstor/dist/varstor.js"
-/*!**********************************************!*\
-  !*** ./node_modules/varstor/dist/varstor.js ***!
-  \**********************************************/
+/***/ "../varstor/dist/varstor-webextension.js"
+/*!***********************************************!*\
+  !*** ../varstor/dist/varstor-webextension.js ***!
+  \***********************************************/
 (module) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -14,17 +14,40 @@
 {}
 })(this, () => {
 return /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
+
+/***/ "./node_modules/webextension-polyfill/dist/browser-polyfill.min.js"
+/*!*************************************************************************!*\
+  !*** ./node_modules/webextension-polyfill/dist/browser-polyfill.min.js ***!
+  \*************************************************************************/
+(module, exports) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(a,b){if(true)!(__WEBPACK_AMD_DEFINE_ARRAY__ = [module], __WEBPACK_AMD_DEFINE_FACTORY__ = (b),
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else // removed by dead control flow
+// removed by dead control flow
+{ var c; }})("undefined"==typeof globalThis?"undefined"==typeof self?this:self:globalThis,function(a){"use strict";if(!(globalThis.chrome&&globalThis.chrome.runtime&&globalThis.chrome.runtime.id))throw new Error("This script should only be loaded in a browser extension.");if(!(globalThis.browser&&globalThis.browser.runtime&&globalThis.browser.runtime.id)){a.exports=(a=>{const b={alarms:{clear:{minArgs:0,maxArgs:1},clearAll:{minArgs:0,maxArgs:0},get:{minArgs:0,maxArgs:1},getAll:{minArgs:0,maxArgs:0}},bookmarks:{create:{minArgs:1,maxArgs:1},get:{minArgs:1,maxArgs:1},getChildren:{minArgs:1,maxArgs:1},getRecent:{minArgs:1,maxArgs:1},getSubTree:{minArgs:1,maxArgs:1},getTree:{minArgs:0,maxArgs:0},move:{minArgs:2,maxArgs:2},remove:{minArgs:1,maxArgs:1},removeTree:{minArgs:1,maxArgs:1},search:{minArgs:1,maxArgs:1},update:{minArgs:2,maxArgs:2}},browserAction:{disable:{minArgs:0,maxArgs:1,fallbackToNoCallback:!0},enable:{minArgs:0,maxArgs:1,fallbackToNoCallback:!0},getBadgeBackgroundColor:{minArgs:1,maxArgs:1},getBadgeText:{minArgs:1,maxArgs:1},getPopup:{minArgs:1,maxArgs:1},getTitle:{minArgs:1,maxArgs:1},openPopup:{minArgs:0,maxArgs:0},setBadgeBackgroundColor:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setBadgeText:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setIcon:{minArgs:1,maxArgs:1},setPopup:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setTitle:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0}},browsingData:{remove:{minArgs:2,maxArgs:2},removeCache:{minArgs:1,maxArgs:1},removeCookies:{minArgs:1,maxArgs:1},removeDownloads:{minArgs:1,maxArgs:1},removeFormData:{minArgs:1,maxArgs:1},removeHistory:{minArgs:1,maxArgs:1},removeLocalStorage:{minArgs:1,maxArgs:1},removePasswords:{minArgs:1,maxArgs:1},removePluginData:{minArgs:1,maxArgs:1},settings:{minArgs:0,maxArgs:0}},commands:{getAll:{minArgs:0,maxArgs:0}},contextMenus:{remove:{minArgs:1,maxArgs:1},removeAll:{minArgs:0,maxArgs:0},update:{minArgs:2,maxArgs:2}},cookies:{get:{minArgs:1,maxArgs:1},getAll:{minArgs:1,maxArgs:1},getAllCookieStores:{minArgs:0,maxArgs:0},remove:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}},devtools:{inspectedWindow:{eval:{minArgs:1,maxArgs:2,singleCallbackArg:!1}},panels:{create:{minArgs:3,maxArgs:3,singleCallbackArg:!0},elements:{createSidebarPane:{minArgs:1,maxArgs:1}}}},downloads:{cancel:{minArgs:1,maxArgs:1},download:{minArgs:1,maxArgs:1},erase:{minArgs:1,maxArgs:1},getFileIcon:{minArgs:1,maxArgs:2},open:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},pause:{minArgs:1,maxArgs:1},removeFile:{minArgs:1,maxArgs:1},resume:{minArgs:1,maxArgs:1},search:{minArgs:1,maxArgs:1},show:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0}},extension:{isAllowedFileSchemeAccess:{minArgs:0,maxArgs:0},isAllowedIncognitoAccess:{minArgs:0,maxArgs:0}},history:{addUrl:{minArgs:1,maxArgs:1},deleteAll:{minArgs:0,maxArgs:0},deleteRange:{minArgs:1,maxArgs:1},deleteUrl:{minArgs:1,maxArgs:1},getVisits:{minArgs:1,maxArgs:1},search:{minArgs:1,maxArgs:1}},i18n:{detectLanguage:{minArgs:1,maxArgs:1},getAcceptLanguages:{minArgs:0,maxArgs:0}},identity:{launchWebAuthFlow:{minArgs:1,maxArgs:1}},idle:{queryState:{minArgs:1,maxArgs:1}},management:{get:{minArgs:1,maxArgs:1},getAll:{minArgs:0,maxArgs:0},getSelf:{minArgs:0,maxArgs:0},setEnabled:{minArgs:2,maxArgs:2},uninstallSelf:{minArgs:0,maxArgs:1}},notifications:{clear:{minArgs:1,maxArgs:1},create:{minArgs:1,maxArgs:2},getAll:{minArgs:0,maxArgs:0},getPermissionLevel:{minArgs:0,maxArgs:0},update:{minArgs:2,maxArgs:2}},pageAction:{getPopup:{minArgs:1,maxArgs:1},getTitle:{minArgs:1,maxArgs:1},hide:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setIcon:{minArgs:1,maxArgs:1},setPopup:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setTitle:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},show:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0}},permissions:{contains:{minArgs:1,maxArgs:1},getAll:{minArgs:0,maxArgs:0},remove:{minArgs:1,maxArgs:1},request:{minArgs:1,maxArgs:1}},runtime:{getBackgroundPage:{minArgs:0,maxArgs:0},getPlatformInfo:{minArgs:0,maxArgs:0},openOptionsPage:{minArgs:0,maxArgs:0},requestUpdateCheck:{minArgs:0,maxArgs:0},sendMessage:{minArgs:1,maxArgs:3},sendNativeMessage:{minArgs:2,maxArgs:2},setUninstallURL:{minArgs:1,maxArgs:1}},sessions:{getDevices:{minArgs:0,maxArgs:1},getRecentlyClosed:{minArgs:0,maxArgs:1},restore:{minArgs:0,maxArgs:1}},storage:{local:{clear:{minArgs:0,maxArgs:0},get:{minArgs:0,maxArgs:1},getBytesInUse:{minArgs:0,maxArgs:1},remove:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}},managed:{get:{minArgs:0,maxArgs:1},getBytesInUse:{minArgs:0,maxArgs:1}},sync:{clear:{minArgs:0,maxArgs:0},get:{minArgs:0,maxArgs:1},getBytesInUse:{minArgs:0,maxArgs:1},remove:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}}},tabs:{captureVisibleTab:{minArgs:0,maxArgs:2},create:{minArgs:1,maxArgs:1},detectLanguage:{minArgs:0,maxArgs:1},discard:{minArgs:0,maxArgs:1},duplicate:{minArgs:1,maxArgs:1},executeScript:{minArgs:1,maxArgs:2},get:{minArgs:1,maxArgs:1},getCurrent:{minArgs:0,maxArgs:0},getZoom:{minArgs:0,maxArgs:1},getZoomSettings:{minArgs:0,maxArgs:1},goBack:{minArgs:0,maxArgs:1},goForward:{minArgs:0,maxArgs:1},highlight:{minArgs:1,maxArgs:1},insertCSS:{minArgs:1,maxArgs:2},move:{minArgs:2,maxArgs:2},query:{minArgs:1,maxArgs:1},reload:{minArgs:0,maxArgs:2},remove:{minArgs:1,maxArgs:1},removeCSS:{minArgs:1,maxArgs:2},sendMessage:{minArgs:2,maxArgs:3},setZoom:{minArgs:1,maxArgs:2},setZoomSettings:{minArgs:1,maxArgs:2},update:{minArgs:1,maxArgs:2}},topSites:{get:{minArgs:0,maxArgs:0}},webNavigation:{getAllFrames:{minArgs:1,maxArgs:1},getFrame:{minArgs:1,maxArgs:1}},webRequest:{handlerBehaviorChanged:{minArgs:0,maxArgs:0}},windows:{create:{minArgs:0,maxArgs:1},get:{minArgs:1,maxArgs:2},getAll:{minArgs:0,maxArgs:1},getCurrent:{minArgs:0,maxArgs:1},getLastFocused:{minArgs:0,maxArgs:1},remove:{minArgs:1,maxArgs:1},update:{minArgs:2,maxArgs:2}}};if(0===Object.keys(b).length)throw new Error("api-metadata.json has not been included in browser-polyfill");class c extends WeakMap{constructor(a,b=void 0){super(b),this.createItem=a}get(a){return this.has(a)||this.set(a,this.createItem(a)),super.get(a)}}const d=a=>a&&"object"==typeof a&&"function"==typeof a.then,e=(b,c)=>(...d)=>{a.runtime.lastError?b.reject(new Error(a.runtime.lastError.message)):c.singleCallbackArg||1>=d.length&&!1!==c.singleCallbackArg?b.resolve(d[0]):b.resolve(d)},f=a=>1==a?"argument":"arguments",g=(a,b)=>function(c,...d){if(d.length<b.minArgs)throw new Error(`Expected at least ${b.minArgs} ${f(b.minArgs)} for ${a}(), got ${d.length}`);if(d.length>b.maxArgs)throw new Error(`Expected at most ${b.maxArgs} ${f(b.maxArgs)} for ${a}(), got ${d.length}`);return new Promise((f,g)=>{if(b.fallbackToNoCallback)try{c[a](...d,e({resolve:f,reject:g},b))}catch(e){console.warn(`${a} API method doesn't seem to support the callback parameter, `+"falling back to call it without a callback: ",e),c[a](...d),b.fallbackToNoCallback=!1,b.noCallback=!0,f()}else b.noCallback?(c[a](...d),f()):c[a](...d,e({resolve:f,reject:g},b))})},h=(a,b,c)=>new Proxy(b,{apply(b,d,e){return c.call(d,a,...e)}});let i=Function.call.bind(Object.prototype.hasOwnProperty);const j=(a,b={},c={})=>{let d=Object.create(null),e=Object.create(a);return new Proxy(e,{has(b,c){return c in a||c in d},get(e,f){if(f in d)return d[f];if(!(f in a))return;let k=a[f];if("function"==typeof k){if("function"==typeof b[f])k=h(a,a[f],b[f]);else if(i(c,f)){let b=g(f,c[f]);k=h(a,a[f],b)}else k=k.bind(a);}else if("object"==typeof k&&null!==k&&(i(b,f)||i(c,f)))k=j(k,b[f],c[f]);else if(i(c,"*"))k=j(k,b[f],c["*"]);else return Object.defineProperty(d,f,{configurable:!0,enumerable:!0,get(){return a[f]},set(b){a[f]=b}}),k;return d[f]=k,k},set(b,c,e){return c in d?d[c]=e:a[c]=e,!0},defineProperty(a,b,c){return Reflect.defineProperty(d,b,c)},deleteProperty(a,b){return Reflect.deleteProperty(d,b)}})},k=a=>({addListener(b,c,...d){b.addListener(a.get(c),...d)},hasListener(b,c){return b.hasListener(a.get(c))},removeListener(b,c){b.removeListener(a.get(c))}}),l=new c(a=>"function"==typeof a?function(b){const c=j(b,{},{getContent:{minArgs:0,maxArgs:0}});a(c)}:a),m=new c(a=>"function"==typeof a?function(b,c,e){let f,g,h=!1,i=new Promise(a=>{f=function(b){h=!0,a(b)}});try{g=a(b,c,f)}catch(a){g=Promise.reject(a)}const j=!0!==g&&d(g);if(!0!==g&&!j&&!h)return!1;const k=a=>{a.then(a=>{e(a)},a=>{let b;b=a&&(a instanceof Error||"string"==typeof a.message)?a.message:"An unexpected error occurred",e({__mozWebExtensionPolyfillReject__:!0,message:b})}).catch(a=>{console.error("Failed to send onMessage rejected reply",a)})};return j?k(g):k(i),!0}:a),n=({reject:b,resolve:c},d)=>{a.runtime.lastError?a.runtime.lastError.message==="The message port closed before a response was received."?c():b(new Error(a.runtime.lastError.message)):d&&d.__mozWebExtensionPolyfillReject__?b(new Error(d.message)):c(d)},o=(a,b,c,...d)=>{if(d.length<b.minArgs)throw new Error(`Expected at least ${b.minArgs} ${f(b.minArgs)} for ${a}(), got ${d.length}`);if(d.length>b.maxArgs)throw new Error(`Expected at most ${b.maxArgs} ${f(b.maxArgs)} for ${a}(), got ${d.length}`);return new Promise((a,b)=>{const e=n.bind(null,{resolve:a,reject:b});d.push(e),c.sendMessage(...d)})},p={devtools:{network:{onRequestFinished:k(l)}},runtime:{onMessage:k(m),onMessageExternal:k(m),sendMessage:o.bind(null,"sendMessage",{minArgs:1,maxArgs:3})},tabs:{sendMessage:o.bind(null,"sendMessage",{minArgs:2,maxArgs:3})}},q={clear:{minArgs:1,maxArgs:1},get:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}};return b.privacy={network:{"*":q},services:{"*":q},websites:{"*":q}},j(a,p,b)})(chrome)}else a.exports=globalThis.browser});
+//# sourceMappingURL=browser-polyfill.min.js.map
+
+// webextension-polyfill v.0.12.0 (https://github.com/mozilla/webextension-polyfill)
+
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+/***/ },
 
 /***/ "./src/helpers.js"
 /*!************************!*\
   !*** ./src/helpers.js ***!
   \************************/
-(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_625__) {
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_11412__) {
 
-__nested_webpack_require_625__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_625__.d(__nested_webpack_exports__, {
+"use strict";
+__nested_webpack_require_11412__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_11412__.d(__nested_webpack_exports__, {
 /* harmony export */   getKeys: () => (/* binding */ getKeys),
 /* harmony export */   getParamNames: () => (/* binding */ getParamNames),
 /* harmony export */   isArray: () => (/* binding */ isArray),
@@ -81,17 +104,18 @@ function toCamelCase(str, delimiter) {
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_2396__) {
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_13197__) {
 
-__nested_webpack_require_2396__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_2396__.d(__nested_webpack_exports__, {
+"use strict";
+__nested_webpack_require_13197__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_13197__.d(__nested_webpack_exports__, {
 /* harmony export */   ACCESSORS: () => (/* binding */ ACCESSORS),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_2396__(/*! ./storage */ "./src/storage.js");
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_2396__(/*! ./helpers */ "./src/helpers.js");
-/* harmony import */ var _namespace__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_2396__(/*! ./namespace */ "./src/namespace.js");
-/* harmony import */ var _validation__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_2396__(/*! ./validation */ "./src/validation.js");
+/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_13197__(/*! ./storage */ "./src/storage.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_13197__(/*! ./helpers */ "./src/helpers.js");
+/* harmony import */ var _namespace__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_13197__(/*! ./namespace */ "./src/namespace.js");
+/* harmony import */ var _validation__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_13197__(/*! ./validation */ "./src/validation.js");
 
 
 
@@ -152,7 +176,7 @@ function setupValue (key, value, defaultValue, storageType) {
     defaultValue,
   };
 
-  return createAccessor(key, value, storageType);
+  return createAccessor(key, storageType);
 }
 
 function setupDependencies(computedValueName, computeFn) {
@@ -372,16 +396,17 @@ function createStore (_namespace) {
 /*!**************************!*\
   !*** ./src/namespace.js ***!
   \**************************/
-(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_11315__) {
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_22123__) {
 
-__nested_webpack_require_11315__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_11315__.d(__nested_webpack_exports__, {
+"use strict";
+__nested_webpack_require_22123__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_22123__.d(__nested_webpack_exports__, {
 /* harmony export */   addNamespace: () => (/* binding */ addNamespace),
 /* harmony export */   getByNamespace: () => (/* binding */ getByNamespace),
 /* harmony export */   namespacify: () => (/* binding */ namespacify),
 /* harmony export */   splitFullKey: () => (/* binding */ splitFullKey)
 /* harmony export */ });
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_11315__(/*! ./helpers */ "./src/helpers.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_22123__(/*! ./helpers */ "./src/helpers.js");
 
 
 const NAMESPACE_DELIMITER = "::";
@@ -423,10 +448,11 @@ function namespacify (namespace, obj) {
 /*!************************!*\
   !*** ./src/storage.js ***!
   \************************/
-(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_12905__) {
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_23727__) {
 
-__nested_webpack_require_12905__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_12905__.d(__nested_webpack_exports__, {
+"use strict";
+__nested_webpack_require_23727__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_23727__.d(__nested_webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 function updateFromLocalStorage(state) {
@@ -468,14 +494,15 @@ function setStorageValue(storageType, key, value) {
 /*!***************************!*\
   !*** ./src/validation.js ***!
   \***************************/
-(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_14061__) {
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_24897__) {
 
-__nested_webpack_require_14061__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_14061__.d(__nested_webpack_exports__, {
+"use strict";
+__nested_webpack_require_24897__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_24897__.d(__nested_webpack_exports__, {
 /* harmony export */   isValid: () => (/* binding */ isValid)
 /* harmony export */ });
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_14061__(/*! . */ "./src/index.js");
-/* harmony import */ var _namespace__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_14061__(/*! ./namespace */ "./src/namespace.js");
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_24897__(/*! . */ "./src/index.js");
+/* harmony import */ var _namespace__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_24897__(/*! ./namespace */ "./src/namespace.js");
 
 
 
@@ -506,6 +533,62 @@ const isValid = {
 };
 
 
+/***/ },
+
+/***/ "./src/webextension-storage.js"
+/*!*************************************!*\
+  !*** ./src/webextension-storage.js ***!
+  \*************************************/
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_26296__) {
+
+"use strict";
+__nested_webpack_require_26296__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_26296__.d(__nested_webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   isBackgroundScript: () => (/* binding */ isBackgroundScript),
+/* harmony export */   isSessionStorageSupport: () => (/* binding */ isSessionStorageSupport)
+/* harmony export */ });
+const browser = __nested_webpack_require_26296__(/*! webextension-polyfill/dist/browser-polyfill.min */ "./node_modules/webextension-polyfill/dist/browser-polyfill.min.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  GET_TYPE: getStorageType,
+  IS_AVAILABE: isStorageAvailable,
+  UPDATE_STATE: updateStateFromStorage,
+  SET_VALUE: setStorageValue,
+});
+
+function getStorageType(isPersistent) {
+  return (isBackgroundScript() && isPersistent && "local") || "session";
+}
+
+function isStorageAvailable(storageType) {
+  return (
+    storageType === "local" ||
+    (storageType === "session" && isSessionStorageSupport())
+  );
+}
+
+async function updateStateFromStorage(state, type) {
+  return Object.assign(state, await browser.storage[type].get());
+}
+
+function setStorageValue(type, key, value) {
+  browser.storage[type].set({ [key]: value });
+  return true;
+}
+
+function isSessionStorageSupport() {
+  return !!browser.storage.session;
+}
+
+function isBackgroundScript() {
+  return (
+    window.location.protocol === "chrome-extension:" ||
+    window.location.protocol === "moz-extension:"
+  );
+}
+
+
 /***/ }
 
 /******/ 	});
@@ -514,7 +597,7 @@ const isValid = {
 /******/ 	const __webpack_module_cache__ = {};
 /******/ 	
 /******/ 	// The require function
-/******/ 	function __nested_webpack_require_15453__(moduleId) {
+/******/ 	function __nested_webpack_require_28090__(moduleId) {
 /******/ 		// Check if module is in cache
 /******/ 		const cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
@@ -534,7 +617,7 @@ const isValid = {
 /******/ 			e.code = 'MODULE_NOT_FOUND';
 /******/ 			throw e;
 /******/ 		}
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __nested_webpack_require_15453__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_28090__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -544,13 +627,13 @@ const isValid = {
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter/value functions for harmony exports
-/******/ 		__nested_webpack_require_15453__.d = (exports, definition) => {
+/******/ 		__nested_webpack_require_28090__.d = (exports, definition) => {
 /******/ 			if(Array.isArray(definition)) {
 /******/ 				var i = 0;
 /******/ 				while(i < definition.length) {
 /******/ 					var key = definition[i++];
 /******/ 					var binding = definition[i++];
-/******/ 					if(!__nested_webpack_require_15453__.o(exports, key)) {
+/******/ 					if(!__nested_webpack_require_28090__.o(exports, key)) {
 /******/ 						if(binding === 0) {
 /******/ 							Object.defineProperty(exports, key, { enumerable: true, value: definition[i++] });
 /******/ 						} else {
@@ -560,7 +643,7 @@ const isValid = {
 /******/ 				}
 /******/ 			} else {
 /******/ 				for(var key in definition) {
-/******/ 					if(__nested_webpack_require_15453__.o(definition, key) && !__nested_webpack_require_15453__.o(exports, key)) {
+/******/ 					if(__nested_webpack_require_28090__.o(definition, key) && !__nested_webpack_require_28090__.o(exports, key)) {
 /******/ 						Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 					}
 /******/ 				}
@@ -570,13 +653,13 @@ const isValid = {
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
-/******/ 		__nested_webpack_require_15453__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 		__nested_webpack_require_28090__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__nested_webpack_require_15453__.r = (exports) => {
+/******/ 		__nested_webpack_require_28090__.r = (exports) => {
 /******/ 			if(Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
@@ -585,13 +668,318 @@ const isValid = {
 /******/ 	})();
 /******/ 	
 /************************************************************************/
+let __nested_webpack_exports__ = {};
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
+(() => {
+"use strict";
+/*!*****************************!*\
+  !*** ./src/webextension.js ***!
+  \*****************************/
+__nested_webpack_require_28090__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_28090__.d(__nested_webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_28090__(/*! . */ "./src/index.js");
+/* harmony import */ var _webextension_storage__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_28090__(/*! ./webextension-storage */ "./src/webextension-storage.js");
+const browser = __nested_webpack_require_28090__(/*! webextension-polyfill/dist/browser-polyfill.min */ "./node_modules/webextension-polyfill/dist/browser-polyfill.min.js");
+
+
+
+
+const { onStateChange, setStorageUtils } = ___WEBPACK_IMPORTED_MODULE_0__["default"];
+
+if ((0,_webextension_storage__WEBPACK_IMPORTED_MODULE_1__.isBackgroundScript)()) {
+  browser.storage.local.onChanged.addListener(onStateChange);
+  (0,_webextension_storage__WEBPACK_IMPORTED_MODULE_1__.isSessionStorageSupport)() &&
+    browser.storage.session.onChanged.addListener(onStateChange);
+}
+
+setStorageUtils(_webextension_storage__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+})();
+
+__nested_webpack_exports__ = __nested_webpack_exports__["default"];
+/******/ 	return __nested_webpack_exports__;
+/******/ })()
+;
+});
+
+/***/ },
+
+/***/ "../webextension-messages/dist/webextension-messages.js"
+/*!**************************************************************!*\
+  !*** ../webextension-messages/dist/webextension-messages.js ***!
+  \**************************************************************/
+(module) {
+
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory();
+	else // removed by dead control flow
+{}
+})(this, () => {
+return /******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./node_modules/webextension-polyfill/dist/browser-polyfill.min.js"
+/*!*************************************************************************!*\
+  !*** ./node_modules/webextension-polyfill/dist/browser-polyfill.min.js ***!
+  \*************************************************************************/
+(module, exports) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(a,b){if(true)!(__WEBPACK_AMD_DEFINE_ARRAY__ = [module], __WEBPACK_AMD_DEFINE_FACTORY__ = (b),
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else // removed by dead control flow
+// removed by dead control flow
+{ var c; }})("undefined"==typeof globalThis?"undefined"==typeof self?this:self:globalThis,function(a){"use strict";if(!(globalThis.chrome&&globalThis.chrome.runtime&&globalThis.chrome.runtime.id))throw new Error("This script should only be loaded in a browser extension.");if(!(globalThis.browser&&globalThis.browser.runtime&&globalThis.browser.runtime.id)){a.exports=(a=>{const b={alarms:{clear:{minArgs:0,maxArgs:1},clearAll:{minArgs:0,maxArgs:0},get:{minArgs:0,maxArgs:1},getAll:{minArgs:0,maxArgs:0}},bookmarks:{create:{minArgs:1,maxArgs:1},get:{minArgs:1,maxArgs:1},getChildren:{minArgs:1,maxArgs:1},getRecent:{minArgs:1,maxArgs:1},getSubTree:{minArgs:1,maxArgs:1},getTree:{minArgs:0,maxArgs:0},move:{minArgs:2,maxArgs:2},remove:{minArgs:1,maxArgs:1},removeTree:{minArgs:1,maxArgs:1},search:{minArgs:1,maxArgs:1},update:{minArgs:2,maxArgs:2}},browserAction:{disable:{minArgs:0,maxArgs:1,fallbackToNoCallback:!0},enable:{minArgs:0,maxArgs:1,fallbackToNoCallback:!0},getBadgeBackgroundColor:{minArgs:1,maxArgs:1},getBadgeText:{minArgs:1,maxArgs:1},getPopup:{minArgs:1,maxArgs:1},getTitle:{minArgs:1,maxArgs:1},openPopup:{minArgs:0,maxArgs:0},setBadgeBackgroundColor:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setBadgeText:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setIcon:{minArgs:1,maxArgs:1},setPopup:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setTitle:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0}},browsingData:{remove:{minArgs:2,maxArgs:2},removeCache:{minArgs:1,maxArgs:1},removeCookies:{minArgs:1,maxArgs:1},removeDownloads:{minArgs:1,maxArgs:1},removeFormData:{minArgs:1,maxArgs:1},removeHistory:{minArgs:1,maxArgs:1},removeLocalStorage:{minArgs:1,maxArgs:1},removePasswords:{minArgs:1,maxArgs:1},removePluginData:{minArgs:1,maxArgs:1},settings:{minArgs:0,maxArgs:0}},commands:{getAll:{minArgs:0,maxArgs:0}},contextMenus:{remove:{minArgs:1,maxArgs:1},removeAll:{minArgs:0,maxArgs:0},update:{minArgs:2,maxArgs:2}},cookies:{get:{minArgs:1,maxArgs:1},getAll:{minArgs:1,maxArgs:1},getAllCookieStores:{minArgs:0,maxArgs:0},remove:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}},devtools:{inspectedWindow:{eval:{minArgs:1,maxArgs:2,singleCallbackArg:!1}},panels:{create:{minArgs:3,maxArgs:3,singleCallbackArg:!0},elements:{createSidebarPane:{minArgs:1,maxArgs:1}}}},downloads:{cancel:{minArgs:1,maxArgs:1},download:{minArgs:1,maxArgs:1},erase:{minArgs:1,maxArgs:1},getFileIcon:{minArgs:1,maxArgs:2},open:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},pause:{minArgs:1,maxArgs:1},removeFile:{minArgs:1,maxArgs:1},resume:{minArgs:1,maxArgs:1},search:{minArgs:1,maxArgs:1},show:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0}},extension:{isAllowedFileSchemeAccess:{minArgs:0,maxArgs:0},isAllowedIncognitoAccess:{minArgs:0,maxArgs:0}},history:{addUrl:{minArgs:1,maxArgs:1},deleteAll:{minArgs:0,maxArgs:0},deleteRange:{minArgs:1,maxArgs:1},deleteUrl:{minArgs:1,maxArgs:1},getVisits:{minArgs:1,maxArgs:1},search:{minArgs:1,maxArgs:1}},i18n:{detectLanguage:{minArgs:1,maxArgs:1},getAcceptLanguages:{minArgs:0,maxArgs:0}},identity:{launchWebAuthFlow:{minArgs:1,maxArgs:1}},idle:{queryState:{minArgs:1,maxArgs:1}},management:{get:{minArgs:1,maxArgs:1},getAll:{minArgs:0,maxArgs:0},getSelf:{minArgs:0,maxArgs:0},setEnabled:{minArgs:2,maxArgs:2},uninstallSelf:{minArgs:0,maxArgs:1}},notifications:{clear:{minArgs:1,maxArgs:1},create:{minArgs:1,maxArgs:2},getAll:{minArgs:0,maxArgs:0},getPermissionLevel:{minArgs:0,maxArgs:0},update:{minArgs:2,maxArgs:2}},pageAction:{getPopup:{minArgs:1,maxArgs:1},getTitle:{minArgs:1,maxArgs:1},hide:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setIcon:{minArgs:1,maxArgs:1},setPopup:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setTitle:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},show:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0}},permissions:{contains:{minArgs:1,maxArgs:1},getAll:{minArgs:0,maxArgs:0},remove:{minArgs:1,maxArgs:1},request:{minArgs:1,maxArgs:1}},runtime:{getBackgroundPage:{minArgs:0,maxArgs:0},getPlatformInfo:{minArgs:0,maxArgs:0},openOptionsPage:{minArgs:0,maxArgs:0},requestUpdateCheck:{minArgs:0,maxArgs:0},sendMessage:{minArgs:1,maxArgs:3},sendNativeMessage:{minArgs:2,maxArgs:2},setUninstallURL:{minArgs:1,maxArgs:1}},sessions:{getDevices:{minArgs:0,maxArgs:1},getRecentlyClosed:{minArgs:0,maxArgs:1},restore:{minArgs:0,maxArgs:1}},storage:{local:{clear:{minArgs:0,maxArgs:0},get:{minArgs:0,maxArgs:1},getBytesInUse:{minArgs:0,maxArgs:1},remove:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}},managed:{get:{minArgs:0,maxArgs:1},getBytesInUse:{minArgs:0,maxArgs:1}},sync:{clear:{minArgs:0,maxArgs:0},get:{minArgs:0,maxArgs:1},getBytesInUse:{minArgs:0,maxArgs:1},remove:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}}},tabs:{captureVisibleTab:{minArgs:0,maxArgs:2},create:{minArgs:1,maxArgs:1},detectLanguage:{minArgs:0,maxArgs:1},discard:{minArgs:0,maxArgs:1},duplicate:{minArgs:1,maxArgs:1},executeScript:{minArgs:1,maxArgs:2},get:{minArgs:1,maxArgs:1},getCurrent:{minArgs:0,maxArgs:0},getZoom:{minArgs:0,maxArgs:1},getZoomSettings:{minArgs:0,maxArgs:1},goBack:{minArgs:0,maxArgs:1},goForward:{minArgs:0,maxArgs:1},highlight:{minArgs:1,maxArgs:1},insertCSS:{minArgs:1,maxArgs:2},move:{minArgs:2,maxArgs:2},query:{minArgs:1,maxArgs:1},reload:{minArgs:0,maxArgs:2},remove:{minArgs:1,maxArgs:1},removeCSS:{minArgs:1,maxArgs:2},sendMessage:{minArgs:2,maxArgs:3},setZoom:{minArgs:1,maxArgs:2},setZoomSettings:{minArgs:1,maxArgs:2},update:{minArgs:1,maxArgs:2}},topSites:{get:{minArgs:0,maxArgs:0}},webNavigation:{getAllFrames:{minArgs:1,maxArgs:1},getFrame:{minArgs:1,maxArgs:1}},webRequest:{handlerBehaviorChanged:{minArgs:0,maxArgs:0}},windows:{create:{minArgs:0,maxArgs:1},get:{minArgs:1,maxArgs:2},getAll:{minArgs:0,maxArgs:1},getCurrent:{minArgs:0,maxArgs:1},getLastFocused:{minArgs:0,maxArgs:1},remove:{minArgs:1,maxArgs:1},update:{minArgs:2,maxArgs:2}}};if(0===Object.keys(b).length)throw new Error("api-metadata.json has not been included in browser-polyfill");class c extends WeakMap{constructor(a,b=void 0){super(b),this.createItem=a}get(a){return this.has(a)||this.set(a,this.createItem(a)),super.get(a)}}const d=a=>a&&"object"==typeof a&&"function"==typeof a.then,e=(b,c)=>(...d)=>{a.runtime.lastError?b.reject(new Error(a.runtime.lastError.message)):c.singleCallbackArg||1>=d.length&&!1!==c.singleCallbackArg?b.resolve(d[0]):b.resolve(d)},f=a=>1==a?"argument":"arguments",g=(a,b)=>function(c,...d){if(d.length<b.minArgs)throw new Error(`Expected at least ${b.minArgs} ${f(b.minArgs)} for ${a}(), got ${d.length}`);if(d.length>b.maxArgs)throw new Error(`Expected at most ${b.maxArgs} ${f(b.maxArgs)} for ${a}(), got ${d.length}`);return new Promise((f,g)=>{if(b.fallbackToNoCallback)try{c[a](...d,e({resolve:f,reject:g},b))}catch(e){console.warn(`${a} API method doesn't seem to support the callback parameter, `+"falling back to call it without a callback: ",e),c[a](...d),b.fallbackToNoCallback=!1,b.noCallback=!0,f()}else b.noCallback?(c[a](...d),f()):c[a](...d,e({resolve:f,reject:g},b))})},h=(a,b,c)=>new Proxy(b,{apply(b,d,e){return c.call(d,a,...e)}});let i=Function.call.bind(Object.prototype.hasOwnProperty);const j=(a,b={},c={})=>{let d=Object.create(null),e=Object.create(a);return new Proxy(e,{has(b,c){return c in a||c in d},get(e,f){if(f in d)return d[f];if(!(f in a))return;let k=a[f];if("function"==typeof k){if("function"==typeof b[f])k=h(a,a[f],b[f]);else if(i(c,f)){let b=g(f,c[f]);k=h(a,a[f],b)}else k=k.bind(a);}else if("object"==typeof k&&null!==k&&(i(b,f)||i(c,f)))k=j(k,b[f],c[f]);else if(i(c,"*"))k=j(k,b[f],c["*"]);else return Object.defineProperty(d,f,{configurable:!0,enumerable:!0,get(){return a[f]},set(b){a[f]=b}}),k;return d[f]=k,k},set(b,c,e){return c in d?d[c]=e:a[c]=e,!0},defineProperty(a,b,c){return Reflect.defineProperty(d,b,c)},deleteProperty(a,b){return Reflect.deleteProperty(d,b)}})},k=a=>({addListener(b,c,...d){b.addListener(a.get(c),...d)},hasListener(b,c){return b.hasListener(a.get(c))},removeListener(b,c){b.removeListener(a.get(c))}}),l=new c(a=>"function"==typeof a?function(b){const c=j(b,{},{getContent:{minArgs:0,maxArgs:0}});a(c)}:a),m=new c(a=>"function"==typeof a?function(b,c,e){let f,g,h=!1,i=new Promise(a=>{f=function(b){h=!0,a(b)}});try{g=a(b,c,f)}catch(a){g=Promise.reject(a)}const j=!0!==g&&d(g);if(!0!==g&&!j&&!h)return!1;const k=a=>{a.then(a=>{e(a)},a=>{let b;b=a&&(a instanceof Error||"string"==typeof a.message)?a.message:"An unexpected error occurred",e({__mozWebExtensionPolyfillReject__:!0,message:b})}).catch(a=>{console.error("Failed to send onMessage rejected reply",a)})};return j?k(g):k(i),!0}:a),n=({reject:b,resolve:c},d)=>{a.runtime.lastError?a.runtime.lastError.message==="The message port closed before a response was received."?c():b(new Error(a.runtime.lastError.message)):d&&d.__mozWebExtensionPolyfillReject__?b(new Error(d.message)):c(d)},o=(a,b,c,...d)=>{if(d.length<b.minArgs)throw new Error(`Expected at least ${b.minArgs} ${f(b.minArgs)} for ${a}(), got ${d.length}`);if(d.length>b.maxArgs)throw new Error(`Expected at most ${b.maxArgs} ${f(b.maxArgs)} for ${a}(), got ${d.length}`);return new Promise((a,b)=>{const e=n.bind(null,{resolve:a,reject:b});d.push(e),c.sendMessage(...d)})},p={devtools:{network:{onRequestFinished:k(l)}},runtime:{onMessage:k(m),onMessageExternal:k(m),sendMessage:o.bind(null,"sendMessage",{minArgs:1,maxArgs:3})},tabs:{sendMessage:o.bind(null,"sendMessage",{minArgs:2,maxArgs:3})}},q={clear:{minArgs:1,maxArgs:1},get:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}};return b.privacy={network:{"*":q},services:{"*":q},websites:{"*":q}},j(a,p,b)})(chrome)}else a.exports=globalThis.browser});
+//# sourceMappingURL=browser-polyfill.min.js.map
+
+// webextension-polyfill v.0.12.0 (https://github.com/mozilla/webextension-polyfill)
+
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+/***/ }
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	const __webpack_module_cache__ = {};
 /******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	let __nested_webpack_exports__ = __nested_webpack_require_15453__("./src/index.js");
-/******/ 	__nested_webpack_exports__ = __nested_webpack_exports__["default"];
+/******/ 	// The require function
+/******/ 	function __nested_webpack_require_11497__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		const cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		const module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
 /******/ 	
+/******/ 		// Execute the module function
+/******/ 		if (!(moduleId in __webpack_modules__)) {
+/******/ 			delete __webpack_module_cache__[moduleId];
+/******/ 			const e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
+/******/ 		}
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_11497__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter/value functions for harmony exports
+/******/ 		__nested_webpack_require_11497__.d = (exports, definition) => {
+/******/ 			if(Array.isArray(definition)) {
+/******/ 				var i = 0;
+/******/ 				while(i < definition.length) {
+/******/ 					var key = definition[i++];
+/******/ 					var binding = definition[i++];
+/******/ 					if(!__nested_webpack_require_11497__.o(exports, key)) {
+/******/ 						if(binding === 0) {
+/******/ 							Object.defineProperty(exports, key, { enumerable: true, value: definition[i++] });
+/******/ 						} else {
+/******/ 							Object.defineProperty(exports, key, { enumerable: true, get: binding });
+/******/ 						}
+/******/ 					} else if(binding === 0) { i++; }
+/******/ 				}
+/******/ 			} else {
+/******/ 				for(var key in definition) {
+/******/ 					if(__nested_webpack_require_11497__.o(definition, key) && !__nested_webpack_require_11497__.o(exports, key)) {
+/******/ 						Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 					}
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__nested_webpack_require_11497__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__nested_webpack_require_11497__.r = (exports) => {
+/******/ 			if(Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+let __nested_webpack_exports__ = {};
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
+(() => {
+"use strict";
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+__nested_webpack_require_11497__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_11497__.d(__nested_webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const browser = __nested_webpack_require_11497__(/*! webextension-polyfill/dist/browser-polyfill.min */ "./node_modules/webextension-polyfill/dist/browser-polyfill.min.js");
+
+const STOP_ACTION = `WEBEXTENSION_MESSAGES_STOP_COMMUNICATION`;
+const RESUME_ACTION = `WEBEXTENSION_MESSAGES_RESUME_COMMUNICATION`;
+const EMPTY_FN = () => {};
+const RESULT_PROMISES = {};
+const ACTIONS = {};
+
+browser.runtime.onMessage.addListener((message) => {
+  if (message.action === STOP_ACTION) {
+    stopListening(message.payload);
+  }
+  if (message.action === RESUME_ACTION) {
+    resumeListening(message.payload);
+  }
+});
+
+function setupCommunication (actions, messagesId = generateId()) {
+  const answers = Object.fromEntries(actions.map((action) => [action, EMPTY_FN]));
+  const messages = Object.fromEntries(
+    actions.map((action) => [
+      action,
+      (payload, isRemoving) => {
+        if (isFunction(payload)) {
+          return addAnswer(payload, isRemoving, action, answers);
+        }
+        return sendMessageForResult(action, payload, messagesId);
+      },
+    ]),
+  );
+
+  ACTIONS[messagesId] = (message) => onMessage(message, answers);
+
+  browser.runtime.onMessage.addListener(ACTIONS[messagesId]);
+
+  return {
+    ...messages,
+    stop: () => stopListening(messagesId, true),
+    resume: () => resumeListening(messagesId, true),
+  };
+}
+
+function addAnswer (cb, isRemoving, action, answers) {
+  if (isRemoving !== null) {
+    return answers[action] = cb;
+  }
+
+  delete answers[action];
+}
+
+async function onMessage (message, actions = {}) {
+  if (RESULT_PROMISES[message.resultId]) {
+    RESULT_PROMISES[message.resultId](message.payload);
+    delete RESULT_PROMISES[message.resultId];
+    return;
+  }
+
+  if (actions[message.action]) {
+    const payload = await actions[message.action](message.payload);
+    sendMessage(message.action, payload, message.resultId);
+  }
+}
+
+function sendMessageForResult(action, payload, messagesId) {
+  if (!isListening(messagesId)) {
+    return Promise.resolve();
+  }
+  const { resultId, promise } = createResultPromise();
+  sendMessage(action, payload, resultId);
+  return promise;
+}
+
+async function sendMessage (action, payload, resultId) {
+  const message = { action, payload, resultId };
+
+  if (isBackgroundScript()) {
+    const [tab] = await getCurrentTab();
+    if(isTabHostedByExtension(tab)) {
+      browser.runtime.sendMessage(message);
+    } else {
+      browser.tabs.sendMessage(tab.id, message);
+    }
+  } else {
+    browser.runtime.sendMessage(message);
+  }
+}
+
+function createResultPromise () {
+  const resultId = generateId();
+
+  return {
+    promise: new Promise((res) => (RESULT_PROMISES[resultId] = res)),
+    resultId,
+  };
+}
+
+function isBackgroundScript () {
+  return (
+    window.location.protocol === "chrome-extension:" ||
+    window.location.protocol === "moz-extension:"
+  );
+}
+
+function isTabHostedByExtension (tab) {
+  return window.location.href === tab.url;
+}
+
+function isListening (messagesId) {
+  return browser.runtime.onMessage.hasListener(ACTIONS[messagesId]);
+}
+
+function generateId () {
+  return `${Date.now()}-${Math.random()}`;
+}
+
+function getCurrentTab () {
+  return browser.tabs.query({ active: true, currentWindow: true });
+}
+
+function stopListening(messagesId, sendToReceiver) {
+  browser.runtime.onMessage.removeListener(ACTIONS[messagesId]);
+
+  if (sendToReceiver) {
+    sendMessage(STOP_ACTION, messagesId);
+  }
+}
+
+function resumeListening(messagesId, sendToReceiver) {
+  if (!isListening(messagesId)) {
+    browser.runtime.onMessage.addListener(ACTIONS[messagesId]);
+  }
+
+  if (sendToReceiver) {
+    sendMessage(RESUME_ACTION, messagesId);
+  }
+}
+
+function isFunction(x) {
+  return typeof x === "function";
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (setupCommunication);
+
+})();
+
+__nested_webpack_exports__ = __nested_webpack_exports__["default"];
 /******/ 	return __nested_webpack_exports__;
 /******/ })()
 ;
@@ -870,21 +1258,6 @@ __nested_webpack_exports__ = __nested_webpack_exports__["default"];
 
 /***/ },
 
-/***/ "./node_modules/webextension-messages/dist/webextension-messages.js"
-/*!**************************************************************************!*\
-  !*** ./node_modules/webextension-messages/dist/webextension-messages.js ***!
-  \**************************************************************************/
-(module) {
-
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(true)
-		module.exports = factory();
-	else // removed by dead control flow
-{}
-})(this, () => {
-return /******/ (() => { // webpackBootstrap
-/******/ 	var __webpack_modules__ = ({
-
 /***/ "./node_modules/webextension-polyfill/dist/browser-polyfill.min.js"
 /*!*************************************************************************!*\
   !*** ./node_modules/webextension-polyfill/dist/browser-polyfill.min.js ***!
@@ -895,7 +1268,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else // removed by dead control flow
-// removed by dead control flow
 { var c; }})("undefined"==typeof globalThis?"undefined"==typeof self?this:self:globalThis,function(a){"use strict";if(!(globalThis.chrome&&globalThis.chrome.runtime&&globalThis.chrome.runtime.id))throw new Error("This script should only be loaded in a browser extension.");if(!(globalThis.browser&&globalThis.browser.runtime&&globalThis.browser.runtime.id)){a.exports=(a=>{const b={alarms:{clear:{minArgs:0,maxArgs:1},clearAll:{minArgs:0,maxArgs:0},get:{minArgs:0,maxArgs:1},getAll:{minArgs:0,maxArgs:0}},bookmarks:{create:{minArgs:1,maxArgs:1},get:{minArgs:1,maxArgs:1},getChildren:{minArgs:1,maxArgs:1},getRecent:{minArgs:1,maxArgs:1},getSubTree:{minArgs:1,maxArgs:1},getTree:{minArgs:0,maxArgs:0},move:{minArgs:2,maxArgs:2},remove:{minArgs:1,maxArgs:1},removeTree:{minArgs:1,maxArgs:1},search:{minArgs:1,maxArgs:1},update:{minArgs:2,maxArgs:2}},browserAction:{disable:{minArgs:0,maxArgs:1,fallbackToNoCallback:!0},enable:{minArgs:0,maxArgs:1,fallbackToNoCallback:!0},getBadgeBackgroundColor:{minArgs:1,maxArgs:1},getBadgeText:{minArgs:1,maxArgs:1},getPopup:{minArgs:1,maxArgs:1},getTitle:{minArgs:1,maxArgs:1},openPopup:{minArgs:0,maxArgs:0},setBadgeBackgroundColor:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setBadgeText:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setIcon:{minArgs:1,maxArgs:1},setPopup:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setTitle:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0}},browsingData:{remove:{minArgs:2,maxArgs:2},removeCache:{minArgs:1,maxArgs:1},removeCookies:{minArgs:1,maxArgs:1},removeDownloads:{minArgs:1,maxArgs:1},removeFormData:{minArgs:1,maxArgs:1},removeHistory:{minArgs:1,maxArgs:1},removeLocalStorage:{minArgs:1,maxArgs:1},removePasswords:{minArgs:1,maxArgs:1},removePluginData:{minArgs:1,maxArgs:1},settings:{minArgs:0,maxArgs:0}},commands:{getAll:{minArgs:0,maxArgs:0}},contextMenus:{remove:{minArgs:1,maxArgs:1},removeAll:{minArgs:0,maxArgs:0},update:{minArgs:2,maxArgs:2}},cookies:{get:{minArgs:1,maxArgs:1},getAll:{minArgs:1,maxArgs:1},getAllCookieStores:{minArgs:0,maxArgs:0},remove:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}},devtools:{inspectedWindow:{eval:{minArgs:1,maxArgs:2,singleCallbackArg:!1}},panels:{create:{minArgs:3,maxArgs:3,singleCallbackArg:!0},elements:{createSidebarPane:{minArgs:1,maxArgs:1}}}},downloads:{cancel:{minArgs:1,maxArgs:1},download:{minArgs:1,maxArgs:1},erase:{minArgs:1,maxArgs:1},getFileIcon:{minArgs:1,maxArgs:2},open:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},pause:{minArgs:1,maxArgs:1},removeFile:{minArgs:1,maxArgs:1},resume:{minArgs:1,maxArgs:1},search:{minArgs:1,maxArgs:1},show:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0}},extension:{isAllowedFileSchemeAccess:{minArgs:0,maxArgs:0},isAllowedIncognitoAccess:{minArgs:0,maxArgs:0}},history:{addUrl:{minArgs:1,maxArgs:1},deleteAll:{minArgs:0,maxArgs:0},deleteRange:{minArgs:1,maxArgs:1},deleteUrl:{minArgs:1,maxArgs:1},getVisits:{minArgs:1,maxArgs:1},search:{minArgs:1,maxArgs:1}},i18n:{detectLanguage:{minArgs:1,maxArgs:1},getAcceptLanguages:{minArgs:0,maxArgs:0}},identity:{launchWebAuthFlow:{minArgs:1,maxArgs:1}},idle:{queryState:{minArgs:1,maxArgs:1}},management:{get:{minArgs:1,maxArgs:1},getAll:{minArgs:0,maxArgs:0},getSelf:{minArgs:0,maxArgs:0},setEnabled:{minArgs:2,maxArgs:2},uninstallSelf:{minArgs:0,maxArgs:1}},notifications:{clear:{minArgs:1,maxArgs:1},create:{minArgs:1,maxArgs:2},getAll:{minArgs:0,maxArgs:0},getPermissionLevel:{minArgs:0,maxArgs:0},update:{minArgs:2,maxArgs:2}},pageAction:{getPopup:{minArgs:1,maxArgs:1},getTitle:{minArgs:1,maxArgs:1},hide:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setIcon:{minArgs:1,maxArgs:1},setPopup:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setTitle:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},show:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0}},permissions:{contains:{minArgs:1,maxArgs:1},getAll:{minArgs:0,maxArgs:0},remove:{minArgs:1,maxArgs:1},request:{minArgs:1,maxArgs:1}},runtime:{getBackgroundPage:{minArgs:0,maxArgs:0},getPlatformInfo:{minArgs:0,maxArgs:0},openOptionsPage:{minArgs:0,maxArgs:0},requestUpdateCheck:{minArgs:0,maxArgs:0},sendMessage:{minArgs:1,maxArgs:3},sendNativeMessage:{minArgs:2,maxArgs:2},setUninstallURL:{minArgs:1,maxArgs:1}},sessions:{getDevices:{minArgs:0,maxArgs:1},getRecentlyClosed:{minArgs:0,maxArgs:1},restore:{minArgs:0,maxArgs:1}},storage:{local:{clear:{minArgs:0,maxArgs:0},get:{minArgs:0,maxArgs:1},getBytesInUse:{minArgs:0,maxArgs:1},remove:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}},managed:{get:{minArgs:0,maxArgs:1},getBytesInUse:{minArgs:0,maxArgs:1}},sync:{clear:{minArgs:0,maxArgs:0},get:{minArgs:0,maxArgs:1},getBytesInUse:{minArgs:0,maxArgs:1},remove:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}}},tabs:{captureVisibleTab:{minArgs:0,maxArgs:2},create:{minArgs:1,maxArgs:1},detectLanguage:{minArgs:0,maxArgs:1},discard:{minArgs:0,maxArgs:1},duplicate:{minArgs:1,maxArgs:1},executeScript:{minArgs:1,maxArgs:2},get:{minArgs:1,maxArgs:1},getCurrent:{minArgs:0,maxArgs:0},getZoom:{minArgs:0,maxArgs:1},getZoomSettings:{minArgs:0,maxArgs:1},goBack:{minArgs:0,maxArgs:1},goForward:{minArgs:0,maxArgs:1},highlight:{minArgs:1,maxArgs:1},insertCSS:{minArgs:1,maxArgs:2},move:{minArgs:2,maxArgs:2},query:{minArgs:1,maxArgs:1},reload:{minArgs:0,maxArgs:2},remove:{minArgs:1,maxArgs:1},removeCSS:{minArgs:1,maxArgs:2},sendMessage:{minArgs:2,maxArgs:3},setZoom:{minArgs:1,maxArgs:2},setZoomSettings:{minArgs:1,maxArgs:2},update:{minArgs:1,maxArgs:2}},topSites:{get:{minArgs:0,maxArgs:0}},webNavigation:{getAllFrames:{minArgs:1,maxArgs:1},getFrame:{minArgs:1,maxArgs:1}},webRequest:{handlerBehaviorChanged:{minArgs:0,maxArgs:0}},windows:{create:{minArgs:0,maxArgs:1},get:{minArgs:1,maxArgs:2},getAll:{minArgs:0,maxArgs:1},getCurrent:{minArgs:0,maxArgs:1},getLastFocused:{minArgs:0,maxArgs:1},remove:{minArgs:1,maxArgs:1},update:{minArgs:2,maxArgs:2}}};if(0===Object.keys(b).length)throw new Error("api-metadata.json has not been included in browser-polyfill");class c extends WeakMap{constructor(a,b=void 0){super(b),this.createItem=a}get(a){return this.has(a)||this.set(a,this.createItem(a)),super.get(a)}}const d=a=>a&&"object"==typeof a&&"function"==typeof a.then,e=(b,c)=>(...d)=>{a.runtime.lastError?b.reject(new Error(a.runtime.lastError.message)):c.singleCallbackArg||1>=d.length&&!1!==c.singleCallbackArg?b.resolve(d[0]):b.resolve(d)},f=a=>1==a?"argument":"arguments",g=(a,b)=>function(c,...d){if(d.length<b.minArgs)throw new Error(`Expected at least ${b.minArgs} ${f(b.minArgs)} for ${a}(), got ${d.length}`);if(d.length>b.maxArgs)throw new Error(`Expected at most ${b.maxArgs} ${f(b.maxArgs)} for ${a}(), got ${d.length}`);return new Promise((f,g)=>{if(b.fallbackToNoCallback)try{c[a](...d,e({resolve:f,reject:g},b))}catch(e){console.warn(`${a} API method doesn't seem to support the callback parameter, `+"falling back to call it without a callback: ",e),c[a](...d),b.fallbackToNoCallback=!1,b.noCallback=!0,f()}else b.noCallback?(c[a](...d),f()):c[a](...d,e({resolve:f,reject:g},b))})},h=(a,b,c)=>new Proxy(b,{apply(b,d,e){return c.call(d,a,...e)}});let i=Function.call.bind(Object.prototype.hasOwnProperty);const j=(a,b={},c={})=>{let d=Object.create(null),e=Object.create(a);return new Proxy(e,{has(b,c){return c in a||c in d},get(e,f){if(f in d)return d[f];if(!(f in a))return;let k=a[f];if("function"==typeof k){if("function"==typeof b[f])k=h(a,a[f],b[f]);else if(i(c,f)){let b=g(f,c[f]);k=h(a,a[f],b)}else k=k.bind(a);}else if("object"==typeof k&&null!==k&&(i(b,f)||i(c,f)))k=j(k,b[f],c[f]);else if(i(c,"*"))k=j(k,b[f],c["*"]);else return Object.defineProperty(d,f,{configurable:!0,enumerable:!0,get(){return a[f]},set(b){a[f]=b}}),k;return d[f]=k,k},set(b,c,e){return c in d?d[c]=e:a[c]=e,!0},defineProperty(a,b,c){return Reflect.defineProperty(d,b,c)},deleteProperty(a,b){return Reflect.deleteProperty(d,b)}})},k=a=>({addListener(b,c,...d){b.addListener(a.get(c),...d)},hasListener(b,c){return b.hasListener(a.get(c))},removeListener(b,c){b.removeListener(a.get(c))}}),l=new c(a=>"function"==typeof a?function(b){const c=j(b,{},{getContent:{minArgs:0,maxArgs:0}});a(c)}:a),m=new c(a=>"function"==typeof a?function(b,c,e){let f,g,h=!1,i=new Promise(a=>{f=function(b){h=!0,a(b)}});try{g=a(b,c,f)}catch(a){g=Promise.reject(a)}const j=!0!==g&&d(g);if(!0!==g&&!j&&!h)return!1;const k=a=>{a.then(a=>{e(a)},a=>{let b;b=a&&(a instanceof Error||"string"==typeof a.message)?a.message:"An unexpected error occurred",e({__mozWebExtensionPolyfillReject__:!0,message:b})}).catch(a=>{console.error("Failed to send onMessage rejected reply",a)})};return j?k(g):k(i),!0}:a),n=({reject:b,resolve:c},d)=>{a.runtime.lastError?a.runtime.lastError.message==="The message port closed before a response was received."?c():b(new Error(a.runtime.lastError.message)):d&&d.__mozWebExtensionPolyfillReject__?b(new Error(d.message)):c(d)},o=(a,b,c,...d)=>{if(d.length<b.minArgs)throw new Error(`Expected at least ${b.minArgs} ${f(b.minArgs)} for ${a}(), got ${d.length}`);if(d.length>b.maxArgs)throw new Error(`Expected at most ${b.maxArgs} ${f(b.maxArgs)} for ${a}(), got ${d.length}`);return new Promise((a,b)=>{const e=n.bind(null,{resolve:a,reject:b});d.push(e),c.sendMessage(...d)})},p={devtools:{network:{onRequestFinished:k(l)}},runtime:{onMessage:k(m),onMessageExternal:k(m),sendMessage:o.bind(null,"sendMessage",{minArgs:1,maxArgs:3})},tabs:{sendMessage:o.bind(null,"sendMessage",{minArgs:2,maxArgs:3})}},q={clear:{minArgs:1,maxArgs:1},get:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}};return b.privacy={network:{"*":q},services:{"*":q},websites:{"*":q}},j(a,p,b)})(chrome)}else a.exports=globalThis.browser});
 //# sourceMappingURL=browser-polyfill.min.js.map
 
@@ -905,259 +1277,40 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-
-/***/ }
-
-/******/ 	});
-/************************************************************************/
-/******/ 	// The module cache
-/******/ 	const __webpack_module_cache__ = {};
-/******/ 	
-/******/ 	// The require function
-/******/ 	function __nested_webpack_require_11497__(moduleId) {
-/******/ 		// Check if module is in cache
-/******/ 		const cachedModule = __webpack_module_cache__[moduleId];
-/******/ 		if (cachedModule !== undefined) {
-/******/ 			return cachedModule.exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		const module = __webpack_module_cache__[moduleId] = {
-/******/ 			// no module.id needed
-/******/ 			// no module.loaded needed
-/******/ 			exports: {}
-/******/ 		};
-/******/ 	
-/******/ 		// Execute the module function
-/******/ 		if (!(moduleId in __webpack_modules__)) {
-/******/ 			delete __webpack_module_cache__[moduleId];
-/******/ 			const e = new Error("Cannot find module '" + moduleId + "'");
-/******/ 			e.code = 'MODULE_NOT_FOUND';
-/******/ 			throw e;
-/******/ 		}
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_11497__);
-/******/ 	
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter/value functions for harmony exports
-/******/ 		__nested_webpack_require_11497__.d = (exports, definition) => {
-/******/ 			if(Array.isArray(definition)) {
-/******/ 				var i = 0;
-/******/ 				while(i < definition.length) {
-/******/ 					var key = definition[i++];
-/******/ 					var binding = definition[i++];
-/******/ 					if(!__nested_webpack_require_11497__.o(exports, key)) {
-/******/ 						if(binding === 0) {
-/******/ 							Object.defineProperty(exports, key, { enumerable: true, value: definition[i++] });
-/******/ 						} else {
-/******/ 							Object.defineProperty(exports, key, { enumerable: true, get: binding });
-/******/ 						}
-/******/ 					} else if(binding === 0) { i++; }
-/******/ 				}
-/******/ 			} else {
-/******/ 				for(var key in definition) {
-/******/ 					if(__nested_webpack_require_11497__.o(definition, key) && !__nested_webpack_require_11497__.o(exports, key)) {
-/******/ 						Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 					}
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__nested_webpack_require_11497__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__nested_webpack_require_11497__.r = (exports) => {
-/******/ 			if(Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/************************************************************************/
-let __nested_webpack_exports__ = {};
-// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
-(() => {
-"use strict";
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-__nested_webpack_require_11497__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_11497__.d(__nested_webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-const browser = __nested_webpack_require_11497__(/*! webextension-polyfill/dist/browser-polyfill.min */ "./node_modules/webextension-polyfill/dist/browser-polyfill.min.js");
-
-const STOP_ACTION = `WEBEXTENSION_MESSAGES_STOP_COMMUNICATION`;
-const RESUME_ACTION = `WEBEXTENSION_MESSAGES_RESUME_COMMUNICATION`;
-const RESULT_PROMISES = {};
-const ACTIONS = {};
-
-browser.runtime.onMessage.addListener((message) => {
-  if (message.action === STOP_ACTION) {
-    stopListening(message.payload);
-  }
-  if (message.action === RESUME_ACTION) {
-    resumeListening(message.payload);
-  }
-});
-
-function setupCommunication (actions, messagesId = generateId()) {
-  const answers = {};
-  const messages = Object.fromEntries(
-    actions.map((action) => [
-      action,
-      (payload, isRemoving) => {
-        if (isFunction(payload)) {
-          return addAnswer(payload, isRemoving, action, answers);
-        }
-        return sendMessageForResult(action, payload, messagesId);
-      },
-    ]),
-  );
-
-  ACTIONS[messagesId] = (message) => onMessage(message, answers);
-
-  browser.runtime.onMessage.addListener(ACTIONS[messagesId]);
-
-  return {
-    ...messages,
-    stop: () => stopListening(messagesId, true),
-    resume: () => resumeListening(messagesId, true),
-  };
-}
-
-function addAnswer (cb, isRemoving, action, answers) {
-  if (isRemoving !== null) {
-    return answers[action] = cb;
-  }
-
-  delete answers[action];
-}
-
-async function onMessage (message, actions = {}) {
-  if (RESULT_PROMISES[message.resultId]) {
-    RESULT_PROMISES[message.resultId](message.payload);
-    delete RESULT_PROMISES[message.resultId];
-    return;
-  }
-
-  if (actions[message.action]) {
-    const payload = await actions[message.action](message.payload);
-    sendMessage(message.action, payload, message.resultId);
-  }
-}
-
-function sendMessageForResult(action, payload, messagesId) {
-  if (!isListening(messagesId)) {
-    return Promise.resolve();
-  }
-  const { resultId, promise } = createResultPromise();
-  sendMessage(action, payload, resultId);
-  return promise;
-}
-
-function sendMessage (action, payload, resultId) {
-  const message = { action, payload, resultId };
-
-  if (isBackgroundScript()) {
-    getCurrentTab().then((tab) => browser.tabs.sendMessage(tab[0].id, message));
-  } else {
-    browser.runtime.sendMessage(message);
-  }
-}
-
-function createResultPromise () {
-  const resultId = generateId();
-
-  return {
-    promise: new Promise((res) => (RESULT_PROMISES[resultId] = res)),
-    resultId,
-  };
-}
-
-function isBackgroundScript () {
-  return (
-    window.location.protocol === "chrome-extension:" ||
-    window.location.protocol === "moz-extension:"
-  );
-}
-
-function isListening (messagesId) {
-  return browser.runtime.onMessage.hasListener(ACTIONS[messagesId]);
-}
-
-function generateId () {
-  return `${Date.now()}-${Math.random()}`;
-}
-
-function getCurrentTab () {
-  return browser.tabs.query({ active: true, currentWindow: true });
-}
-
-function stopListening(messagesId, sendToReceiver) {
-  browser.runtime.onMessage.removeListener(ACTIONS[messagesId]);
-
-  if (sendToReceiver) {
-    sendMessage(STOP_ACTION, messagesId);
-  }
-}
-
-function resumeListening(messagesId, sendToReceiver) {
-  if (!isListening(messagesId)) {
-    browser.runtime.onMessage.addListener(ACTIONS[messagesId]);
-  }
-
-  if (sendToReceiver) {
-    sendMessage(RESUME_ACTION, messagesId);
-  }
-}
-
-function isFunction(x) {
-  return typeof x === "function";
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (setupCommunication);
-
-})();
-
-__nested_webpack_exports__ = __nested_webpack_exports__["default"];
-/******/ 	return __nested_webpack_exports__;
-/******/ })()
-;
-});
 
 /***/ },
 
-/***/ "./node_modules/webextension-polyfill/dist/browser-polyfill.min.js"
-/*!*************************************************************************!*\
-  !*** ./node_modules/webextension-polyfill/dist/browser-polyfill.min.js ***!
-  \*************************************************************************/
-(module, exports) {
+/***/ "./src/background-script.js"
+/*!**********************************!*\
+  !*** ./src/background-script.js ***!
+  \**********************************/
+(module, __webpack_exports__, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(a,b){if(true)!(__WEBPACK_AMD_DEFINE_ARRAY__ = [module], __WEBPACK_AMD_DEFINE_FACTORY__ = (b),
-		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else // removed by dead control flow
-{ var c; }})("undefined"==typeof globalThis?"undefined"==typeof self?this:self:globalThis,function(a){"use strict";if(!(globalThis.chrome&&globalThis.chrome.runtime&&globalThis.chrome.runtime.id))throw new Error("This script should only be loaded in a browser extension.");if(!(globalThis.browser&&globalThis.browser.runtime&&globalThis.browser.runtime.id)){a.exports=(a=>{const b={alarms:{clear:{minArgs:0,maxArgs:1},clearAll:{minArgs:0,maxArgs:0},get:{minArgs:0,maxArgs:1},getAll:{minArgs:0,maxArgs:0}},bookmarks:{create:{minArgs:1,maxArgs:1},get:{minArgs:1,maxArgs:1},getChildren:{minArgs:1,maxArgs:1},getRecent:{minArgs:1,maxArgs:1},getSubTree:{minArgs:1,maxArgs:1},getTree:{minArgs:0,maxArgs:0},move:{minArgs:2,maxArgs:2},remove:{minArgs:1,maxArgs:1},removeTree:{minArgs:1,maxArgs:1},search:{minArgs:1,maxArgs:1},update:{minArgs:2,maxArgs:2}},browserAction:{disable:{minArgs:0,maxArgs:1,fallbackToNoCallback:!0},enable:{minArgs:0,maxArgs:1,fallbackToNoCallback:!0},getBadgeBackgroundColor:{minArgs:1,maxArgs:1},getBadgeText:{minArgs:1,maxArgs:1},getPopup:{minArgs:1,maxArgs:1},getTitle:{minArgs:1,maxArgs:1},openPopup:{minArgs:0,maxArgs:0},setBadgeBackgroundColor:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setBadgeText:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setIcon:{minArgs:1,maxArgs:1},setPopup:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setTitle:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0}},browsingData:{remove:{minArgs:2,maxArgs:2},removeCache:{minArgs:1,maxArgs:1},removeCookies:{minArgs:1,maxArgs:1},removeDownloads:{minArgs:1,maxArgs:1},removeFormData:{minArgs:1,maxArgs:1},removeHistory:{minArgs:1,maxArgs:1},removeLocalStorage:{minArgs:1,maxArgs:1},removePasswords:{minArgs:1,maxArgs:1},removePluginData:{minArgs:1,maxArgs:1},settings:{minArgs:0,maxArgs:0}},commands:{getAll:{minArgs:0,maxArgs:0}},contextMenus:{remove:{minArgs:1,maxArgs:1},removeAll:{minArgs:0,maxArgs:0},update:{minArgs:2,maxArgs:2}},cookies:{get:{minArgs:1,maxArgs:1},getAll:{minArgs:1,maxArgs:1},getAllCookieStores:{minArgs:0,maxArgs:0},remove:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}},devtools:{inspectedWindow:{eval:{minArgs:1,maxArgs:2,singleCallbackArg:!1}},panels:{create:{minArgs:3,maxArgs:3,singleCallbackArg:!0},elements:{createSidebarPane:{minArgs:1,maxArgs:1}}}},downloads:{cancel:{minArgs:1,maxArgs:1},download:{minArgs:1,maxArgs:1},erase:{minArgs:1,maxArgs:1},getFileIcon:{minArgs:1,maxArgs:2},open:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},pause:{minArgs:1,maxArgs:1},removeFile:{minArgs:1,maxArgs:1},resume:{minArgs:1,maxArgs:1},search:{minArgs:1,maxArgs:1},show:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0}},extension:{isAllowedFileSchemeAccess:{minArgs:0,maxArgs:0},isAllowedIncognitoAccess:{minArgs:0,maxArgs:0}},history:{addUrl:{minArgs:1,maxArgs:1},deleteAll:{minArgs:0,maxArgs:0},deleteRange:{minArgs:1,maxArgs:1},deleteUrl:{minArgs:1,maxArgs:1},getVisits:{minArgs:1,maxArgs:1},search:{minArgs:1,maxArgs:1}},i18n:{detectLanguage:{minArgs:1,maxArgs:1},getAcceptLanguages:{minArgs:0,maxArgs:0}},identity:{launchWebAuthFlow:{minArgs:1,maxArgs:1}},idle:{queryState:{minArgs:1,maxArgs:1}},management:{get:{minArgs:1,maxArgs:1},getAll:{minArgs:0,maxArgs:0},getSelf:{minArgs:0,maxArgs:0},setEnabled:{minArgs:2,maxArgs:2},uninstallSelf:{minArgs:0,maxArgs:1}},notifications:{clear:{minArgs:1,maxArgs:1},create:{minArgs:1,maxArgs:2},getAll:{minArgs:0,maxArgs:0},getPermissionLevel:{minArgs:0,maxArgs:0},update:{minArgs:2,maxArgs:2}},pageAction:{getPopup:{minArgs:1,maxArgs:1},getTitle:{minArgs:1,maxArgs:1},hide:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setIcon:{minArgs:1,maxArgs:1},setPopup:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setTitle:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},show:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0}},permissions:{contains:{minArgs:1,maxArgs:1},getAll:{minArgs:0,maxArgs:0},remove:{minArgs:1,maxArgs:1},request:{minArgs:1,maxArgs:1}},runtime:{getBackgroundPage:{minArgs:0,maxArgs:0},getPlatformInfo:{minArgs:0,maxArgs:0},openOptionsPage:{minArgs:0,maxArgs:0},requestUpdateCheck:{minArgs:0,maxArgs:0},sendMessage:{minArgs:1,maxArgs:3},sendNativeMessage:{minArgs:2,maxArgs:2},setUninstallURL:{minArgs:1,maxArgs:1}},sessions:{getDevices:{minArgs:0,maxArgs:1},getRecentlyClosed:{minArgs:0,maxArgs:1},restore:{minArgs:0,maxArgs:1}},storage:{local:{clear:{minArgs:0,maxArgs:0},get:{minArgs:0,maxArgs:1},getBytesInUse:{minArgs:0,maxArgs:1},remove:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}},managed:{get:{minArgs:0,maxArgs:1},getBytesInUse:{minArgs:0,maxArgs:1}},sync:{clear:{minArgs:0,maxArgs:0},get:{minArgs:0,maxArgs:1},getBytesInUse:{minArgs:0,maxArgs:1},remove:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}}},tabs:{captureVisibleTab:{minArgs:0,maxArgs:2},create:{minArgs:1,maxArgs:1},detectLanguage:{minArgs:0,maxArgs:1},discard:{minArgs:0,maxArgs:1},duplicate:{minArgs:1,maxArgs:1},executeScript:{minArgs:1,maxArgs:2},get:{minArgs:1,maxArgs:1},getCurrent:{minArgs:0,maxArgs:0},getZoom:{minArgs:0,maxArgs:1},getZoomSettings:{minArgs:0,maxArgs:1},goBack:{minArgs:0,maxArgs:1},goForward:{minArgs:0,maxArgs:1},highlight:{minArgs:1,maxArgs:1},insertCSS:{minArgs:1,maxArgs:2},move:{minArgs:2,maxArgs:2},query:{minArgs:1,maxArgs:1},reload:{minArgs:0,maxArgs:2},remove:{minArgs:1,maxArgs:1},removeCSS:{minArgs:1,maxArgs:2},sendMessage:{minArgs:2,maxArgs:3},setZoom:{minArgs:1,maxArgs:2},setZoomSettings:{minArgs:1,maxArgs:2},update:{minArgs:1,maxArgs:2}},topSites:{get:{minArgs:0,maxArgs:0}},webNavigation:{getAllFrames:{minArgs:1,maxArgs:1},getFrame:{minArgs:1,maxArgs:1}},webRequest:{handlerBehaviorChanged:{minArgs:0,maxArgs:0}},windows:{create:{minArgs:0,maxArgs:1},get:{minArgs:1,maxArgs:2},getAll:{minArgs:0,maxArgs:1},getCurrent:{minArgs:0,maxArgs:1},getLastFocused:{minArgs:0,maxArgs:1},remove:{minArgs:1,maxArgs:1},update:{minArgs:2,maxArgs:2}}};if(0===Object.keys(b).length)throw new Error("api-metadata.json has not been included in browser-polyfill");class c extends WeakMap{constructor(a,b=void 0){super(b),this.createItem=a}get(a){return this.has(a)||this.set(a,this.createItem(a)),super.get(a)}}const d=a=>a&&"object"==typeof a&&"function"==typeof a.then,e=(b,c)=>(...d)=>{a.runtime.lastError?b.reject(new Error(a.runtime.lastError.message)):c.singleCallbackArg||1>=d.length&&!1!==c.singleCallbackArg?b.resolve(d[0]):b.resolve(d)},f=a=>1==a?"argument":"arguments",g=(a,b)=>function(c,...d){if(d.length<b.minArgs)throw new Error(`Expected at least ${b.minArgs} ${f(b.minArgs)} for ${a}(), got ${d.length}`);if(d.length>b.maxArgs)throw new Error(`Expected at most ${b.maxArgs} ${f(b.maxArgs)} for ${a}(), got ${d.length}`);return new Promise((f,g)=>{if(b.fallbackToNoCallback)try{c[a](...d,e({resolve:f,reject:g},b))}catch(e){console.warn(`${a} API method doesn't seem to support the callback parameter, `+"falling back to call it without a callback: ",e),c[a](...d),b.fallbackToNoCallback=!1,b.noCallback=!0,f()}else b.noCallback?(c[a](...d),f()):c[a](...d,e({resolve:f,reject:g},b))})},h=(a,b,c)=>new Proxy(b,{apply(b,d,e){return c.call(d,a,...e)}});let i=Function.call.bind(Object.prototype.hasOwnProperty);const j=(a,b={},c={})=>{let d=Object.create(null),e=Object.create(a);return new Proxy(e,{has(b,c){return c in a||c in d},get(e,f){if(f in d)return d[f];if(!(f in a))return;let k=a[f];if("function"==typeof k){if("function"==typeof b[f])k=h(a,a[f],b[f]);else if(i(c,f)){let b=g(f,c[f]);k=h(a,a[f],b)}else k=k.bind(a);}else if("object"==typeof k&&null!==k&&(i(b,f)||i(c,f)))k=j(k,b[f],c[f]);else if(i(c,"*"))k=j(k,b[f],c["*"]);else return Object.defineProperty(d,f,{configurable:!0,enumerable:!0,get(){return a[f]},set(b){a[f]=b}}),k;return d[f]=k,k},set(b,c,e){return c in d?d[c]=e:a[c]=e,!0},defineProperty(a,b,c){return Reflect.defineProperty(d,b,c)},deleteProperty(a,b){return Reflect.deleteProperty(d,b)}})},k=a=>({addListener(b,c,...d){b.addListener(a.get(c),...d)},hasListener(b,c){return b.hasListener(a.get(c))},removeListener(b,c){b.removeListener(a.get(c))}}),l=new c(a=>"function"==typeof a?function(b){const c=j(b,{},{getContent:{minArgs:0,maxArgs:0}});a(c)}:a),m=new c(a=>"function"==typeof a?function(b,c,e){let f,g,h=!1,i=new Promise(a=>{f=function(b){h=!0,a(b)}});try{g=a(b,c,f)}catch(a){g=Promise.reject(a)}const j=!0!==g&&d(g);if(!0!==g&&!j&&!h)return!1;const k=a=>{a.then(a=>{e(a)},a=>{let b;b=a&&(a instanceof Error||"string"==typeof a.message)?a.message:"An unexpected error occurred",e({__mozWebExtensionPolyfillReject__:!0,message:b})}).catch(a=>{console.error("Failed to send onMessage rejected reply",a)})};return j?k(g):k(i),!0}:a),n=({reject:b,resolve:c},d)=>{a.runtime.lastError?a.runtime.lastError.message==="The message port closed before a response was received."?c():b(new Error(a.runtime.lastError.message)):d&&d.__mozWebExtensionPolyfillReject__?b(new Error(d.message)):c(d)},o=(a,b,c,...d)=>{if(d.length<b.minArgs)throw new Error(`Expected at least ${b.minArgs} ${f(b.minArgs)} for ${a}(), got ${d.length}`);if(d.length>b.maxArgs)throw new Error(`Expected at most ${b.maxArgs} ${f(b.maxArgs)} for ${a}(), got ${d.length}`);return new Promise((a,b)=>{const e=n.bind(null,{resolve:a,reject:b});d.push(e),c.sendMessage(...d)})},p={devtools:{network:{onRequestFinished:k(l)}},runtime:{onMessage:k(m),onMessageExternal:k(m),sendMessage:o.bind(null,"sendMessage",{minArgs:1,maxArgs:3})},tabs:{sendMessage:o.bind(null,"sendMessage",{minArgs:2,maxArgs:3})}},q={clear:{minArgs:1,maxArgs:1},get:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}};return b.privacy={network:{"*":q},services:{"*":q},websites:{"*":q}},j(a,p,b)})(chrome)}else a.exports=globalThis.browser});
-//# sourceMappingURL=browser-polyfill.min.js.map
+"use strict";
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _background_message_answers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @background/message-answers */ "./src/background/message-answers.js");
+/* harmony import */ var _background_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @background/actions */ "./src/background/actions.js");
+/* harmony import */ var _background_context_menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./background/context-menu */ "./src/background/context-menu.js");
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_background_message_answers__WEBPACK_IMPORTED_MODULE_0__, _background_actions__WEBPACK_IMPORTED_MODULE_1__, _background_context_menu__WEBPACK_IMPORTED_MODULE_2__]);
+([_background_message_answers__WEBPACK_IMPORTED_MODULE_0__, _background_actions__WEBPACK_IMPORTED_MODULE_1__, _background_context_menu__WEBPACK_IMPORTED_MODULE_2__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+const browser = __webpack_require__(/*! webextension-polyfill/dist/browser-polyfill.min */ "./node_modules/webextension-polyfill/dist/browser-polyfill.min.js");
 
-// webextension-polyfill v.0.12.0 (https://github.com/mozilla/webextension-polyfill)
 
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+
+
+browser.browserAction.onClicked.addListener((tab) => _background_actions__WEBPACK_IMPORTED_MODULE_1__["default"].switchPopup(tab));
+
+browser.tabs.onActivated.addListener(_background_context_menu__WEBPACK_IMPORTED_MODULE_2__.updateContextMenu);
+browser.tabs.onUpdated.addListener(_background_context_menu__WEBPACK_IMPORTED_MODULE_2__.updateContextMenu);
+
+browser.storage.local.onChanged.addListener(_background_context_menu__WEBPACK_IMPORTED_MODULE_2__.updateContextMenu);
+
+(0,_background_context_menu__WEBPACK_IMPORTED_MODULE_2__.updateContextMenu)();
+
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
 
 /***/ },
 
@@ -1165,9 +1318,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /*!***********************************!*\
   !*** ./src/background/actions.js ***!
   \***********************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   addSearchToContextMenu: () => (/* binding */ addSearchToContextMenu),
@@ -1179,6 +1333,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./state */ "./src/background/state.js");
 /* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helpers */ "./src/background/helpers.js");
 /* harmony import */ var _context_menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./context-menu */ "./src/background/context-menu.js");
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_state__WEBPACK_IMPORTED_MODULE_1__, _context_menu__WEBPACK_IMPORTED_MODULE_3__]);
+([_state__WEBPACK_IMPORTED_MODULE_1__, _context_menu__WEBPACK_IMPORTED_MODULE_3__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 const browser = __webpack_require__(/*! webextension-polyfill/dist/browser-polyfill.min */ "./node_modules/webextension-polyfill/dist/browser-polyfill.min.js");
 
 
@@ -1196,6 +1352,8 @@ const browser = __webpack_require__(/*! webextension-polyfill/dist/browser-polyf
   removeSearch,
   removeAllSearches,
   removeRecentSearch,
+  addFavoriteSearch,
+  removeFavoriteSearch,
   openPage,
 });
 
@@ -1260,15 +1418,28 @@ async function executeScript(tabId, file) {
   }
 }
 
-function removeRecentSearch (str) {
-  _state__WEBPACK_IMPORTED_MODULE_1__["default"].removeRecentSearch(str);
-  (0,_context_menu__WEBPACK_IMPORTED_MODULE_3__.updateContextMenu)();
+function removeRecentSearch (string) {
+  _state__WEBPACK_IMPORTED_MODULE_1__["default"].removeRecentSearch(string);
+  _common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].removeRecentSearch({ string })
+  ;(0,_context_menu__WEBPACK_IMPORTED_MODULE_3__.updateContextMenu)();
+}
+
+function addFavoriteSearch (string) {
+  _state__WEBPACK_IMPORTED_MODULE_1__["default"].addFavoriteSearch(string);
+  _common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].addFavoriteSearch({ string });
+}
+
+function removeFavoriteSearch (string) {
+  _state__WEBPACK_IMPORTED_MODULE_1__["default"].removeFavoriteSearch(string);
+  _common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].removeFavoriteSearch({ string })
 }
 
 function openPage (url) {
   browser.tabs.create({ active: true, url });
 }
 
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
 
 /***/ },
 
@@ -1276,9 +1447,10 @@ function openPage (url) {
 /*!****************************************!*\
   !*** ./src/background/context-menu.js ***!
   \****************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   updateContextMenu: () => (/* binding */ updateContextMenu)
@@ -1289,6 +1461,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./state */ "./src/background/state.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./actions */ "./src/background/actions.js");
 /* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helpers */ "./src/background/helpers.js");
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_state__WEBPACK_IMPORTED_MODULE_2__, _actions__WEBPACK_IMPORTED_MODULE_3__]);
+([_state__WEBPACK_IMPORTED_MODULE_2__, _actions__WEBPACK_IMPORTED_MODULE_3__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
 
 
@@ -1301,68 +1475,86 @@ const MENU_TEXT = {
   REMOVE: "Remove",
   REMOVE_ALL_ACTIVE: "Remove all active",
   FIND: "Find",
-  RECENT_SEARCHES: "Recent searches",
-  REMOVE_ALL_RECENT: "Remove all recent",
-  OPTIONS: "Settings",
-}
+  RECENT_SEARCHES: "Recent",
+  REMOVE_ALL_RECENT: "Remove all",
+  FAVORITE_SEARCHES: "Saved",
+  REMOVE_ALL_FAVORITE: "Remove all",
+  OPTIONS: "Customize",
+};
 
 function separator (str) {
   return `${Date.now()}${str}`;
 };
 
 async function updateContextMenu () {
-  const { recentSearches } = _state__WEBPACK_IMPORTED_MODULE_2__["default"].get();
+  const { recentSearches, favoriteSearches } = _state__WEBPACK_IMPORTED_MODULE_2__["default"].get();
   const { id } = await (0,_helpers__WEBPACK_IMPORTED_MODULE_4__.getCurrentTab)();
   const { searches } = _state__WEBPACK_IMPORTED_MODULE_2__["default"].getTabState(id);
 
-  const newSearchOption = searches.every((s) => s) ? {} : {
-    [MENU_TEXT.NEW]: () => _actions__WEBPACK_IMPORTED_MODULE_3__["default"].openSearchGroup()
-  }
-
   const activeSearchOptions = searches
-    .map((s, i) => [
-      s,
-      {
-        [MENU_TEXT.OPEN]: () => _actions__WEBPACK_IMPORTED_MODULE_3__["default"].openSearchGroup(i),
-        [MENU_TEXT.REMOVE]: () => _actions__WEBPACK_IMPORTED_MODULE_3__["default"].removeSearch(id, i),
-      },
-    ])
+    .map((s, i) => [s, () => _actions__WEBPACK_IMPORTED_MODULE_3__["default"].openSearchGroup(i)])
     .filter(([s]) => s);
 
   if (activeSearchOptions.length) {
-    activeSearchOptions.unshift([separator(1), null]);
+    activeSearchOptions.unshift([separator(0), null]);
     activeSearchOptions.push(
+      [separator(1), null],
       [MENU_TEXT.REMOVE_ALL_ACTIVE, () => _actions__WEBPACK_IMPORTED_MODULE_3__["default"].removeAllSearches(id)],
     );
   }
 
-  let recentSearchesSubmenu = {};
-  const recentSearchesOptions = recentSearches.filter((s) => s).map((s) => [
+  let favoriteSearchesSubmenu = {};
+  const favoriteSearchesOptions = favoriteSearches.map((s) => [
     s,
-    {
-      [MENU_TEXT.FIND]: () => _actions__WEBPACK_IMPORTED_MODULE_3__["default"].openSearchGroup(undefined, s),
-      [MENU_TEXT.REMOVE]: () => _actions__WEBPACK_IMPORTED_MODULE_3__["default"].removeRecentSearch(s),
-    },
+    () => _actions__WEBPACK_IMPORTED_MODULE_3__["default"].openSearchGroup(undefined, s),
+  ]);
+
+  if (favoriteSearchesOptions.length) {
+    favoriteSearchesOptions.push(
+      [separator(2), null],
+      [MENU_TEXT.REMOVE_ALL_FAVORITE, () => _actions__WEBPACK_IMPORTED_MODULE_3__["default"].removeFavoriteSearch()],
+    );
+    favoriteSearchesSubmenu = {
+      [separator(3)]: null,
+      [MENU_TEXT.FAVORITE_SEARCHES]: Object.fromEntries(
+        favoriteSearchesOptions,
+      ),
+    };
+  }
+
+
+  let recentSearchesSubmenu = {};
+  const recentSearchesOptions = recentSearches.map((s) => [
+    s,
+    () => _actions__WEBPACK_IMPORTED_MODULE_3__["default"].openSearchGroup(undefined, s),
   ]);
 
   if (recentSearchesOptions.length) {
+    recentSearchesOptions.push(
+      [separator(4), null],
+      [MENU_TEXT.REMOVE_ALL_RECENT, () => _actions__WEBPACK_IMPORTED_MODULE_3__["default"].removeRecentSearch()],
+    );
     recentSearchesSubmenu = {
-      [separator(2)]: null,
-      [MENU_TEXT.RECENT_SEARCHES]: Object.fromEntries(recentSearchesOptions),
-      [MENU_TEXT.REMOVE_ALL_RECENT]: () => _actions__WEBPACK_IMPORTED_MODULE_3__["default"].removeRecentSearch(),
+      ...(favoriteSearchesOptions.length ? {} : { [separator(5)]: null }),
+      [MENU_TEXT.RECENT_SEARCHES]: Object.fromEntries(
+        recentSearchesOptions,
+      ),
     };
   }
 
   webextension_contextmenu__WEBPACK_IMPORTED_MODULE_0___default()({
     [_common_constants__WEBPACK_IMPORTED_MODULE_1__.FIND_SUGGESTION]: {
-      ...newSearchOption,
+      [MENU_TEXT.NEW]: () => _actions__WEBPACK_IMPORTED_MODULE_3__["default"].openSearchGroup(),
       ...Object.fromEntries(activeSearchOptions),
+      ...favoriteSearchesSubmenu,
       ...recentSearchesSubmenu,
-      [separator(3)]: null,
+      [separator(6)]: null,
       [MENU_TEXT.OPTIONS]: () => _actions__WEBPACK_IMPORTED_MODULE_3__["default"].openPage(_common_constants__WEBPACK_IMPORTED_MODULE_1__.PAGE_URLS.SETTINGS)
     },
   });
 }
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
 
 /***/ },
 
@@ -1392,23 +1584,35 @@ function getCurrentTab() {
 /*!*******************************************!*\
   !*** ./src/background/message-answers.js ***!
   \*******************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @common/messages */ "./src/common/messages.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actions */ "./src/background/actions.js");
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./state */ "./src/background/state.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./actions */ "./src/background/actions.js");
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_state__WEBPACK_IMPORTED_MODULE_1__, _actions__WEBPACK_IMPORTED_MODULE_2__]);
+([_state__WEBPACK_IMPORTED_MODULE_1__, _actions__WEBPACK_IMPORTED_MODULE_2__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
 
 
-_common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].closingTab(({ tabId }) => (0,_actions__WEBPACK_IMPORTED_MODULE_1__.closingTab)({ tabId }));
-_common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].closingPopup(({ tabId }) => (0,_actions__WEBPACK_IMPORTED_MODULE_1__.closingPopup)({ tabId }));
+
+_common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].closingTab(({ tabId }) => _actions__WEBPACK_IMPORTED_MODULE_2__["default"].closingTab({ tabId }));
+_common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].closingPopup(({ tabId }) => _actions__WEBPACK_IMPORTED_MODULE_2__["default"].closingPopup({ tabId }));
 
 _common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].addSearchToContextMenu(({ tabId, idx, string }) =>
-  (0,_actions__WEBPACK_IMPORTED_MODULE_1__.addSearchToContextMenu)({ tabId, idx, string }),
+  _actions__WEBPACK_IMPORTED_MODULE_2__["default"].addSearchToContextMenu({ tabId, idx, string }),
 );
 
+_common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].getSearches(() => _state__WEBPACK_IMPORTED_MODULE_1__["default"].get())
 
+_common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].removeRecentSearch(({ string }) => _actions__WEBPACK_IMPORTED_MODULE_2__["default"].removeRecentSearch(string));
+_common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].addFavoriteSearch(({ string }) => _actions__WEBPACK_IMPORTED_MODULE_2__["default"].addFavoriteSearch(string));
+_common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].removeFavoriteSearch(({ string }) => _actions__WEBPACK_IMPORTED_MODULE_2__["default"].removeFavoriteSearch(string));
+
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
 
 /***/ },
 
@@ -1416,76 +1620,83 @@ _common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].addSearchToContextMenu(
 /*!*********************************!*\
   !*** ./src/background/state.js ***!
   \*********************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var varstor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! varstor */ "./node_modules/varstor/dist/varstor.js");
-/* harmony import */ var varstor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(varstor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var varstor_webextension__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! varstor/webextension */ "../varstor/dist/varstor-webextension.js");
+/* harmony import */ var varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(varstor_webextension__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _common_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @common/constants */ "./src/common/constants.js");
 
 
 
 const EMPTY_OBJECT = { searches: [undefined] };
 
-varstor__WEBPACK_IMPORTED_MODULE_0___default().add({
+varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().add({
   tabs: {},
   recentSearches: [],
 });
 
+await varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().addPersistent({
+  favoriteSearches: [],
+});
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  ...(varstor__WEBPACK_IMPORTED_MODULE_0___default()),
+  ...(varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default()),
   getTabState,
   initTabState,
   setTabState,
   setSearchInTab,
   getEmptySearchId,
   removeRecentSearch,
+  addFavoriteSearch,
+  removeFavoriteSearch,
 });
 
 function getTabState (tabId) {
-  return varstor__WEBPACK_IMPORTED_MODULE_0___default().get().tabs[ tabId ] || EMPTY_OBJECT;
+  return varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().get().tabs[ tabId ] || EMPTY_OBJECT;
 }
 
 function initTabState (tabId) {
-  const { tabs } = varstor__WEBPACK_IMPORTED_MODULE_0___default().get();
+  const { tabs } = varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().get();
   tabs[tabId] = {
     open: false,
     searches: Array(_common_constants__WEBPACK_IMPORTED_MODULE_1__.COLORS.length).fill(),
     removeMenus: false,
     initialized: true,
   };
-  varstor__WEBPACK_IMPORTED_MODULE_0___default().set({ tabs });
+  varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().set({ tabs });
 
   return tabs[tabId];
 }
 
 function setTabState (tabId, state) {
-  const { tabs } = varstor__WEBPACK_IMPORTED_MODULE_0___default().get();
+  const { tabs } = varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().get();
   const prevTabState = tabs[tabId];
   tabs[tabId] = state ? { ...prevTabState, ...state } : EMPTY_OBJECT;
-  varstor__WEBPACK_IMPORTED_MODULE_0___default().set({ tabs });
+  varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().set({ tabs });
 }
 
 function setSearchInTab (tabId, searchId, string) {
-  const { tabs } = varstor__WEBPACK_IMPORTED_MODULE_0___default().get();
+  const { tabs } = varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().get();
   tabs[tabId].searches[searchId] = string;
   addRecentSearch(string)
-  varstor__WEBPACK_IMPORTED_MODULE_0___default().set({ tabs });
+  varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().set({ tabs });
 }
 
 async function getEmptySearchId ({ id }) {
-  const { searches } = varstor__WEBPACK_IMPORTED_MODULE_0___default().get().tabs[id];
+  const { searches } = varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().get().tabs[id];
   const emptySlot = searches.findIndex((s) => !s);
 
   return emptySlot >= 0 ? emptySlot : searches.length - 1;
 }
 
 function addRecentSearch (str) {
-  const { recentSearches } = varstor__WEBPACK_IMPORTED_MODULE_0___default().get();
+  const { recentSearches } = varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().get();
 
   if (!str) {
     return;
@@ -1504,14 +1715,39 @@ function addRecentSearch (str) {
 
   recentSearches.unshift(str);
 
-  varstor__WEBPACK_IMPORTED_MODULE_0___default().set({ recentSearches });
+  varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().set({ recentSearches });
 }
 
 function removeRecentSearch (str) {
-  const { recentSearches } = varstor__WEBPACK_IMPORTED_MODULE_0___default().get();
+  const { recentSearches } = varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().get();
 
-  varstor__WEBPACK_IMPORTED_MODULE_0___default().set({ recentSearches: str ? recentSearches.filter((s) => s !== str) : [] });
-} 
+  varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().set({
+    recentSearches: str ? recentSearches.filter((s) => s !== str) : [],
+  });
+}
+
+function addFavoriteSearch (str) {
+  const { favoriteSearches } = varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().get();
+  const favoriteIdx = favoriteSearches.indexOf(str);
+
+  if (favoriteIdx >= 0) {
+    favoriteSearches.splice(favoriteIdx, 1);
+  }
+
+  favoriteSearches.unshift(str);
+
+  varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().set({ favoriteSearches });
+}
+
+function removeFavoriteSearch (str) {
+  const { favoriteSearches } = varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().get();
+
+  varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().set({
+    favoriteSearches: str ? favoriteSearches.filter((s) => s !== str) : [],
+  });
+}
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } }, 1);
 
 /***/ },
 
@@ -1538,7 +1774,7 @@ const FIND_HELPER_CLASS = EXTENSION_ID + '-find-helper';
 
 const FLAT_STRING_DELIMITER = "~";
 
-const RECENT_SEARCHES_LIMIT = 20;
+const RECENT_SEARCHES_LIMIT = 15;
 
 const PAGE_URLS = {
   SETTINGS: "/options/options.html",
@@ -1600,7 +1836,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var webextension_messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! webextension-messages */ "./node_modules/webextension-messages/dist/webextension-messages.js");
+/* harmony import */ var webextension_messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! webextension-messages */ "../webextension-messages/dist/webextension-messages.js");
 /* harmony import */ var webextension_messages__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(webextension_messages__WEBPACK_IMPORTED_MODULE_0__);
 
 
@@ -1612,6 +1848,11 @@ __webpack_require__.r(__webpack_exports__);
   "saveTabId",
   "removeSearch",
   "closingTab",
+  "getSearches",
+  "addToRecent",
+  "removeRecentSearch",
+  "addFavoriteSearch",
+  "removeFavoriteSearch",
 ]));
 
 /***/ }
@@ -1649,6 +1890,82 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/async module */
+/******/ 	(() => {
+/******/ 		const hasSymbol = typeof Symbol === "function";
+/******/ 		const webpackQueues = hasSymbol ? Symbol("webpack queues") : "__webpack_queues__";
+/******/ 		const webpackExports = hasSymbol ? Symbol("webpack exports") : "__webpack_exports__";
+/******/ 		const webpackError = hasSymbol ? Symbol("webpack error") : "__webpack_error__";
+/******/ 		
+/******/ 		const resolveQueue = (queue) => {
+/******/ 			if(queue?.d < 1) {
+/******/ 				queue.d = 1;
+/******/ 				queue.forEach((fn) => (fn.r--));
+/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
+/******/ 			}
+/******/ 		}
+/******/ 		const wrapDeps = (deps) => (deps.map((dep) => {
+/******/ 			if(dep !== null && typeof dep === "object") {
+/******/ 		
+/******/ 				if(dep[webpackQueues]) return dep;
+/******/ 				if(dep.then) {
+/******/ 					const queue = [];
+/******/ 					queue.d = 0;
+/******/ 					dep.then((r) => {
+/******/ 						obj[webpackExports] = r;
+/******/ 						resolveQueue(queue);
+/******/ 					}, (e) => {
+/******/ 						obj[webpackError] = e;
+/******/ 						resolveQueue(queue);
+/******/ 					});
+/******/ 					const obj = {};
+/******/ 		
+/******/ 					obj[webpackQueues] = (fn) => (fn(queue));
+/******/ 					return obj;
+/******/ 				}
+/******/ 			}
+/******/ 			const ret = {};
+/******/ 			ret[webpackQueues] = x => {};
+/******/ 			ret[webpackExports] = dep;
+/******/ 			return ret;
+/******/ 		}));
+/******/ 		__webpack_require__.a = (module, body, hasAwait) => {
+/******/ 			let queue;
+/******/ 			hasAwait && ((queue = []).d = -1);
+/******/ 			const depQueues = new Set();
+/******/ 			const exports = module.exports;
+/******/ 			let currentDeps;
+/******/ 			let outerResolve;
+/******/ 			let reject;
+/******/ 			const promise = new Promise((resolve, rej) => {
+/******/ 				reject = rej;
+/******/ 				outerResolve = resolve;
+/******/ 			});
+/******/ 			promise[webpackExports] = exports;
+/******/ 			promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
+/******/ 			module.exports = promise;
+/******/ 			const handle = (deps) => {
+/******/ 				currentDeps = wrapDeps(deps);
+/******/ 				let fn;
+/******/ 				const getResult = () => (currentDeps.map((d) => {
+/******/ 		
+/******/ 					if(d[webpackError]) throw d[webpackError];
+/******/ 					return d[webpackExports];
+/******/ 				}))
+/******/ 				const promise = new Promise((resolve) => {
+/******/ 					fn = () => (resolve(getResult));
+/******/ 					fn.r = 0;
+/******/ 					const fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
+/******/ 					currentDeps.map((dep) => (dep[webpackQueues](fnQueue)));
+/******/ 				});
+/******/ 				return fn.r ? promise : getResult();
+/******/ 			}
+/******/ 			const done = (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue))
+/******/ 			body(handle, done);
+/******/ 			queue?.d < 0 && (queue.d = 0);
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -1705,31 +2022,11 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-let __webpack_exports__ = {};
-// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
-(() => {
-"use strict";
-/*!**********************************!*\
-  !*** ./src/background-script.js ***!
-  \**********************************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _background_message_answers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @background/message-answers */ "./src/background/message-answers.js");
-/* harmony import */ var _background_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @background/actions */ "./src/background/actions.js");
-/* harmony import */ var _background_context_menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./background/context-menu */ "./src/background/context-menu.js");
-const browser = __webpack_require__(/*! webextension-polyfill/dist/browser-polyfill.min */ "./node_modules/webextension-polyfill/dist/browser-polyfill.min.js");
-
-
-
-
-
-browser.browserAction.onClicked.addListener((tab) => _background_actions__WEBPACK_IMPORTED_MODULE_1__["default"].switchPopup(tab));
-
-browser.tabs.onActivated.addListener(_background_context_menu__WEBPACK_IMPORTED_MODULE_2__.updateContextMenu);
-browser.tabs.onUpdated.addListener(_background_context_menu__WEBPACK_IMPORTED_MODULE_2__.updateContextMenu);
-
-(0,_background_context_menu__WEBPACK_IMPORTED_MODULE_2__.updateContextMenu)();
-
-})();
-
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module used 'module' so it can't be inlined
+/******/ 	let __webpack_exports__ = __webpack_require__("./src/background-script.js");
+/******/ 	
 /******/ })()
 ;

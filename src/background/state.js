@@ -1,4 +1,4 @@
-import Varstor from 'varstor';
+import Varstor from 'varstor/webextension';
 import { COLORS, RECENT_SEARCHES_LIMIT } from '@common/constants';
 
 const EMPTY_OBJECT = { searches: [undefined] };
@@ -6,6 +6,10 @@ const EMPTY_OBJECT = { searches: [undefined] };
 Varstor.add({
   tabs: {},
   recentSearches: [],
+});
+
+await Varstor.addPersistent({
+  favoriteSearches: [],
 });
 
 export default {
@@ -16,6 +20,8 @@ export default {
   setSearchInTab,
   getEmptySearchId,
   removeRecentSearch,
+  addFavoriteSearch,
+  removeFavoriteSearch,
 };
 
 function getTabState (tabId) {
@@ -82,5 +88,28 @@ function addRecentSearch (str) {
 function removeRecentSearch (str) {
   const { recentSearches } = Varstor.get();
 
-  Varstor.set({ recentSearches: str ? recentSearches.filter((s) => s !== str) : [] });
-} 
+  Varstor.set({
+    recentSearches: str ? recentSearches.filter((s) => s !== str) : [],
+  });
+}
+
+function addFavoriteSearch (str) {
+  const { favoriteSearches } = Varstor.get();
+  const favoriteIdx = favoriteSearches.indexOf(str);
+
+  if (favoriteIdx >= 0) {
+    favoriteSearches.splice(favoriteIdx, 1);
+  }
+
+  favoriteSearches.unshift(str);
+
+  Varstor.set({ favoriteSearches });
+}
+
+function removeFavoriteSearch (str) {
+  const { favoriteSearches } = Varstor.get();
+
+  Varstor.set({
+    favoriteSearches: str ? favoriteSearches.filter((s) => s !== str) : [],
+  });
+}

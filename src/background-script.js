@@ -11,4 +11,6 @@ browser.browserAction.onClicked.addListener((tab) => actions.switchPopup(tab));
 browser.tabs.onActivated.addListener(updateContextMenu);
 browser.tabs.onUpdated.addListener(updateContextMenu);
 
+browser.storage.local.onChanged.addListener(updateContextMenu);
+
 updateContextMenu();
