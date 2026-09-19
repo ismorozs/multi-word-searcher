@@ -9,8 +9,10 @@ Message.addSearchToContextMenu(({ tabId, idx, string }) =>
   actions.addSearchToContextMenu({ tabId, idx, string }),
 );
 
-Message.getSearches(() => State.get())
+Message.getData(() => State.get())
 
 Message.removeRecentSearch(({ string }) => actions.removeRecentSearch(string));
 Message.addFavoriteSearch(({ string }) => actions.addFavoriteSearch(string));
 Message.removeFavoriteSearch(({ string }) => actions.removeFavoriteSearch(string));
+
+Message.setColors(({ colors }) => actions.setColors(colors));

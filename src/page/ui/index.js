@@ -7,3 +7,9 @@ export function createElement (type, styles) {
 
   return el;
 }
+
+export function appendStyles(styleStr) {
+  const styleEl = document.createElement("style");
+  styleEl.appendChild(document.createTextNode(styleStr));
+  document.head.appendChild(styleEl);
+}

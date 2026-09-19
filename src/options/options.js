@@ -9,5 +9,6 @@ Message.addFavoriteSearch(({ string }) =>
 Message.removeFavoriteSearch(({ string }) =>
   State.removeFavoriteSearch(string),
 );
+Message.setColors(({ colors }) => State.set({ colors }));
 
 Settings({}, document.body);

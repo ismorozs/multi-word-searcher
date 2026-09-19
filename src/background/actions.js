@@ -16,6 +16,7 @@ export default {
   removeRecentSearch,
   addFavoriteSearch,
   removeFavoriteSearch,
+  setColors,
   openPage,
 };
 
@@ -41,8 +42,9 @@ async function switchPopup({ id }, noClosing) {
 }
 
 async function initializePopup(tabId) {
+  const { colors } = State.get();
   await executeScript(tabId, "/page-script.js");
-  Message.saveTabId({ tabId });
+  await Message.saveTabData({ tabId, colors });
   return State.initTabState(tabId);
 }
 
@@ -92,6 +94,11 @@ function addFavoriteSearch (string) {
 function removeFavoriteSearch (string) {
   State.removeFavoriteSearch(string);
   Message.removeFavoriteSearch({ string })
+}
+
+function setColors (colors) {
+  State.set({ colors });
+  Message.setColors({ colors });
 }
 
 function openPage (url) {

@@ -1364,6 +1364,7 @@ const browser = __webpack_require__(/*! webextension-polyfill/dist/browser-polyf
   removeRecentSearch,
   addFavoriteSearch,
   removeFavoriteSearch,
+  setColors,
   openPage,
 });
 
@@ -1389,8 +1390,9 @@ async function switchPopup({ id }, noClosing) {
 }
 
 async function initializePopup(tabId) {
+  const { colors } = _state__WEBPACK_IMPORTED_MODULE_1__["default"].get();
   await executeScript(tabId, "/page-script.js");
-  _common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].saveTabId({ tabId });
+  await _common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].saveTabData({ tabId, colors });
   return _state__WEBPACK_IMPORTED_MODULE_1__["default"].initTabState(tabId);
 }
 
@@ -1440,6 +1442,11 @@ function addFavoriteSearch (string) {
 function removeFavoriteSearch (string) {
   _state__WEBPACK_IMPORTED_MODULE_1__["default"].removeFavoriteSearch(string);
   _common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].removeFavoriteSearch({ string })
+}
+
+function setColors (colors) {
+  _state__WEBPACK_IMPORTED_MODULE_1__["default"].set({ colors });
+  _common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].setColors({ colors });
 }
 
 function openPage (url) {
@@ -1613,12 +1620,13 @@ _common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].addSearchToContextMenu(
   _actions__WEBPACK_IMPORTED_MODULE_2__["default"].addSearchToContextMenu({ tabId, idx, string }),
 );
 
-_common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].getSearches(() => _state__WEBPACK_IMPORTED_MODULE_1__["default"].get())
+_common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].getData(() => _state__WEBPACK_IMPORTED_MODULE_1__["default"].get())
 
 _common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].removeRecentSearch(({ string }) => _actions__WEBPACK_IMPORTED_MODULE_2__["default"].removeRecentSearch(string));
 _common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].addFavoriteSearch(({ string }) => _actions__WEBPACK_IMPORTED_MODULE_2__["default"].addFavoriteSearch(string));
 _common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].removeFavoriteSearch(({ string }) => _actions__WEBPACK_IMPORTED_MODULE_2__["default"].removeFavoriteSearch(string));
 
+_common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].setColors(({ colors }) => _actions__WEBPACK_IMPORTED_MODULE_2__["default"].setColors(colors));
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
 
@@ -1651,6 +1659,7 @@ varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().add({
 
 await varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().addPersistent({
   favoriteSearches: [],
+  colors: _common_constants__WEBPACK_IMPORTED_MODULE_1__.COLORS,
 });
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -1860,14 +1869,15 @@ __webpack_require__.r(__webpack_exports__);
   "closingPopup",
   "addSearchToContextMenu",
   "popupState",
-  "saveTabId",
+  "saveTabData",
   "removeSearch",
   "closingTab",
-  "getSearches",
+  "getData",
   "addToRecent",
   "removeRecentSearch",
   "addFavoriteSearch",
   "removeFavoriteSearch",
+  "setColors",
 ]));
 
 /***/ }

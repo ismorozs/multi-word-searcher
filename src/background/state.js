@@ -10,6 +10,7 @@ Varstor.add({
 
 await Varstor.addPersistent({
   favoriteSearches: [],
+  colors: COLORS,
 });
 
 export default {

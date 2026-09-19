@@ -1,7 +1,10 @@
 import Store from './store';
 import Message from '@common/messages';
 
-Message.saveTabId(({ tabId }) => Store.set({ tabId }));
+Message.saveTabData(({ tabId, colors }) => {
+  Store.set({ tabId });
+  Store.updateColors(colors);
+});
 
 Message.popupState(({ open }) => Store.setPopupState(open));
 

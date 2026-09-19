@@ -8,9 +8,13 @@ import { toNumberOrZero, fromFlatStringToStructure, fromStructureToFlatString } 
 Varstor.add({
   popupOpen: false,
   tabId: null,
-  searches: COLORS.map((c, i) => initiateSearchOpts(i, "")),
   searchId: 0,
+  colors: COLORS,
   searchIdEl: null,
+});
+
+Varstor.add({
+  searches: COLORS.map((c, i) => initiateSearchOpts(i, "")),
   currentSearch: (searches, searchId) => searches[searchId],
 });
 
@@ -31,16 +35,19 @@ export default {
   removeSearchString,
   addNewSearchString,
   updateStringDistance,
+  updateColors,
 };
 
 function initiateSearchOpts (i, string) {
+  const { colors } = Varstor.get();
+
   return {
     searchStrings: fromFlatStringToStructure(string),
     foundResults: 0,
     lastFocused: 0,
     searchHappened: false,
     highlightPosition: 0,
-    color: COLORS[i],
+    color: colors[i],
     id: i,
     caseSensitive: false,
   };
@@ -290,4 +297,15 @@ function changeSearchStringFocus(idx) {
   currentSearch.lastFocused = idx;
 
   Varstor.set({ searches });
+}
+
+function updateColors (colors) {
+  const { searches } = Varstor.get();
+
+  Highlightings.appendBlinkingStyles(colors);
+
+  Varstor.set({
+    searches: searches.map((s, i) => ({ ...s, color: colors[i] })),
+    colors,
+  });
 }

@@ -1518,14 +1518,15 @@ __webpack_require__.r(__webpack_exports__);
   "closingPopup",
   "addSearchToContextMenu",
   "popupState",
-  "saveTabId",
+  "saveTabData",
   "removeSearch",
   "closingTab",
-  "getSearches",
+  "getData",
   "addToRecent",
   "removeRecentSearch",
   "addFavoriteSearch",
   "removeFavoriteSearch",
+  "setColors",
 ]));
 
 /***/ },
@@ -1697,59 +1698,6 @@ function isStringInRange(
 
 /***/ },
 
-/***/ "./src/page/global-styles.js"
-/*!***********************************!*\
-  !*** ./src/page/global-styles.js ***!
-  \***********************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   appendStyles: () => (/* binding */ appendStyles),
-/* harmony export */   stylesString: () => (/* binding */ stylesString)
-/* harmony export */ });
-/* harmony import */ var _common_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @common/constants */ "./src/common/constants.js");
-
-
-let stylesString = _common_constants__WEBPACK_IMPORTED_MODULE_0__.COLORS.map((color, idx) => `
-  @keyframes ${_common_constants__WEBPACK_IMPORTED_MODULE_0__.FIND_HELPER_CLASS}${idx} {
-    0% {
-      outline-color: rgba(${color}, 1);
-    }
-
-    100% {
-      outline-color: rgba(${color}, 0);
-    }
-  }
-
-  .${_common_constants__WEBPACK_IMPORTED_MODULE_0__.FIND_HELPER_CLASS}${idx} {
-    animation-name: '${_common_constants__WEBPACK_IMPORTED_MODULE_0__.FIND_HELPER_CLASS}${idx}';
-    outline-style: solid;
-    animation-duration: 1.3s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-  }
-`).join('');
-
-stylesString += `
-  @keyframes outline_blinker {
-    50% {
-      outline-color: rgba(0, 0, 0, 0);
-    }
-  }
-`;
-
-function appendStyles (styleStr) {
-  const styleEl = document.createElement('style');
-  styleEl.appendChild( document.createTextNode(styleStr) );
-  document.head.appendChild(styleEl);
-}
-
-appendStyles(stylesString);
-
-/***/ },
-
 /***/ "./src/page/highlightings.js"
 /*!***********************************!*\
   !*** ./src/page/highlightings.js ***!
@@ -1780,14 +1728,17 @@ const HIGHLIGHTINGS_POSITIONS = [];
   remove: removeHighlightings,
   moveTo: jumpTo,
   switchBlinking,
+  appendBlinkingStyles,
 });
 
-function createHighlightings (stringPositions, data) {
+function createHighlightings(stringPositions, data) {
   removeHighlightings(data.searchId);
 
   const doc = document.documentElement;
-  const scrollLeft = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0);
-  const scrollTop = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0);
+  const scrollLeft =
+    (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0);
+  const scrollTop =
+    (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
 
   stringPositions.forEach((stringPositions, stringIdx) => {
     const topPosition = scrollTop + stringPositions[0].top;
@@ -1819,21 +1770,21 @@ function createHighlightings (stringPositions, data) {
   });
 }
 
-function createHightlightElement (rect, scrollTop, scrollLeft, data) {
+function createHightlightElement(rect, scrollTop, scrollLeft, data) {
   const highlight = (0,_ui_index__WEBPACK_IMPORTED_MODULE_2__.createElement)(
-    'span',
-    (0,_ui_components_highlighting_styles__WEBPACK_IMPORTED_MODULE_3__["default"])({ scrollTop, scrollLeft, rect, ...data })
+    "span",
+    (0,_ui_components_highlighting_styles__WEBPACK_IMPORTED_MODULE_3__["default"])({ scrollTop, scrollLeft, rect, ...data }),
   );
-  
+
   highlight.classList.add(_common_constants__WEBPACK_IMPORTED_MODULE_1__.EXTENSION_ID + data.searchId);
 
   return highlight;
 }
 
-function createScrollbarMark (topPosition, data, rangeIdx) {
+function createScrollbarMark(topPosition, data, rangeIdx) {
   const scrollBarMark = (0,_ui_index__WEBPACK_IMPORTED_MODULE_2__.createElement)(
-    'span',
-    (0,_ui_components_scrollbarMark_styles__WEBPACK_IMPORTED_MODULE_4__["default"])({ topPosition, ...data })
+    "span",
+    (0,_ui_components_scrollbarMark_styles__WEBPACK_IMPORTED_MODULE_4__["default"])({ topPosition, ...data }),
   );
 
   scrollBarMark.title = data.searchString;
@@ -1846,27 +1797,70 @@ function createScrollbarMark (topPosition, data, rangeIdx) {
   return scrollBarMark;
 }
 
-function jumpTo (searchId, id) {
+function jumpTo(searchId, id) {
   const highlightPosition = HIGHLIGHTINGS_POSITIONS[searchId][id];
   const centerHeight = window.innerHeight / 2;
   const centerWidth = window.innerWidth / 2;
   window.scrollTo(
     highlightPosition.left - centerWidth,
-    highlightPosition.top - centerHeight
+    highlightPosition.top - centerHeight,
   );
 }
 
-function removeHighlightings (searchId) {
-  document.querySelectorAll('.' + _common_constants__WEBPACK_IMPORTED_MODULE_1__.EXTENSION_ID + searchId)
+function removeHighlightings(searchId) {
+  document
+    .querySelectorAll("." + _common_constants__WEBPACK_IMPORTED_MODULE_1__.EXTENSION_ID + searchId)
     .forEach((el) => el.parentNode.removeChild(el));
 
   HIGHLIGHTINGS_POSITIONS[searchId] = [];
 }
 
-function switchBlinking (searchId, operation) {
-  HIGHLIGHTINGS_POSITIONS[searchId]
-    .forEach((highlightData) => highlightData.els
-      .forEach((el) => el.classList[operation](`${_common_constants__WEBPACK_IMPORTED_MODULE_1__.FIND_HELPER_CLASS}${searchId}`)));
+function switchBlinking(searchId, operation) {
+  HIGHLIGHTINGS_POSITIONS[searchId].forEach((highlightData) =>
+    highlightData.els.forEach((el) =>
+      el.classList[operation](`${_common_constants__WEBPACK_IMPORTED_MODULE_1__.FIND_HELPER_CLASS}${searchId}`),
+    ),
+  );
+}
+
+function generateBlinkingStyles(colors) {
+  let stylesString = colors
+    .map(
+      (color, idx) => `
+    @keyframes ${_common_constants__WEBPACK_IMPORTED_MODULE_1__.FIND_HELPER_CLASS}${idx} {
+      0% {
+        outline-color: rgba(${color}, 1);
+      }
+
+      100% {
+        outline-color: rgba(${color}, 0);
+      }
+    }
+
+    .${_common_constants__WEBPACK_IMPORTED_MODULE_1__.FIND_HELPER_CLASS}${idx} {
+      animation-name: '${_common_constants__WEBPACK_IMPORTED_MODULE_1__.FIND_HELPER_CLASS}${idx}';
+      outline-style: solid;
+      animation-duration: 1.3s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+  `,
+    )
+    .join("");
+
+  stylesString += `
+    @keyframes outline_blinker {
+      50% {
+        outline-color: rgba(0, 0, 0, 0);
+      }
+    }
+  `;
+
+  return stylesString;
+}
+
+function appendBlinkingStyles (colors) {
+  (0,_ui_index__WEBPACK_IMPORTED_MODULE_2__.appendStyles)(generateBlinkingStyles(colors));
 }
 
 
@@ -1885,7 +1879,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_common_messages__WEBPACK_IMPORTED_MODULE_1__["default"].saveTabId(({ tabId }) => _store__WEBPACK_IMPORTED_MODULE_0__["default"].set({ tabId }));
+_common_messages__WEBPACK_IMPORTED_MODULE_1__["default"].saveTabData(({ tabId, colors }) => {
+  _store__WEBPACK_IMPORTED_MODULE_0__["default"].set({ tabId });
+  _store__WEBPACK_IMPORTED_MODULE_0__["default"].updateColors(colors);
+});
 
 _common_messages__WEBPACK_IMPORTED_MODULE_1__["default"].popupState(({ open }) => _store__WEBPACK_IMPORTED_MODULE_0__["default"].setPopupState(open));
 
@@ -1935,9 +1932,13 @@ __webpack_require__.r(__webpack_exports__);
 varstor__WEBPACK_IMPORTED_MODULE_0___default().add({
   popupOpen: false,
   tabId: null,
-  searches: _common_constants__WEBPACK_IMPORTED_MODULE_4__.COLORS.map((c, i) => initiateSearchOpts(i, "")),
   searchId: 0,
+  colors: _common_constants__WEBPACK_IMPORTED_MODULE_4__.COLORS,
   searchIdEl: null,
+});
+
+varstor__WEBPACK_IMPORTED_MODULE_0___default().add({
+  searches: _common_constants__WEBPACK_IMPORTED_MODULE_4__.COLORS.map((c, i) => initiateSearchOpts(i, "")),
   currentSearch: (searches, searchId) => searches[searchId],
 });
 
@@ -1958,16 +1959,19 @@ varstor__WEBPACK_IMPORTED_MODULE_0___default().add({
   removeSearchString,
   addNewSearchString,
   updateStringDistance,
+  updateColors,
 });
 
 function initiateSearchOpts (i, string) {
+  const { colors } = varstor__WEBPACK_IMPORTED_MODULE_0___default().get();
+
   return {
     searchStrings: (0,_common_helpers__WEBPACK_IMPORTED_MODULE_5__.fromFlatStringToStructure)(string),
     foundResults: 0,
     lastFocused: 0,
     searchHappened: false,
     highlightPosition: 0,
-    color: _common_constants__WEBPACK_IMPORTED_MODULE_4__.COLORS[i],
+    color: colors[i],
     id: i,
     caseSensitive: false,
   };
@@ -2217,6 +2221,17 @@ function changeSearchStringFocus(idx) {
   currentSearch.lastFocused = idx;
 
   varstor__WEBPACK_IMPORTED_MODULE_0___default().set({ searches });
+}
+
+function updateColors (colors) {
+  const { searches } = varstor__WEBPACK_IMPORTED_MODULE_0___default().get();
+
+  _highlightings__WEBPACK_IMPORTED_MODULE_1__["default"].appendBlinkingStyles(colors);
+
+  varstor__WEBPACK_IMPORTED_MODULE_0___default().set({
+    searches: searches.map((s, i) => ({ ...s, color: colors[i] })),
+    colors,
+  });
 }
 
 /***/ },
@@ -2924,6 +2939,7 @@ __webpack_require__.dn(__WEBPACK_DEFAULT_EXPORT__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   appendStyles: () => (/* binding */ appendStyles),
 /* harmony export */   createElement: () => (/* binding */ createElement)
 /* harmony export */ });
 function createElement (type, styles) {
@@ -2934,6 +2950,12 @@ function createElement (type, styles) {
   }
 
   return el;
+}
+
+function appendStyles(styleStr) {
+  const styleEl = document.createElement("style");
+  styleEl.appendChild(document.createTextNode(styleStr));
+  document.head.appendChild(styleEl);
 }
 
 
@@ -3048,8 +3070,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _page_ui_components_Popup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @page/ui/components/Popup */ "./src/page/ui/components/Popup/index.js");
 /* harmony import */ var _common_messages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @common/messages */ "./src/common/messages.js");
 /* harmony import */ var _page_message_answers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @page/message-answers */ "./src/page/message-answers.js");
-/* harmony import */ var _page_global_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @page/global-styles */ "./src/page/global-styles.js");
-
 
 
 

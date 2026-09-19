@@ -2418,6 +2418,7 @@ varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().add({
 
 await varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().addPersistent({
   favoriteSearches: [],
+  colors: _common_constants__WEBPACK_IMPORTED_MODULE_1__.COLORS,
 });
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2702,15 +2703,139 @@ __webpack_require__.r(__webpack_exports__);
   "closingPopup",
   "addSearchToContextMenu",
   "popupState",
-  "saveTabId",
+  "saveTabData",
   "removeSearch",
   "closingTab",
-  "getSearches",
+  "getData",
   "addToRecent",
   "removeRecentSearch",
   "addFavoriteSearch",
   "removeFavoriteSearch",
+  "setColors",
 ]));
+
+/***/ },
+
+/***/ "./src/options/components/ColorOrder.js"
+/*!**********************************************!*\
+  !*** ./src/options/components/ColorOrder.js ***!
+  \**********************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var simple_els__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! simple-els */ "./node_modules/simple-els/dist/simple-els.js");
+/* harmony import */ var simple_els__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(simple_els__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _common_messages__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @common/messages */ "./src/common/messages.js");
+/* harmony import */ var _common_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @common/constants */ "./src/common/constants.js");
+
+
+
+
+const Color = simple_els__WEBPACK_IMPORTED_MODULE_0___default()(
+  `
+  <div @color draggable="true"></div>  
+`,
+  {
+    color_style: (color) => ({ backgroundColor: `rgb(${color})` }),
+    color_dragstart: (e, { get, send }) =>  send({ current: get().index }),
+    color_dragover: (e) => e.preventDefault(),
+    color_dragend: (e, { send }) => send({ dragEnd: true }),
+    color_dragenter: (e, { get, send }) => send({ hovered: get().index }),
+    color_dragleave: (e, { get, send }) => send({ prevHovered: get().index }),
+  },
+  `
+  .color {
+    min-width: 60px;
+    height: 40px;
+    cursor: grab;
+  }
+
+  .color:active {
+    cursor: grabbing;
+  }
+`,
+);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (simple_els__WEBPACK_IMPORTED_MODULE_0___default()(
+  (_) =>
+    `
+  <div .container>
+    <h3>Colors order</h3>
+    <div .colors>
+      ${_(Color, (colors) =>
+        colors.map((color, index) => ({
+          color,
+          index,
+        })),
+      )}
+    </div>
+    <button @button>Defaults</button>
+  </div> 
+`,
+  {
+    colors: [],
+    button_click: () => _common_messages__WEBPACK_IMPORTED_MODULE_1__["default"].setColors({ colors: _common_constants__WEBPACK_IMPORTED_MODULE_2__.COLORS }),
+    onMessage: (data, { set, get }) => {
+      if (data.dragEnd) {
+        const { current, hovered, prevHovered, colors } = get();
+        if (hovered === prevHovered) {
+          return;
+        }
+
+        const curentColor = colors.splice(current, 1)[0];
+        colors.splice(hovered, 0, curentColor);
+        _common_messages__WEBPACK_IMPORTED_MODULE_1__["default"].setColors({ colors });
+        return;
+      }
+      set(data);
+    },
+  },
+  `
+  .container {
+    display: flex;
+    width: 600px;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 30px;
+    position: relative;
+    padding-left: 60px;
+  }
+
+  .colors {
+    display: flex;
+    width: 600px;
+    border: 2px solid black;
+  }
+
+  .button {
+    position: absolute;
+    bottom: 0;
+    right: -110px;
+    display: inline-block;
+    text-align: center;
+    margin-left: 8px;
+    border: 3px solid black;
+    background: none;
+    font-size: 18px;
+    padding: 5px 10px;
+    min-width: 68px;
+    box-sizing: border-box;
+  }
+
+  .button:hover {
+    cursor: pointer;
+  }
+
+  .button:active {
+    transform: scale(1.02);
+  }
+`,
+));
+
 
 /***/ },
 
@@ -2974,7 +3099,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _background_state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @background/state */ "./src/background/state.js");
 /* harmony import */ var _common_messages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @common/messages */ "./src/common/messages.js");
 /* harmony import */ var _SearchString__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SearchString */ "./src/options/components/SearchString.js");
-/* harmony import */ var _common_helpers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @common/helpers */ "./src/common/helpers.js");
+/* harmony import */ var _ColorOrder__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ColorOrder */ "./src/options/components/ColorOrder.js");
+/* harmony import */ var _common_helpers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @common/helpers */ "./src/common/helpers.js");
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_background_state__WEBPACK_IMPORTED_MODULE_1__]);
 var __webpack_async_dependencies_result__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 _background_state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_async_dependencies_result__[0];
@@ -2985,49 +3111,53 @@ _background_state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_async_dependencies_re
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (simple_els__WEBPACK_IMPORTED_MODULE_0___default()(
   (_) => `
-  <div .searches-container>
-    <div>
-      <h3>Recent Searches</h3>
-      <ul .searches>
-        ${_(_SearchString__WEBPACK_IMPORTED_MODULE_3__["default"], (recentSearches) =>
-          recentSearches.map((s) => ({
-            searchString: (0,_common_helpers__WEBPACK_IMPORTED_MODULE_4__.fromFlatStringToStructure)(s),
-            type: "Recent",
-          })),
-        )}
-      </ul>
-    </div>
-    <div>
-      <h3>Saved Searches</h3>
-      <ul .searches>
-        ${_(_SearchString__WEBPACK_IMPORTED_MODULE_3__["default"], (favoriteSearches) =>
-          favoriteSearches.map((s) => ({
-            searchString: (0,_common_helpers__WEBPACK_IMPORTED_MODULE_4__.fromFlatStringToStructure)(s),
-            type: "Favorite",
-          })),
-        )}
-      </ul>
+  <div .container>
+    ${_(_ColorOrder__WEBPACK_IMPORTED_MODULE_4__["default"], (colors) => ({ colors }))}
+    <div .searches-container>
+      <div>
+        <h3>Recent Searches</h3>
+        <ul .searches>
+          ${_(_SearchString__WEBPACK_IMPORTED_MODULE_3__["default"], (recentSearches) =>
+            recentSearches.map((s) => ({
+              searchString: (0,_common_helpers__WEBPACK_IMPORTED_MODULE_5__.fromFlatStringToStructure)(s),
+              type: "Recent",
+            })),
+          )}
+        </ul>
+      </div>
+      <div>
+        <h3>Saved Searches</h3>
+        <ul .searches>
+          ${_(_SearchString__WEBPACK_IMPORTED_MODULE_3__["default"], (favoriteSearches) =>
+            favoriteSearches.map((s) => ({
+              searchString: (0,_common_helpers__WEBPACK_IMPORTED_MODULE_5__.fromFlatStringToStructure)(s),
+              type: "Favorite",
+            })),
+          )}
+        </ul>
+      </div>
     </div>
   </div>
 `,
   {
     recentSearches: [],
     favoriteSearches: [],
+    colors: [],
 
     onChange: async (changes, { set }) => {
       if (changes > 0) {
-        const { recentSearches, favoriteSearches } =
-          await _common_messages__WEBPACK_IMPORTED_MODULE_2__["default"].getSearches();
-        _background_state__WEBPACK_IMPORTED_MODULE_1__["default"].set({ recentSearches, favoriteSearches });
-        set({ recentSearches, favoriteSearches });
+        const { recentSearches, favoriteSearches, colors } = await _common_messages__WEBPACK_IMPORTED_MODULE_2__["default"].getData();
 
         _background_state__WEBPACK_IMPORTED_MODULE_1__["default"].onChange(
-          ["recentSearches", "favoriteSearches"],
-          (_, { recentSearches, favoriteSearches }) =>
-            set({ recentSearches, favoriteSearches }),
+          ["recentSearches", "favoriteSearches", "colors"],
+          (_, { recentSearches, favoriteSearches, colors }) =>
+            set({ recentSearches, favoriteSearches, colors }),
         );
+
+        _background_state__WEBPACK_IMPORTED_MODULE_1__["default"].set({ recentSearches, favoriteSearches, colors });
       }
     },
 
@@ -3036,13 +3166,16 @@ _background_state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_async_dependencies_re
     },
   },
   `
-    .searches-container {
+    .container {
       font-family: sans-serif;
-      display: flex;
       font-size: 18px;
       margin-left: 50px;
       margin-top: 20px;
       text-align: center;
+    }
+
+    .searches-container {
+      display: flex;
     }
 
     .searches-container h3 {
@@ -3093,6 +3226,7 @@ _common_messages__WEBPACK_IMPORTED_MODULE_1__["default"].addFavoriteSearch(({ st
 _common_messages__WEBPACK_IMPORTED_MODULE_1__["default"].removeFavoriteSearch(({ string }) =>
   _background_state__WEBPACK_IMPORTED_MODULE_2__["default"].removeFavoriteSearch(string),
 );
+_common_messages__WEBPACK_IMPORTED_MODULE_1__["default"].setColors(({ colors }) => _background_state__WEBPACK_IMPORTED_MODULE_2__["default"].set({ colors }));
 
 (0,_components_Settings__WEBPACK_IMPORTED_MODULE_0__["default"])({}, document.body);
 
