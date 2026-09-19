@@ -1,4 +1,5 @@
 import Settings from './components/Settings';
+import Warning from './components/Warning';
 import Message from '@common/messages';
 import State from '@background/state';
 
@@ -12,3 +13,7 @@ Message.removeFavoriteSearch(({ string }) =>
 Message.setColors(({ colors }) => State.set({ colors }));
 
 Settings({}, document.body);
+
+if (State.get().showWarning) {
+  Warning.asPopup({ closeButton: '.button' });
+}

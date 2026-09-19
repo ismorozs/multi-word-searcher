@@ -16,3 +16,5 @@ Message.addFavoriteSearch(({ string }) => actions.addFavoriteSearch(string));
 Message.removeFavoriteSearch(({ string }) => actions.removeFavoriteSearch(string));
 
 Message.setColors(({ colors }) => actions.setColors(colors));
+
+Message.closingWarning((showWarning) => State.set({ showWarning }));

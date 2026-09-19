@@ -14,4 +14,5 @@ export default createMessages([
   "addFavoriteSearch",
   "removeFavoriteSearch",
   "setColors",
+  "closingWarning"
 ]);

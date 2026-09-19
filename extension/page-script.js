@@ -1527,6 +1527,7 @@ __webpack_require__.r(__webpack_exports__);
   "addFavoriteSearch",
   "removeFavoriteSearch",
   "setColors",
+  "closingWarning"
 ]));
 
 /***/ },

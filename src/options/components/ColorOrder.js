@@ -95,6 +95,8 @@ export default create(
 
   .button:hover {
     cursor: pointer;
+    color: rgb(145, 30, 180);
+    border-color: rgb(145, 30, 180);
   }
 
   .button:active {

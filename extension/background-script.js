@@ -1627,6 +1627,8 @@ _common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].addFavoriteSearch(({ st
 _common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].removeFavoriteSearch(({ string }) => _actions__WEBPACK_IMPORTED_MODULE_2__["default"].removeFavoriteSearch(string));
 
 _common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].setColors(({ colors }) => _actions__WEBPACK_IMPORTED_MODULE_2__["default"].setColors(colors));
+
+_common_messages__WEBPACK_IMPORTED_MODULE_0__["default"].closingWarning((showWarning) => _state__WEBPACK_IMPORTED_MODULE_1__["default"].set({ showWarning }));
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
 
@@ -1660,6 +1662,7 @@ varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().add({
 await varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().addPersistent({
   favoriteSearches: [],
   colors: _common_constants__WEBPACK_IMPORTED_MODULE_1__.COLORS,
+  showWarning: true,
 });
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -1878,6 +1881,7 @@ __webpack_require__.r(__webpack_exports__);
   "addFavoriteSearch",
   "removeFavoriteSearch",
   "setColors",
+  "closingWarning"
 ]));
 
 /***/ }

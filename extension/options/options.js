@@ -2419,6 +2419,7 @@ varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().add({
 await varstor_webextension__WEBPACK_IMPORTED_MODULE_0___default().addPersistent({
   favoriteSearches: [],
   colors: _common_constants__WEBPACK_IMPORTED_MODULE_1__.COLORS,
+  showWarning: true,
 });
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2712,6 +2713,7 @@ __webpack_require__.r(__webpack_exports__);
   "addFavoriteSearch",
   "removeFavoriteSearch",
   "setColors",
+  "closingWarning"
 ]));
 
 /***/ },
@@ -2828,6 +2830,8 @@ const Color = simple_els__WEBPACK_IMPORTED_MODULE_0___default()(
 
   .button:hover {
     cursor: pointer;
+    color: rgb(145, 30, 180);
+    border-color: rgb(145, 30, 180);
   }
 
   .button:active {
@@ -3201,6 +3205,102 @@ __webpack_async_result__();
 
 /***/ },
 
+/***/ "./src/options/components/Warning.js"
+/*!*******************************************!*\
+  !*** ./src/options/components/Warning.js ***!
+  \*******************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var simple_els__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! simple-els */ "./node_modules/simple-els/dist/simple-els.js");
+/* harmony import */ var simple_els__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(simple_els__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _common_messages__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @common/messages */ "./src/common/messages.js");
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (simple_els__WEBPACK_IMPORTED_MODULE_0___default()(
+  `
+  <div .container>
+    <h3>Warning</h3>
+    <p>Keeping this tab open when performing searches in other tabs<br> may cause extension  errors. <span .note>(in very rare cases)</span></p>
+    <div @controls>
+      <label @label>
+        <input type="checkbox" @dont-show>
+        Don't show again
+      </label>
+      <button @button>OK</button>
+    </div>
+  </div>
+`,
+  {
+    button_click: (e, { markup }) =>
+      _common_messages__WEBPACK_IMPORTED_MODULE_1__["default"].closingWarning(!markup.dontShow.checked),
+  },
+  `
+  .container {
+    font-family: sans-serif;
+    background: white;
+    border: 3px solid black;
+    padding: 30px 40px;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .container h3 {
+    font-size: 24px;
+    margin-top: 0;
+  }
+
+  .container p {
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+
+  .controls {
+    position: relative;
+  }
+
+  .note {
+    font-size: 16px;
+  }
+
+  .label {
+    position: absolute;
+    top: 8px;
+    right: 40px;
+    font-size: 16px;
+  }
+
+  .button {
+    display: inline-block;
+    text-align: center;
+    margin-left: 8px;
+    border: 3px solid black;
+    background: none;
+    font-size: 18px;
+    padding: 6px 30px;
+    min-width: 68px;
+    box-sizing: border-box;
+  }
+
+  .button:hover {
+    cursor: pointer;
+    color: rgb(145, 30, 180);
+    border-color: rgb(145, 30, 180);
+  }
+
+  .button:active {
+    transform: scale(1.02);
+  }
+`,
+));
+
+/***/ },
+
 /***/ "./src/options/options.js"
 /*!********************************!*\
   !*** ./src/options/options.js ***!
@@ -3211,25 +3311,30 @@ __webpack_async_result__();
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Settings__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Settings */ "./src/options/components/Settings.js");
-/* harmony import */ var _common_messages__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @common/messages */ "./src/common/messages.js");
-/* harmony import */ var _background_state__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @background/state */ "./src/background/state.js");
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_Settings__WEBPACK_IMPORTED_MODULE_0__, _background_state__WEBPACK_IMPORTED_MODULE_2__]);
-([_components_Settings__WEBPACK_IMPORTED_MODULE_0__, _background_state__WEBPACK_IMPORTED_MODULE_2__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+/* harmony import */ var _components_Warning__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Warning */ "./src/options/components/Warning.js");
+/* harmony import */ var _common_messages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @common/messages */ "./src/common/messages.js");
+/* harmony import */ var _background_state__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @background/state */ "./src/background/state.js");
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_Settings__WEBPACK_IMPORTED_MODULE_0__, _background_state__WEBPACK_IMPORTED_MODULE_3__]);
+([_components_Settings__WEBPACK_IMPORTED_MODULE_0__, _background_state__WEBPACK_IMPORTED_MODULE_3__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
 
 
 
-_common_messages__WEBPACK_IMPORTED_MODULE_1__["default"].removeRecentSearch(({ string }) => _background_state__WEBPACK_IMPORTED_MODULE_2__["default"].removeRecentSearch(string));
-_common_messages__WEBPACK_IMPORTED_MODULE_1__["default"].addFavoriteSearch(({ string }) =>
-  _background_state__WEBPACK_IMPORTED_MODULE_2__["default"].addFavoriteSearch(string),
+
+_common_messages__WEBPACK_IMPORTED_MODULE_2__["default"].removeRecentSearch(({ string }) => _background_state__WEBPACK_IMPORTED_MODULE_3__["default"].removeRecentSearch(string));
+_common_messages__WEBPACK_IMPORTED_MODULE_2__["default"].addFavoriteSearch(({ string }) =>
+  _background_state__WEBPACK_IMPORTED_MODULE_3__["default"].addFavoriteSearch(string),
 );
-_common_messages__WEBPACK_IMPORTED_MODULE_1__["default"].removeFavoriteSearch(({ string }) =>
-  _background_state__WEBPACK_IMPORTED_MODULE_2__["default"].removeFavoriteSearch(string),
+_common_messages__WEBPACK_IMPORTED_MODULE_2__["default"].removeFavoriteSearch(({ string }) =>
+  _background_state__WEBPACK_IMPORTED_MODULE_3__["default"].removeFavoriteSearch(string),
 );
-_common_messages__WEBPACK_IMPORTED_MODULE_1__["default"].setColors(({ colors }) => _background_state__WEBPACK_IMPORTED_MODULE_2__["default"].set({ colors }));
+_common_messages__WEBPACK_IMPORTED_MODULE_2__["default"].setColors(({ colors }) => _background_state__WEBPACK_IMPORTED_MODULE_3__["default"].set({ colors }));
 
 (0,_components_Settings__WEBPACK_IMPORTED_MODULE_0__["default"])({}, document.body);
 
+if (_background_state__WEBPACK_IMPORTED_MODULE_3__["default"].get().showWarning) {
+  _components_Warning__WEBPACK_IMPORTED_MODULE_1__["default"].asPopup({ closeButton: '.button' });
+}
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
 
