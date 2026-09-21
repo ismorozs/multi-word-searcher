@@ -22,13 +22,13 @@ function getNextHighlightPosition (curPos, nextNum, foundResults) {
 export default create(
   markup,
   {
-    searchStrings: [],
-    searchHappened: null,
-    highlightPosition: 0,
-    foundResults: 0,
-    caseSensitive: false,
-    color: null,
-    blinkSet: null,
+    searchStrings: { _: [] },
+    searchHappened: { _:null },
+    highlightPosition: { _:0 },
+    foundResults: { _:0 },
+    caseSensitive: { _:false },
+    color: { _:null },
+    blinkSet: { _:null },
 
     unfocusedInputs: (searchStrings) =>
       searchStrings.filter((input) => !input.focus),

@@ -21,10 +21,10 @@ export default create(
   </li>
 `,
   {
-    first: false,
-    focus: false,
-    index: null,
-    unfocusedInputs: [],
+    first: { _: false },
+    focus: { _: false },
+    index: { _: null },
+    unfocusedInputs: { _: [] },
 
     container_style: (index, length) => {
       const style = {};
