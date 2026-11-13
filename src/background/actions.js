@@ -4,9 +4,8 @@ import Message from "@common/messages";
 import State from "./state";
 import { getCurrentTab } from "./helpers";
 
-
 export default {
-  closingTab,
+  onTabClose,
   closingPopup,
   switchPopup,
   openSearchGroup,
@@ -20,8 +19,8 @@ export default {
   openPage,
 };
 
-export function closingTab({ tabId }) {
-  State.setTabState(tabId, undefined);
+export function onTabClose(tabId) {
+  State.setTabState(tabId);
 }
 
 export function closingPopup({ tabId }) {
@@ -51,7 +50,8 @@ async function initializePopup(tabId) {
 async function openSearchGroup(searchGroupId, searchString) {
   const tab = await getCurrentTab();
   await switchPopup(tab, true);
-  const idx = searchGroupId >= 0 ? searchGroupId : (await State.getEmptySearchId(tab));
+  const idx =
+    searchGroupId >= 0 ? searchGroupId : await State.getEmptySearchId(tab);
   Message.openSearchGroup({ idx, searchString });
 }
 
@@ -60,8 +60,10 @@ async function removeSearch(tabId, idx) {
   Message.removeSearch({ idx });
 }
 
-function removeAllSearches (tabId) {
-  State.getTabState(tabId).searches.forEach((s, i) => s && removeSearch(tabId, i));
+function removeAllSearches(tabId) {
+  State.getTabState(tabId).searches.forEach(
+    (s, i) => s && removeSearch(tabId, i),
+  );
 }
 
 export async function addSearchToContextMenu({ tabId, idx, string }) {
@@ -81,26 +83,22 @@ async function executeScript(tabId, file) {
   }
 }
 
-function removeRecentSearch (string) {
-  State.removeRecentSearch(string);
-  Message.removeRecentSearch({ string })
+async function removeRecentSearch(string) {
+  await State.removeRecentSearch(string);
 }
 
-function addFavoriteSearch (string) {
-  State.addFavoriteSearch(string);
-  Message.addFavoriteSearch({ string });
+async function addFavoriteSearch(string) {
+  await State.addFavoriteSearch(string);
 }
 
-function removeFavoriteSearch (string) {
-  State.removeFavoriteSearch(string);
-  Message.removeFavoriteSearch({ string })
+async function removeFavoriteSearch(string) {
+  await State.removeFavoriteSearch(string);
 }
 
-function setColors (colors) {
+function setColors(colors) {
   State.set({ colors });
-  Message.setColors({ colors });
 }
 
-function openPage (url) {
+function openPage(url) {
   browser.tabs.create({ active: true, url });
 }

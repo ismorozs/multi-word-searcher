@@ -1,4 +1,4 @@
-import createMessages from 'webextension-messages';
+import createMessages from "webextension-messages";
 
 export default createMessages([
   "openSearchGroup",
@@ -7,12 +7,11 @@ export default createMessages([
   "popupState",
   "saveTabData",
   "removeSearch",
-  "closingTab",
   "getData",
   "addToRecent",
   "removeRecentSearch",
   "addFavoriteSearch",
   "removeFavoriteSearch",
   "setColors",
-  "closingWarning"
+  "closingWarning",
 ]);

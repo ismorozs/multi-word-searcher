@@ -1,9 +1,8 @@
-
 import create from "simple-els";
 import Store from "@background/state";
 import Message from "@common/messages";
 import SearchString from "./SearchString";
-import ColorOrder from './ColorOrder';
+import ColorOrder from "./ColorOrder";
 import { fromFlatStringToStructure } from "@common/helpers";
 
 export default create(
@@ -43,20 +42,23 @@ export default create(
 
     onChange: async (changes, { set }) => {
       if (changes > 0) {
-        const { recentSearches, favoriteSearches, colors } = await Message.getData();
+        const { recentSearches, favoriteSearches, colors } =
+          await Message.getData();
 
-        Store.onChange(
-          ["recentSearches", "favoriteSearches", "colors"],
-          (_, { recentSearches, favoriteSearches, colors }) =>
-            set({ recentSearches, favoriteSearches, colors }),
+        Store.onChange(["recentSearches", "favoriteSearches", "colors"], () =>
+          set(Store.get()),
         );
 
         Store.set({ recentSearches, favoriteSearches, colors });
       }
     },
 
-    onMessage: ({ action, string }) => {
-      Message[action]({ string });
+    onMessage: async ({ action, string }, { set }) => {
+      await Message[action]({ string });
+
+      const { recentSearches, favoriteSearches } = await Message.getData();
+
+      set({ recentSearches, favoriteSearches });
     },
   },
   `

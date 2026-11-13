@@ -8,7 +8,7 @@
 (module) {
 
 /*! For license information please see simple-els.min.js.LICENSE.txt */
-!function(e,t){ true?module.exports=t():0}(this,()=>(()=>{"use strict";var e={"./src/combine.js"(e,t,n){n.r(t),n.d(t,{combineState:()=>l,combineTemplates:()=>E});var r=n("./src/consts.js"),s=n("./src/state.js"),o=n("./src/helpers.js"),c=n("./src/html.js"),i=n("./src/index.js");function E(e,t){const n={},r=a.bind(null,n,t),s=e.call(null,r);return[(0,c.cloneHTMLMarkup)(s),n]}function a(e,t,...n){const[s,c]=n,[E,a]=function(e,t){if(e.markup)return[e,!1];return[(0,i.default)(e,{},void 0,t),!0]}(s,t),l=Object.keys(e).length,S=`${r.UTIL_KEYS.CHILDREN}${l}`,p=(0,o.isFunction)(c)&&c,_=p&&(0,o.getParamNames)(c)||[];return e[`${S}`]={createComponent:E,[r.UTIL_KEYS.CHILDREN]:[],[r.UTIL_KEYS.ON_CHANGE]:[],[r.UTIL_KEYS.DEPENDANTS]:[],[r.UTIL_KEYS.ON_CHANGE]:[],[r.UTIL_KEYS.IS_RENDERED]:!1,[r.UTIL_KEYS.IS_ANONYMOUS]:a,[r.UTIL_KEYS.VALUE]:{value:!p&&u(c),computeFn:p,dependencies:_}},`<span ${r.BINDING_SIGN.COMPONENT}${S}></span>`}function l(e,t){Object.assign(e,t),(0,o.forEach)(t,(t,n)=>{const{dependencies:c,computeFn:i,value:E}=n[r.UTIL_KEYS.VALUE];c.forEach(n=>{(0,o.set)(e,[n,r.UTIL_KEYS.DEPENDANTS,t],[r.UTIL_KEYS.VALUE])}),e[r.UTIL_KEYS.HAS_ANONYMOUS_CHILDREN]=n.createComponent[r.UTIL_KEYS.IS_ANONYMOUS];const a=i&&function(e,t){const n=i.apply(null,(0,s.getArguments)(e,t));return n?u(n):[]};n[r.UTIL_KEYS.VALUE].computeFn=a,n[r.UTIL_KEYS.VALUE].value=a?a(c,e):E})}function u(e){return(0,o.isArray)(e)?e[0]&&!(0,o.isArray)(e[0])?e.map(e=>[e]):e:[[e||{}]]}},"./src/consts.js"(e,t,n){n.r(t),n.d(t,{BINDING_SIGN:()=>o,CHILDREN_LIST_OPERATIONS:()=>S,COMPONENT_PREFIX:()=>i,DEFAULT_CONTAINER:()=>l,DESTROY_OP:()=>E,EMPTY_FN:()=>u,FORM_TAGS:()=>p,NOT_BINDING_PREFIX:()=>s,REACTIVE_TYPES:()=>a,STATE_BEHAVIOUR_DELIMITER:()=>r,UTIL_KEYS:()=>c});const r="_",s=" ",o={BEHAVIOR:"@",CLASS:".",COMPONENT:"&"},c={VALUE:r,DEPENDENCIES:"dependencies",DEPENDANTS:"dependants",ON_CHANGE:"onChange",LISTENERS:"listeners",MARKUP:"el",EVENT_LISTENERS:"eventListeners",CHILDREN:"children",TEMPLATE:"template",IS_RENDERED:"isRendered",ON_MESSAGE:"onMessage",ON_MESSAGE_COMPONENT:s+"onMessage",PARENT_STATE:s+"parentState",ON_CHANGE_COMPONENT:s+"onChange",CHILDREN_DATA:s+"childrenData",MARKUP_COMPONENT:s+"el",IS_RENDERED_COMPONENT:s+"isRendered",IS_SAME_VALUE:"isSame",IS_ANONYMOUS:"isAnonymous",HAS_ANONYMOUS_CHILDREN:s+"isAnonymousChildren",IS_STATELESS:"isStateless",IS_FAST_APPLY:"isFastApply"},i="component",E="destroy",a=["html","value","style","text","attrs","class","onChange",c.VALUE,void 0],l="div",u=()=>{},S=[E,"set","insert","push"],p=["INPUT","SELECT","TEXTAREA"]},"./src/error.js"(e,t,n){n.r(t),n.d(t,{throwIllegalBindingNameError:()=>o,throwNoDeclaredDependencyError:()=>c});var r=n("./src/consts.js"),s=n("./src/helpers.js");function o(e){i(`Binding @${e} can't be added in the markup, because this name is reserved by the library.\nOther reserved names: ${(0,s.map)(r.UTIL_KEYS,(e,t)=>t)}`)}function c(e,t){i(`Dependency '${e}' is used for '${t}', but is not declared as a state value of the component.`)}function i(e){throw new Error(e)}},"./src/helpers.js"(e,t,n){n.r(t),n.d(t,{addEnding:()=>_,copy:()=>I,default:()=>d,filter:()=>O,forEach:()=>U,get:()=>Y,getFilteredKeys:()=>K,getParamNames:()=>l,isArray:()=>A,isDOMElement:()=>f,isFunction:()=>i,isHTMLString:()=>o,isNumber:()=>T,isObject:()=>E,isString:()=>c,isUndefined:()=>L,map:()=>u,set:()=>h,toCamelCase:()=>p,toDashCase:()=>S,uid:()=>m});const r=/((\/\/.*$)|(\/\*[\s\S]*?\*\/))/gm,s=/([^\s,]+)/g;function o(e){return c(e)&&0===e.indexOf("<")}function c(e){return"[object String]"===a(e)}function i(e){return"[object Function]"===a(e)}function E(e){return"[object Object]"===a(e)}function a(e){return Object.prototype.toString.call(e)}function l(e){const t=e.toString().replace(r,"").split("=>")[0],n=t.slice(t.indexOf("(")+1,t.indexOf(")")).match(s);return null===n?[]:n}function u(e,t){const n=Object.entries(e).map(([e,n])=>t(e,n));return 2===n[0]?.length?Object.fromEntries(n):n}function S(e){return e.replace(/[A-Z]/g,e=>`-${e.toLowerCase()}`)}function p(e){return e.replace(/-([a-z])/gi,(e,t)=>t.toUpperCase())}function _(e,t,n){return`${e}${n&&t||""}`}function T(e){return"[object Number]"===a(e)&&e==e}const d=I;function I(e,t){if(!e)return I({},t);for(let n in t)L(t[n])||(t.hasOwnProperty(n)&&E(t[n])?(e[n]||(e[n]={}),I(e[n],t[n])):A(t[n])?(e[n]||(e[n]=[]),N(e[n],t[n])):f(t[n])?e[n]=t[n].cloneNode(!0):e[n]=t[n]);return e}function N(e,t){for(let n=0;n<t.length;n++)E(t[n])?(e[n]=e[n]||{},I(e[n],t[n])):A(t[n])?(e[n]=e[n]||[],N(e[n],t[n])):e[n]=t[n];return e}function f(e){return e&&void 0!==e.tagName}function L(e){return void 0===e}function A(e){return"[object Array]"===a(e)}function U(e,t){Object.entries(e||{}).forEach(([e,n])=>t(e,n))}function h(e,t,n){if(!t.length)return E(n)?Object.assign(e,n):n;let r=e;for(var s=0;s<t.length-1;s++)r=r[t[s]]?r[t[s]]:r[t[s]]={};return E(n)?(r[t[s]]=r[t[s]]||{},Object.assign(r[t[s]],n)):r[t[s]]=n,e}function O(e,t){return Object.fromEntries(Object.entries(e).filter(([e,n])=>!0===t(e,n)))}function m(){return Date.now().toString(36)+Math.random().toString(36).substr(2)}function Y(e,t,n){let r=e;for(let e=0;e<t.length;e++)try{r=r[t[e]]}catch{return n}return L(r)?n:r}function K(e,t){return u(O(e,(e,n)=>t(e,n)),e=>e)}},"./src/html.js"(e,t,n){n.r(t),n.d(t,{MARKUP_ACTIONS:()=>i,addChildMarkup:()=>T,applyToMarkup:()=>S,cloneHTMLMarkup:()=>E,gatherBindings:()=>a,removeChildMarkup:()=>_,setupEventListener:()=>p,walkNodes:()=>u});var r=n("./src/helpers.js"),s=n("./src/consts.js"),o=n("./src/popup.js"),c=n("./src/error.js");const i={[s.UTIL_KEYS.VALUE]:({el:e,[s.UTIL_KEYS.IS_FAST_APPLY]:t},n)=>t&&function(e,t=""){s.FORM_TAGS.includes(e.tagName)?e.value=t:e.textContent=t}(e,n),value:({el:e},t)=>e.value=t,text:({el:e},t)=>e.textContent=t,html:({el:e},t)=>e.innerHTML=t,attrs:({el:e,attrs:t},n)=>function(e,t){for(const n of e.getAttributeNames())t[n]||e.removeAttribute(n);Object.entries(t).forEach(([t,n])=>e.setAttribute(t,n))}(e,{...t,...n,class:e.className}),style:({el:e},t)=>function(e,t){(0,r.forEach)(t,(t,n)=>{e.style[(0,r.toDashCase)(t)]=(0,r.addEnding)(n,"px",(0,r.isNumber)(n))})}(e,t),class:({el:e,classes:t,templateId:n},r)=>function(e,t){e.classList.value=t.join(" ")}(e,r.map(e=>`${n}${e}`).concat(t))};function E(e){return function(e){const t=new DOMParser;return t.parseFromString(e,"text/html").body.firstElementChild}((0,r.isHTMLString)(e.trim())?e:document.querySelector(e).innerHTML)}function a(e,t,n){const r={};return u(e,e=>{const{name:o,el:i,classes:E,attrs:a,isComponent:u,placeholder:S}=function(e,t,n){let r={};const o={},i=[],E=e.getAttributeNames();for(const a of E)if(a.startsWith(s.BINDING_SIGN.CLASS))n&&(o[a]=!0)||e.removeAttribute(a),l(e,t,a.slice(s.BINDING_SIGN.CLASS.length),i);else{if(a.startsWith(s.BINDING_SIGN.BEHAVIOR)){const E=a.slice(s.BINDING_SIGN.BEHAVIOR.length);Object.values(s.UTIL_KEYS).includes(E)&&(0,c.throwIllegalBindingNameError)(E),n&&(o[a]=!0)||e.removeAttribute(a),r={name:E,el:e},l(e,t,E,i);continue}a.startsWith(s.BINDING_SIGN.COMPONENT)?(n&&(o[a]=!0)||e.removeAttribute(a),r={name:a.slice(s.BINDING_SIGN.COMPONENT.length),el:e,placeholder:e,isComponent:!0}):o[a]=e.getAttribute(a)}return{...r,classes:i,attrs:o}}(e,t,n);o&&(r[o]={el:i,classes:E,attrs:a,isComponent:u,placeholder:S,templateId:t})}),r}function l(e,t,n,r){const o=n.split(s.BINDING_SIGN.CLASS).map(e=>`${t}${e}`),c=e.classList;c.add.apply(c,o),r.push.apply(r,o)}function u(e,t){t(e),Array.prototype.slice.call(e.children).forEach(e=>u(e,t))}function S(e,t,n){e&&i[t]&&i[t](e,n)}function p(e,t,n,r){e.addEventListener(t,e=>n(e,r))}function _(e,t){const{children:n,[s.UTIL_KEYS.MARKUP]:r}=e[s.UTIL_KEYS.CHILDREN_DATA],o=e[s.UTIL_KEYS.MARKUP_COMPONENT];if(1===n.length)return o.parentNode.replaceChild(r.placeholder,o),void(r.el=r.placeholder);0===t&&(r.el=o.nextSibling),o.parentNode.removeChild(o)}function T(e,t,n){const{markup:r,styles:s,id:c}=t,{isNoShadow:i,nextNode:E,placeholder:a,isPopup:l}=n;let u;if(i)u=r;else{u=document.createElement("div");const e=u.attachShadow({mode:"open"});e.adoptedStyleSheets=s,e.appendChild(r)}a?e.replaceChild(u,a):E?e.insertBefore(u,E):e.appendChild(u),l&&(0,o.addPopupLogic)(r,{...n,id:c})}},"./src/index.js"(e,t,n){n.r(t),n.d(t,{append:()=>u,default:()=>S});var r=n("./src/state.js"),s=n("./src/html.js"),o=n("./src/styles.js"),c=n("./src/helpers.js"),i=n("./src/combine.js"),E=n("./src/consts.js"),a=n("./src/lifecycle.js");function l(e,...t){(0,c.isDOMElement)(t[0])&&t.unshift({});const[n,o,i]=t;e[E.UTIL_KEYS.IS_STATELESS]&&(Object.assign(e.state,(0,r.prepareStateSettings)(n,!0)),e[E.UTIL_KEYS.IS_STATELESS]=!1);const a=e.markup.cloneNode(!0),l=(0,c.copy)({},e.state);l[E.UTIL_KEYS.PARENT_STATE]=i?.[E.UTIL_KEYS.PARENT_STATE],l[E.UTIL_KEYS.CHILDREN_DATA]=i?.[E.UTIL_KEYS.CHILDREN_DATA],l[E.UTIL_KEYS.MARKUP_COMPONENT]=a;const S=(0,s.gatherBindings)(a,e.id),p={api:l&&(0,r.setupComponentMarkup)(S,l,e[E.UTIL_KEYS.IS_ANONYMOUS]?(0,r.getValues)((0,r.prepareStateSettings)(n)):n),...e,markup:a,state:l};return o?u(o,p,i):Object.assign((e,t)=>u(e,p,t),{asPopup:e=>u(document.body,p,{...e,isPopup:!0})})}function u(e,t,n={}){(0,s.addChildMarkup)(e,t,n);const{state:r}=t;return r[E.UTIL_KEYS.IS_RENDERED_COMPONENT]=!0,(0,a.runStateChangeListeners)(!0,r)}const S=function(e,t,n,a){const u=a||(0,c.uid)(),[S,p]=(0,c.isFunction)(e)?(0,i.combineTemplates)(e,u):[(0,s.cloneHTMLMarkup)(e),{}],[_,T]=(0,c.isObject)(t)?[(0,r.prepareStateSettings)(t),(0,o.prepareStyles)(u,n)]:[{},(0,o.prepareStyles)(u,t)],d=!Object.keys(_).length||!!a;(0,i.combineState)(_,p);const I=(0,s.gatherBindings)(S,u,!0);(0,r.updateTemplateMarkup)(I,_);const N={id:u,markup:S,state:_,styles:(0,c.map)(p,(e,t)=>t).map(e=>e.createComponent.styles).reduce((e,t)=>e.concat(t),[]).concat(T),[E.UTIL_KEYS.IS_STATELESS]:d,[E.UTIL_KEYS.IS_ANONYMOUS]:d};return Object.assign((...e)=>l(N,...e),{...N,asPopup:e=>l(N,{},document.body,{...e,isPopup:!0})})}},"./src/lifecycle.js"(e,t,n){n.r(t),n.d(t,{runStateChangeListeners:()=>c});var r=n("./src/consts.js"),s=n("./src/helpers.js"),o=n("./src/state.js");function c(e,t){const{[r.UTIL_KEYS.ON_CHANGE_COMPONENT]:n,[r.UTIL_KEYS.MARKUP_COMPONENT]:c}=t,i=(0,o.getStateBindings)(t),E=(0,o.createStateApi)(t);return(0,s.forEach)(i,(t,{[r.UTIL_KEYS.ON_CHANGE]:n,[r.UTIL_KEYS.MARKUP]:o})=>{if((0,s.isArray)(e)&&!e.includes(t))return;const c=(0,s.isArray)(e)?[t]:e;n?.forEach(e=>e(c,E,o?.el))}),n(e,E,c),E}},"./src/popup.js"(e,t,n){n.r(t),n.d(t,{addPopupLogic:()=>i});n("./src/consts.js");var r=n("./src/helpers.js"),s=n("./src/styles.js");const o={left:"X",top:"Y"},c=["left","top","bottom","right"];function i(e,t){const{handle:n,closeButton:i,id:E}=t;i&&e.parentNode.querySelector((0,s.addClassPrefix)(i,E))?.addEventListener("click",()=>e.parentNode.removeChild(e)),n&&e.parentNode.querySelector((0,s.addClassPrefix)(n,E))?.addEventListener("mousedown",t=>{const n=t.target,r=t.clientX-e.getBoundingClientRect().left,s=t.clientY-e.getBoundingClientRect().top;function o(t){requestAnimationFrame(()=>{e.style.left=t.clientX-r+"px",e.style.top=t.clientY-s+"px",e.style.transform="none"})}function c(e){document.removeEventListener("mousemove",o),document.removeEventListener("mouseup",c),n.removeEventListener("mouseup",c)}document.addEventListener("mouseup",c),n.addEventListener("mouseup",c),document.addEventListener("mousemove",o)}),function(e,t){const{left:n,top:s,bottom:i,right:E}=t;e.style.position="fixed";const{width:a,height:l}=e.getBoundingClientRect();n||E||(t.left="center");s||i||(t.top="center");E&&!n&&(delete t.right,t.left=document.body.clientWidth-a-E);i&&!s&&(delete t.bottom,t.top=window.innerHeight-l-i);const u=[];(0,r.forEach)(t,(e,t)=>{if(c.includes(e)){if("center"===t)return u.push(`${e}: 50%`,`transform: translate${o[e]}(-50%)`);u.push(`${e}: ${(0,r.addEnding)(t,"px",(0,r.isNumber)(t))}`)}}),"center"===t.left&&"center"===t.top&&u.push("transform: translate(-50%, -50%)"),e.style=`${e.style.cssText}; ${u.join(";")}`}(e,t)}},"./src/state.js"(e,t,n){n.r(t),n.d(t,{createChildrenApi:()=>U,createStateApi:()=>f,getArguments:()=>u,getStateBindings:()=>L,getValues:()=>S,prepareStateSettings:()=>i,setupComponentMarkup:()=>a,updateTemplateMarkup:()=>E});var r=n("./src/html.js"),s=n("./src/helpers.js"),o=n("./src/consts.js"),c=n("./src/lifecycle.js");function i(e={},t){const n={[o.UTIL_KEYS.ON_MESSAGE_COMPONENT]:e[o.UTIL_KEYS.ON_MESSAGE]||o.EMPTY_FN,[o.UTIL_KEYS.ON_CHANGE_COMPONENT]:e[o.UTIL_KEYS.ON_CHANGE]||o.EMPTY_FN};return(0,s.map)(o.UTIL_KEYS,(e,t)=>t).forEach(t=>delete e[t]),(0,s.forEach)(e,(e,r)=>{const[c,i]=function(e){const t=e.split(o.STATE_BEHAVIOUR_DELIMITER);if(1===t.length)return[t[0]];const n=t.slice(0,-1).join(o.STATE_BEHAVIOUR_DELIMITER),r=t.slice(-1)[0];return[n,r]}(e);if(n[c]||(n[c]={[o.UTIL_KEYS.VALUE]:{},[o.UTIL_KEYS.IS_FAST_APPLY]:!i&&!(0,s.isObject)(r),[o.UTIL_KEYS.DEPENDANTS]:{},[o.UTIL_KEYS.ON_CHANGE]:[]}),(0,s.isObject)(r))return(0,s.forEach)(r,(e,r)=>{n[c][e]=l(c,e,r,n,t)});n[c][i||o.UTIL_KEYS.VALUE]=l(c,i,r,n,t)}),n}function E(e,t){(0,s.forEach)(e,(e,n)=>{const c=t[(0,s.toCamelCase)(e)];n[o.UTIL_KEYS.IS_FAST_APPLY]=c?.[o.UTIL_KEYS.IS_FAST_APPLY],(0,s.forEach)(c,(e,t)=>(0,r.applyToMarkup)(n,e,t?.value))})}function a(e,t,n){return(0,s.forEach)(e,(e,n)=>{const r=t[(0,s.toCamelCase)(e)];n[o.UTIL_KEYS.IS_FAST_APPLY]=!r||r?.[o.UTIL_KEYS.IS_FAST_APPLY],(0,s.set)(t,[(0,s.toCamelCase)(e),o.UTIL_KEYS.MARKUP],n)}),p(t,n),(0,s.forEach)((0,s.filter)(t,e=>!e.startsWith(o.NOT_BINDING_PREFIX)),(e,n)=>{const{[o.UTIL_KEYS.MARKUP]:c,[o.UTIL_KEYS.IS_RENDERED]:i,[o.UTIL_KEYS.VALUE]:E}=n;if(n.createComponent){if(!i){const e=U(n),r=O(E.value,[]);for(let t of o.CHILDREN_LIST_OPERATIONS)r[t].forEach(n=>e[t].apply(null,n));m(t)}return void(n[o.UTIL_KEYS.PARENT_STATE]=t)}const a=(0,s.filter)(n,(e,t)=>function(e,t){return(0,s.isFunction)(t)&&!o.REACTIVE_TYPES.includes(e)}(e,t.value));(0,s.forEach)(a,(e,n)=>(0,r.setupEventListener)(c?.el,e,n.value,f(t)))}),f(t)}function l(e,t,n,r,c){if(t===o.UTIL_KEYS.ON_CHANGE)return[n];const i=function(e,t){return(0,s.isFunction)(t)&&o.REACTIVE_TYPES.includes(e)}(t,n),E=i&&(0,s.getParamNames)(n);E&&E.forEach(n=>{(0,s.get)(r,[n,o.UTIL_KEYS.DEPENDANTS,e])||(0,s.set)(r,[n,o.UTIL_KEYS.DEPENDANTS,e],[]),r[n][o.UTIL_KEYS.DEPENDANTS][e].push(t||o.UTIL_KEYS.VALUE)});const a=i&&function(e,t){return n.apply(null,u(e,t))};return{value:c?void 0:i?a(E,r):n,computeFn:a,dependencies:E}}function u(e,t){const n=S(t);return e.map(e=>n[e])}function S(e){return(0,s.map)(L(e),(e,t)=>[e,t[o.UTIL_KEYS.VALUE]?.value])}function p(e,t){const n={};for(let[r,s]of Object.entries(t))_(r,s,e,n,t);!function(e,t){(0,s.forEach)(t,(t,n)=>{const i=e[t],{[o.UTIL_KEYS.MARKUP]:E,[o.UTIL_KEYS.CHILDREN]:a}=i;if(a){const{newValue:e,prevValue:t}=n[o.UTIL_KEYS.VALUE],r=U(i),s=O(e,t);for(let e of o.CHILDREN_LIST_OPERATIONS){s[e].forEach(t=>{e===o.DESTROY_OP&&a.length&&(0,c.runStateChangeListeners)(!1,a[t[0]].state),r[e].apply(null,t)})}return void(i[o.UTIL_KEYS.IS_RENDERED]=!0)}(0,s.forEach)(n,(e,t)=>!t[o.UTIL_KEYS.IS_SAME_VALUE]&&(0,r.applyToMarkup)(E,e,t.newValue))}),m(e);const n=(0,s.getFilteredKeys)(t,(t,n)=>!!n[o.UTIL_KEYS.VALUE]&&!n[o.UTIL_KEYS.VALUE][o.UTIL_KEYS.IS_SAME_VALUE]&&!e[t][o.UTIL_KEYS.CHILDREN]);e[o.UTIL_KEYS.IS_RENDERED_COMPONENT]&&n.length&&(0,c.runStateChangeListeners)(n,e)}(e,n)}function _(e,t,n,r,c){const i=(0,s.get)(n,[e,o.UTIL_KEYS.VALUE,"value"]);i!==t?((0,s.set)(n,[e,o.UTIL_KEYS.VALUE,"value"],t),(0,s.set)(r,[e,o.UTIL_KEYS.VALUE],{newValue:t,prevValue:i})):(0,s.set)(r,[e,o.UTIL_KEYS.VALUE],{[o.UTIL_KEYS.IS_SAME_VALUE]:!0}),T(e,n,r,c)}function T(e,t,n,r){const c=(0,s.get)(t,[e,o.UTIL_KEYS.DEPENDANTS],{});for(let[e,i]of Object.entries(c))i.forEach(c=>{const{computeFn:i,dependencies:E}=t[e][c],a=(0,s.getFilteredKeys)(n,(e,t)=>!!t[o.UTIL_KEYS.VALUE]),l=Object.keys(r),u=(0,s.get)(n,[e,c]);if(!E.every(e=>l.includes(e)&&a.includes(e)||!l.includes(e))||u)return;const S=t[e][c].value,p=i(E,t);S!==p&&(t[e][c].value=p,(0,s.set)(n,[e,c],{newValue:p,prevValue:S}),c===o.UTIL_KEYS.VALUE&&T(e,t,n,r))})}function d(e,t,n){t.forEach(t=>e[t][o.UTIL_KEYS.ON_CHANGE].push(n))}function I(e,t,n){t.forEach(t=>{const r=e[t][o.UTIL_KEYS.ON_CHANGE],s=r.findIndex(e=>e===n);r.splice(s,1)})}function N(e,t){let n=e[o.UTIL_KEYS.PARENT_STATE];const r=e[o.UTIL_KEYS.CHILDREN_DATA],s=r.children.findIndex(t=>t.state===e),c=()=>n={};for(;n;)n[o.UTIL_KEYS.ON_MESSAGE_COMPONENT](t,{stop:c,...f(n)},{index:s,...U(r,!0)}),n=n[o.UTIL_KEYS.PARENT_STATE]}function f(e){return{get:S.bind(null,e),set:p.bind(null,e),children:h.bind(null,e),send:N.bind(null,e),onChange:d.bind(null,e),removeListener:I.bind(null,e),[o.DESTROY_OP]:r.removeChildMarkup.bind(null,e),markup:A(e),state:e}}function L(e){return(0,s.filter)(e,(e,t)=>!!t?.[o.UTIL_KEYS.VALUE]&&!t?.[o.UTIL_KEYS.CHILDREN])}function A(e){return(0,s.map)((0,s.filter)(e,(e,t)=>!!t?.[o.UTIL_KEYS.MARKUP]?.el&&!t?.[o.UTIL_KEYS.CHILDREN]),(e,t)=>[e,t?.[o.UTIL_KEYS.MARKUP]?.el])}function U(e,t){const{createComponent:n,[o.UTIL_KEYS.PARENT_STATE]:r,[o.UTIL_KEYS.CHILDREN]:s,[o.UTIL_KEYS.VALUE]:c}=e,E=(t,s,c)=>{const{[o.UTIL_KEYS.MARKUP]:i}=e,E=n(t,i.el.parentNode,{isNoShadow:!0,placeholder:c&&i.el,nextNode:s,[o.UTIL_KEYS.CHILDREN_DATA]:e,[o.UTIL_KEYS.PARENT_STATE]:r});return c&&(i.el=E.state[o.UTIL_KEYS.MARKUP_COMPONENT]),E};return{[o.DESTROY_OP]:e=>{s[e][o.DESTROY_OP](e),s.splice(e,1),t&&c.value.splice(e,1)},push:e=>{const n=s.length&&s[s.length-1].state[o.UTIL_KEYS.MARKUP_COMPONENT].nextSibling;s.push(E(e,n,!s.length)),t&&c.value.push(e)},insert:(e,n=0)=>{const r=s[n].state[o.UTIL_KEYS.MARKUP_COMPONENT];s.splice(n,0,E(e,r)),t&&e.value.splice(n,0,e)},set:(e,t)=>{if(t||0===t)return s[t].set(n[o.UTIL_KEYS.IS_ANONYMOUS]?S(i(e)):e)},get:e=>e||0===e?s[e].get():s.map(({get:e})=>e()),forEach:e=>s.forEach(e)}}function h(e,t){return(0,s.map)((0,s.filter)(e,(e,t)=>!!t?.[o.UTIL_KEYS.CHILDREN]),(e,t)=>[e,U(t)])}function O(e,t){const n=[],r=[],s=[],c=[],i={},E={};let a=0;t.forEach(([t,s],o)=>{const c=E[s]>=0?E[s]+1:0,l=e.slice(c).findIndex(([e,t])=>t===s),u=o-a;-1===l?(n.push([u]),a++):(E[s]=c+l,r.push([e[E[s]][0],u]),i[E[s]]=u)});let l=0,u=0;return e.forEach(([e],n)=>{const r=i[n];r>=0?u=r+1+l:u>=t.length+l?c.push([e]):(s.push([e,u]),u++,l++)}),{[o.DESTROY_OP]:n,set:r,insert:s,push:c}}function m(e){e[o.UTIL_KEYS.HAS_ANONYMOUS_CHILDREN]&&(0,s.forEach)(e,(t,n)=>{if(n?.[o.UTIL_KEYS.IS_ANONYMOUS]){U(n).forEach(({set:t})=>t(S(e)))}})}},"./src/styles.js"(e,t,n){function r(e,t){const n=new CSSStyleSheet;n.replaceSync(t);for(let t=0;t<n.rules.length;t++){const{selectorText:r}=n.rules[t];n.rules[t].selectorText=s(r,e)}return[n]}function s(e,t){return e.replaceAll(".",`.${t}`)}n.r(t),n.d(t,{addClassPrefix:()=>s,prepareStyles:()=>r})}};const t={};function n(r){const s=t[r];if(void 0!==s)return s.exports;const o=t[r]={exports:{}};if(!(r in e)){delete t[r];const e=new Error("Cannot find module '"+r+"'");throw e.code="MODULE_NOT_FOUND",e}return e[r](o,o.exports,n),o.exports}n.d=(e,t)=>{if(Array.isArray(t))for(var r=0;r<t.length;){var s=t[r++],o=t[r++];n.o(e,s)?0===o&&r++:0===o?Object.defineProperty(e,s,{enumerable:!0,value:t[r++]}):Object.defineProperty(e,s,{enumerable:!0,get:o})}else for(var s in t)n.o(t,s)&&!n.o(e,s)&&Object.defineProperty(e,s,{enumerable:!0,get:t[s]})},n.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),n.r=e=>{Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})};let r=n("./src/index.js");return r=r.default,r})());
+!function(e,t){ true?module.exports=t():0}(this,()=>(()=>{"use strict";var e={"./src/combine.ts"(e,t,n){n.r(t),n.d(t,{combineState:()=>u,combineTemplates:()=>c});var s=n("./src/consts.ts"),r=n("./src/state.ts"),i=n("./src/helpers.ts"),o=n("./src/html.ts"),a=n("./src/index.ts");function c(e,t){const n={},s=l.bind(null,n,t),r=e.call(null,s);return[(0,o.cloneHTMLMarkup)(r),n]}function l(e,t,n,r){const[o,c]=function(e,t){if(e.markup)return[e,!1];return[(0,a.default)(e,{},"",t),!0]}(n,t),l=Object.keys(e).length,u=`${s.UTIL_KEYS.CHILDREN}${l}`,p=(0,i.isFunction)(r)&&r,f=p&&(0,i.getParamNames)(r)||[];return e[u]={createComponent:o,values:{[s.UTIL_KEYS.VALUE]:{value:!p&&d(r),computeFn:p,dependencies:f}},dependants:{},children:[],isRendered:!1,isAnonymous:c,isFastApply:!1,el:{},isParent:!0},`<span ${s.BINDING_SIGN.COMPONENT}${u}></span>`}function u(e,t){Object.assign(e.bindings,t),(0,i.forEach)(t,(t,n)=>{const{dependencies:o,computeFn:a,value:c}=n.values[s.UTIL_KEYS.VALUE];o.forEach(n=>{(0,i.set)(e.bindings,[n,s.UTIL_KEYS.DEPENDANTS,t],[s.UTIL_KEYS.VALUE])});const l=a&&function(e,t){const n=a.apply(null,(0,r.getArguments)(e,t));return n?d(n):[]};n.values[s.UTIL_KEYS.VALUE].computeFn=l,n.values[s.UTIL_KEYS.VALUE].value=l?l(o,e):c})}function d(e){return(0,i.isArray)(e)?e[0]&&!(0,i.isArray)(e[0])?e.map(e=>[e]):e:[[e||{}]]}},"./src/consts.ts"(e,t,n){n.r(t),n.d(t,{BINDING_SIGN:()=>r,CHILDREN_LIST_OPERATIONS:()=>u,DESTROY_OP:()=>o,EMPTY_FN:()=>l,FORM_TAGS:()=>d,NO_EVENT_TYPES:()=>c,REACTIVE_TYPES:()=>a,STATE_BEHAVIOUR_DELIMITER:()=>s,UTIL_KEYS:()=>i});const s="_",r={BEHAVIOR:"@",CLASS:".",COMPONENT:"&"},i={VALUE:s,DEPENDANTS:"dependants",CHILDREN:"children",VALUES:"values",MARKUP:"el",ON_MESSAGE:"onMessage",ON_CHANGE:"onChange"},o="destroy",a=["html","value","style","text","attrs","class",i.VALUE,void 0],c=a.concat([i.ON_CHANGE]),l=()=>{},u=[o,"set","insert","push"],d=["INPUT","SELECT","TEXTAREA"]},"./src/error.ts"(e,t,n){n.r(t),n.d(t,{throwIllegalBindingNameError:()=>i,throwNoDeclaredDependencyError:()=>o});var s=n("./src/consts.ts"),r=n("./src/helpers.ts");function i(e){a(`Binding @${e} can't be added in the markup, because this name is reserved by the library.\nOther reserved names: ${(0,r.map)(s.UTIL_KEYS,(e,t)=>t)}`)}function o(e,t){a(`Dependency '${e}' is used for '${t}', but is not declared as a state value of the component.`)}function a(e){throw new Error(e)}},"./src/helpers.ts"(e,t,n){n.r(t),n.d(t,{addEnding:()=>E,copy:()=>m,default:()=>g,filter:()=>N,forEach:()=>v,get:()=>I,getFilteredKeys:()=>_,getParamNames:()=>u,isArray:()=>b,isDOMElement:()=>L,isFunction:()=>a,isHTMLString:()=>i,isNumber:()=>h,isObject:()=>c,isString:()=>o,isUndefined:()=>T,map:()=>d,set:()=>A,toCamelCase:()=>f,toDashCase:()=>p,uid:()=>y});const s=/((\/\/.*$)|(\/\*[\s\S]*?\*\/))/gm,r=/([^\s,]+)/g;function i(e){return o(e)&&0===e.indexOf("<")}function o(e){return"[object String]"===l(e)}function a(e){return"[object Function]"===l(e)}function c(e){return"[object Object]"===l(e)}function l(e){return Object.prototype.toString.call(e)}function u(e){const t=e.toString().replace(s,"").split("=>")[0],n=t.slice(t.indexOf("(")+1,t.indexOf(")")).match(r);return null===n?[]:n}function d(e,t){const n=Object.entries(e).map(([e,n])=>t(e,n));return 2===n[0]?.length?Object.fromEntries(n):n}function p(e){return e.replace(/[A-Z]/g,e=>`-${e.toLowerCase()}`)}function f(e){return e.replace(/-([a-z])/gi,(e,t)=>t.toUpperCase())}function E(e,t,n){return`${e}${n&&t||""}`}function h(e){return"[object Number]"===l(e)&&e==e}const g=m;function m(e,t){if(!e)return m({},t);for(let n in t)T(t[n])||(t.hasOwnProperty(n)&&c(t[n])?(e[n]||(e[n]={}),m(e[n],t[n])):b(t[n])?(e[n]||(e[n]=[]),S(e[n],t[n])):L(t[n])?e[n]=t[n].cloneNode(!0):e[n]=t[n]);return e}function S(e,t){for(let n=0;n<t.length;n++)c(t[n])?(e[n]=e[n]||{},m(e[n],t[n])):b(t[n])?(e[n]=e[n]||[],S(e[n],t[n])):e[n]=t[n];return e}function L(e){return!!e&&void 0!==e.tagName}function T(e){return void 0===e}function b(e){return"[object Array]"===l(e)}function v(e,t){Object.entries(e||{}).forEach(([e,n])=>t(e,n))}function A(e,t,n){if(!t.length)return c(n)?Object.assign(e,n):n;let s=e;for(var r=0;r<t.length-1;r++)s=s[t[r]]?s[t[r]]:s[t[r]]={};return c(n)?(s[t[r]]=s[t[r]]||{},Object.assign(s[t[r]],n)):s[t[r]]=n,e}function N(e,t){return Object.fromEntries(Object.entries(e||{}).filter(([e,n])=>!0===t(e,n)))}function y(){return Date.now().toString(36)+Math.random().toString(36).substr(2)}function I(e,t,n){let s=e;for(let e=0;e<t.length;e++)try{s=s[t[e]]}catch{return n}return T(s)?n:s}function _(e,t){return d(N(e,(e,n)=>t(e,n)),e=>e)}},"./src/html.ts"(e,t,n){n.r(t),n.d(t,{MARKUP_ACTIONS:()=>a,addChildMarkup:()=>h,applyToMarkup:()=>p,cloneHTMLMarkup:()=>c,gatherBindings:()=>l,removeChildMarkup:()=>E,setupEventListener:()=>f,walkNodes:()=>d});var s=n("./src/helpers.ts"),r=n("./src/consts.ts"),i=n("./src/popup.ts"),o=n("./src/error.ts");const a={[r.UTIL_KEYS.VALUE]:({el:e,isFastApply:t},n)=>t&&function(e,t=""){r.FORM_TAGS.includes(e.tagName)?e.value=t:e.textContent=t}(e,n),value:({el:e},t)=>e.value=t,text:({el:e},t)=>e.textContent=t,html:({el:e},t)=>e.innerHTML=t,attrs:({el:e,attrs:t},n)=>function(e,t){for(const n of e.getAttributeNames())t[n]||e.removeAttribute(n);Object.entries(t).forEach(([t,n])=>e.setAttribute(t,n))}(e,{...t,...n,class:e.className}),style:({el:e},t)=>function(e,t){(0,s.forEach)(t,(t,n)=>{e.style.setProperty((0,s.toDashCase)(t),(0,s.addEnding)(n,"px",(0,s.isNumber)(n)))})}(e,t),class:({el:e,classes:t,templateId:n},s)=>function(e,t){e.classList.value=t.join(" ")}(e,s.map(e=>`${n}${e}`).concat(t))};function c(e){return function(e){const t=new DOMParser;return t.parseFromString(e,"text/html").body.firstElementChild}((0,s.isHTMLString)(e.trim())?e:document.querySelector(e)?.innerHTML)}function l(e,t,n){const s={};return d(e,e=>{const{name:i,el:a,classes:c,attrs:l,isComponent:d,placeholder:p}=function(e,t,n){let s={};const i={},a=[],c=e.getAttributeNames();for(const l of c)if(l.startsWith(r.BINDING_SIGN.CLASS))n&&(i[l]=!0)||e.removeAttribute(l),u(e,t,l.slice(r.BINDING_SIGN.CLASS.length),a);else{if(l.startsWith(r.BINDING_SIGN.BEHAVIOR)){const c=l.slice(r.BINDING_SIGN.BEHAVIOR.length);Object.values(r.UTIL_KEYS).includes(c)&&(0,o.throwIllegalBindingNameError)(c),n&&(i[l]=!0)||e.removeAttribute(l),s={name:c,el:e},u(e,t,c,a);continue}l.startsWith(r.BINDING_SIGN.COMPONENT)?(n&&(i[l]=!0)||e.removeAttribute(l),s={name:l.slice(r.BINDING_SIGN.COMPONENT.length),el:e,placeholder:e,isComponent:!0}):i[l]=e.getAttribute(l)}return{...s,classes:a,attrs:i}}(e,t,n);i&&(s[i]={el:a,classes:c,attrs:l,isComponent:d,placeholder:p,templateId:t})}),s}function u(e,t,n,s){const i=n.split(r.BINDING_SIGN.CLASS).map(e=>`${t}${e}`),o=e.classList;o.add.apply(o,i),s.push.apply(s,i)}function d(e,t){t(e),Array.prototype.slice.call(e.children).forEach(e=>d(e,t))}function p(e,t,n){e&&a[t]&&a[t](e,n)}function f(e,t,n,s){e.addEventListener(t,e=>n(e,s))}function E(e,t){const{children:n,el:s}=e.parentBinding,r=e.el;if(1===n.length&&s)return r?.parentNode?.replaceChild(s.placeholder,r),void(s.el=s.placeholder);0===t&&(s.el=r?.nextSibling),r?.parentNode?.removeChild(r)}function h(e,t,n){const{markup:s,styles:r,id:o}=t,{isNoShadow:a,nextNode:c,placeholder:l,isPopup:u}=n;let d;if(a)d=s;else{d=document.createElement("div");const e=d.attachShadow({mode:"open"});e.adoptedStyleSheets=r,e.appendChild(s)}l?e.replaceChild(d,l):c?e.insertBefore(d,c):e.appendChild(d),u&&(0,i.addPopupLogic)(s,{...n,id:o})}},"./src/index.ts"(e,t,n){n.r(t),n.d(t,{append:()=>u,default:()=>d});var s=n("./src/state.ts"),r=n("./src/html.ts"),i=n("./src/styles.ts"),o=n("./src/helpers.ts"),a=n("./src/combine.ts"),c=n("./src/lifecycle.ts");function l(e,t,n,i={}){e.isAnonymous&&(0,o.copy)(e.state,(0,s.prepareStateSettings)(t,!0));const a=e.markup?.cloneNode(!0),c=(0,o.copy)({},e.state);c.parentState=i.parentState,c.parentBinding=i.parentBinding,c.el=a;const l=(0,r.gatherBindings)(a,e.id),d={api:c&&(0,s.setupComponentMarkup)(l,c,e.isAnonymous?(0,s.getValues)((0,s.prepareStateSettings)(t)):t),...e,markup:a,state:c};if(n)return u(n,d,i)}function u(e,t,n={}){(0,r.addChildMarkup)(e,t,n);const{state:s}=t;return s.isRendered=!0,(0,c.runStateChangeListeners)(!0,s)}const d=function(e,t,n,c){const u=c||(0,o.uid)(),[d,p]=(0,o.isFunction)(e)?(0,a.combineTemplates)(e,u):[(0,r.cloneHTMLMarkup)(e),{}],[f,E]=(0,o.isObject)(t)?[(0,s.prepareStateSettings)(t),(0,i.prepareStyles)(u,n)]:[{},(0,i.prepareStyles)(u,t)],h=!Object.keys(f).length||!!c;(0,a.combineState)(f,p);const g=(0,r.gatherBindings)(d,u,!0);(0,s.updateTemplateMarkup)(g,f);const m=(0,o.map)(p,(e,t)=>t).map(e=>e.createComponent?.styles).reduce((e,t)=>e.concat(t),[]).concat(E),S={id:u,markup:d,state:f,styles:m,isAnonymous:h};return Object.assign((e,t,n)=>l(S,e,t,n),{...S,asPopup:e=>l(S,{},document.body,{...e,isPopup:!0})})}},"./src/lifecycle.ts"(e,t,n){n.r(t),n.d(t,{runStateChangeListeners:()=>i});var s=n("./src/helpers.ts"),r=n("./src/state.ts");function i(e,t){const{onChange:n,el:i}=t,o=(0,r.getStateBindings)(t),a=(0,r.createStateApi)(t);return(0,s.forEach)(o,(t,n)=>{if((0,s.isArray)(e)&&!e.includes(t))return;const r=(0,s.isArray)(e)?[t]:e;n?.values?.onChange?.value?.(r,a,n.el?.el)}),n(e,a,i),a}},"./src/popup.ts"(e,t,n){n.r(t),n.d(t,{addPopupLogic:()=>a});var s=n("./src/helpers.ts"),r=n("./src/styles.ts");const i={left:"X",top:"Y"},o=["left","top","bottom","right"];function a(e,t){const{handle:n,closeButton:a,id:c}=t;a&&e?.parentNode?.querySelector((0,r.addClassPrefix)(a,c))?.addEventListener("click",()=>e?.parentNode?.removeChild(e)),n&&e?.parentNode?.querySelector((0,r.addClassPrefix)(n,c))?.addEventListener("mousedown",t=>{const n=t.target,s=t.clientX-e.getBoundingClientRect().left,r=t.clientY-e.getBoundingClientRect().top;function i(t){requestAnimationFrame(()=>{e.style.left=t.clientX-s+"px",e.style.top=t.clientY-r+"px",e.style.transform="none"})}function o(){document.removeEventListener("mousemove",i),document.removeEventListener("mouseup",o),n?.removeEventListener("mouseup",o)}document.addEventListener("mouseup",o),n?.addEventListener("mouseup",o),document.addEventListener("mousemove",i)}),function(e,t){const{left:n,top:r,bottom:a,right:c}=t;e.style.position="fixed";const{width:l,height:u}=e.getBoundingClientRect();n||c||(t.left="center");r||a||(t.top="center");c&&!n&&(delete t.right,t.left=document.body.clientWidth-l-c);a&&!r&&(delete t.bottom,t.top=window.innerHeight-u-a);const d=[];(0,s.forEach)(t,(e,t)=>{if(o.includes(e)){if("center"===t)return d.push(`${e}: 50%`,`transform: translate${i[e]}(-50%)`);d.push(`${e}: ${(0,s.addEnding)(t,"px",(0,s.isNumber)(t))}`)}}),"center"===t.left&&"center"===t.top&&d.push("transform: translate(-50%, -50%)"),e.style=`${e.style.cssText}; ${d.join(";")}`}(e,t)}},"./src/state.ts"(e,t,n){n.r(t),n.d(t,{createChildrenApi:()=>v,createStateApi:()=>S,getArguments:()=>p,getStateBindings:()=>L,getValues:()=>f,prepareStateSettings:()=>a,setupComponentMarkup:()=>l,updateTemplateMarkup:()=>c});var s=n("./src/html.ts"),r=n("./src/helpers.ts"),i=n("./src/consts.ts"),o=n("./src/lifecycle.ts");function a(e={},t){const n={onMessage:e.onMessage||i.EMPTY_FN,onChange:e.onChange||i.EMPTY_FN,bindings:{}};return(0,r.map)(i.UTIL_KEYS,(e,t)=>t).forEach(t=>delete e[t]),(0,r.forEach)(e,(e,s)=>{const[o,a]=function(e){const t=e.split(i.STATE_BEHAVIOUR_DELIMITER);if(1===t.length)return[t[0]];const n=t.slice(0,-1).join(i.STATE_BEHAVIOUR_DELIMITER),s=t.slice(-1)[0];return[n,s]}(e);n.bindings[o]||(n.bindings[o]={values:{[i.UTIL_KEYS.VALUE]:{}},children:[],el:{},isFastApply:!a&&!(0,r.isObject)(s),dependants:{}});const c=n.bindings[o];if((0,r.isObject)(s))return(0,r.forEach)(s,(e,s)=>{c.values[e]=u(o,e,s,n,t)});c.values[a||i.UTIL_KEYS.VALUE]=u(o,a,s,n,t)}),n}function c(e,t){(0,r.forEach)(e,(e,n)=>{const i=t.bindings[(0,r.toCamelCase)(e)];n.isFastApply=i?.isFastApply,i&&(0,r.forEach)(i.values,(e,t)=>(0,s.applyToMarkup)(n,e,t?.value))})}function l(e,t,n){return(0,r.forEach)(e,(e,n)=>{const s=t.bindings[(0,r.toCamelCase)(e)];n.isFastApply=!s||s?.isFastApply,(0,r.set)(t.bindings,[(0,r.toCamelCase)(e),i.UTIL_KEYS.MARKUP],n)}),E(t,n),(0,r.forEach)(t.bindings,(e,n)=>{const{isParent:o,el:a,isRendered:c,values:l}=n,{[i.UTIL_KEYS.VALUE]:u}=l||{};if(o){if(!c){const e=v(n),s=A(u.value,[]);for(let t of i.CHILDREN_LIST_OPERATIONS)s[t].forEach(n=>{e[t].apply(null,[n])});N(t)}return void(n.parentState=t)}const d=(0,r.filter)(n.values,(e,t)=>function(e,t){return(0,r.isFunction)(t)&&!i.NO_EVENT_TYPES.includes(e)}(e,t.value));(0,r.forEach)(d,(e,n)=>(0,s.setupEventListener)(a?.el,e,n.value,S(t)))}),S(t)}function u(e,t,n,s,o){const a=function(e,t){return(0,r.isFunction)(t)&&i.REACTIVE_TYPES.includes(e)}(t,n),c=a?(0,r.getParamNames)(n):[];c&&c.forEach(n=>{(0,r.get)(s.bindings,[n,i.UTIL_KEYS.DEPENDANTS,e])||(0,r.set)(s.bindings,[n,i.UTIL_KEYS.DEPENDANTS,e],[]),s.bindings[n].dependants[e].push(t||i.UTIL_KEYS.VALUE)});const l=a&&function(e,t){return n.apply(null,p(e,t))};return{value:!o||d(t,n)?a?l(c,s):n:void 0,computeFn:l,dependencies:c}}function d(e,t){return(0,r.isFunction)(t)&&!i.REACTIVE_TYPES.includes(e)}function p(e,t){const n=f(t);return e.map(e=>n[e])}function f(e){return(0,r.map)(L(e),(e,t)=>[e,t.values._?.value])}function E(e,t){const n={};for(let[s,r]of Object.entries(t))h(s,r,e,n,t);!function(e,t){(0,r.forEach)(t,(t,n)=>{const a=e.bindings[t],{el:c,children:l,isParent:u}=a;if(u){const{newValue:e,prevValue:t}=n[i.UTIL_KEYS.VALUE],s=v(a),r=A(e,t);for(let e of i.CHILDREN_LIST_OPERATIONS){r[e].forEach(t=>{e===i.DESTROY_OP&&l.length&&(0,o.runStateChangeListeners)(!1,l[t.index].state),s[e].apply(null,[t])})}return void(a.isRendered=!0)}(0,r.forEach)(n,(e,t)=>!t.isSame&&(0,s.applyToMarkup)(c,e,t.newValue))}),N(e);const n=(0,r.getFilteredKeys)(t,(t,n)=>!!n[i.UTIL_KEYS.VALUE]&&!n[i.UTIL_KEYS.VALUE].isSame&&!e.bindings[t].isParent);e.isRendered&&n.length&&(0,o.runStateChangeListeners)(n,e)}(e,n)}function h(e,t,n,s,o){const a=(0,r.get)(n.bindings,[e,i.UTIL_KEYS.VALUES,i.UTIL_KEYS.VALUE,"value"]);a!==t?((0,r.set)(n.bindings,[e,i.UTIL_KEYS.VALUES,i.UTIL_KEYS.VALUE,"value"],t),(0,r.set)(s,[e,i.UTIL_KEYS.VALUE],{newValue:t,prevValue:a})):(0,r.set)(s,[e,i.UTIL_KEYS.VALUE],{isSame:!0}),g(e,n,s,o)}function g(e,t,n,s){const o=(0,r.get)(t.bindings,[e,i.UTIL_KEYS.DEPENDANTS],{});for(let[e,a]of Object.entries(o))a.forEach(o=>{const a=t.bindings[e].values[o],{computeFn:c,dependencies:l}=a,u=(0,r.getFilteredKeys)(n,(e,t)=>!!t[i.UTIL_KEYS.VALUE]),d=Object.keys(s),p=(0,r.get)(n,[e,o]);if(!l.every(e=>d.includes(e)&&u.includes(e)||!d.includes(e))||p)return;const f=a.value,E=c(l,t);f!==E&&(a.value=E,(0,r.set)(n,[e,o],{newValue:E,prevValue:f}),o===i.UTIL_KEYS.VALUE&&g(e,t,n,s))})}function m(e,t){let n=e.parentState||e.parentBinding?.parentState;const s=e.parentBinding,r=s.children.findIndex(t=>t.state===e),i=()=>n={};for(;n;)n.onMessage(t,{stop:i,...S(n)},{index:r,...v(s,!0)}),n=n.parentState||n.parentBinding?.parentState}function S(e){return{get:f.bind(null,e),set:E.bind(null,e),send:m.bind(null,e),children:T.bind(null,e),[i.DESTROY_OP]:s.removeChildMarkup.bind(null,e),markup:b(e),state:e}}function L(e){return(0,r.filter)(e.bindings,(e,t)=>!!t?.values?.[i.UTIL_KEYS.VALUE]&&!t?.isParent)}function T(e){return(0,r.map)((0,r.filter)(e.bindings,(e,t)=>!!t?.isParent),(e,t)=>[e,v(t)])}function b(e){return(0,r.map)((0,r.filter)(e.bindings,(e,t)=>!!t?.el?.el&&!t?.isParent),(e,t)=>[e,t?.el?.el])}function v(e,t){const{createComponent:n,parentState:s,children:r,values:{[i.UTIL_KEYS.VALUE]:o}}=e,c=(t,r,i)=>{const{el:o}=e,a=n?.(t,o?.el.parentNode,{isNoShadow:!0,placeholder:i&&o?.el,nextNode:r,parentBinding:e,parentState:s});return i&&o&&(o.el=a?.state.el),a};return{[i.DESTROY_OP]:({index:e})=>{r[e][i.DESTROY_OP](e),r.splice(e,1),t&&o.value.splice(e,1)},push:({values:e})=>{const n=r&&r.length&&r[r.length-1].state.el?.nextSibling;r.push(c(e,n,!r.length)),t&&o.value.push(e)},insert:({values:e,index:n=0})=>{const s=r[n].state.el;r.splice(n,0,c(e,s)),t&&o.value.splice(n,0,o)},set:({values:e,index:t})=>{if(t||0===t)return r[t].set(n?.isAnonymous?f(a(e)):e)},get:e=>e||0===e?r[e].get():r.map(({get:e})=>e()),forEach:e=>r.forEach(e)}}function A(e,t){const n=[],s=[],r=[],o=[],a={},c={};let l=0;t.forEach(([t,r],i)=>{const o=c[r]>=0?c[r]+1:0,u=e.slice(o).findIndex(([e,t])=>t===r),d=i-l;-1===u?(n.push({index:d,values:t}),l++):(c[r]=o+u,s.push({values:e[c[r]][0],index:d}),a[c[r]]=d)});let u=0,d=0;return e.forEach(([e],n)=>{const s=a[n];s>=0?d=s+1+u:d>=t.length+u?o.push({values:e,index:n}):(r.push({values:e,index:d}),d++,u++)}),{[i.DESTROY_OP]:n,set:s,insert:r,push:o}}function N(e){(0,r.forEach)(e.bindings,(t,n)=>{if(n?.isAnonymous){v(n).forEach(({set:t})=>t(f(e)))}})}},"./src/styles.ts"(e,t,n){function s(e,t){const n=new CSSStyleSheet;n.replaceSync(t);for(let t=0;t<n.cssRules.length;t++){const s=n.cssRules[t];s.selectorText=r(s.selectorText,e)}return[n]}function r(e,t){return e.replaceAll(".",`.${t}`)}n.r(t),n.d(t,{addClassPrefix:()=>r,prepareStyles:()=>s})}};const t={};function n(s){const r=t[s];if(void 0!==r)return r.exports;const i=t[s]={exports:{}};if(!(s in e)){delete t[s];const e=new Error("Cannot find module '"+s+"'");throw e.code="MODULE_NOT_FOUND",e}return e[s](i,i.exports,n),i.exports}n.d=(e,t)=>{if(Array.isArray(t))for(var s=0;s<t.length;){var r=t[s++],i=t[s++];n.o(e,r)?0===i&&s++:0===i?Object.defineProperty(e,r,{enumerable:!0,value:t[s++]}):Object.defineProperty(e,r,{enumerable:!0,get:i})}else for(var r in t)n.o(t,r)&&!n.o(e,r)&&Object.defineProperty(e,r,{enumerable:!0,get:t[r]})},n.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),n.r=e=>{Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})};let s=n("./src/index.ts");return s=s.default,s})());
 
 /***/ },
 
@@ -25,86 +25,180 @@
 {}
 })(this, () => {
 return /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/helpers.js"
+/***/ "./src/types.d.ts"
 /*!************************!*\
-  !*** ./src/helpers.js ***!
+  !*** ./src/types.d.ts ***!
   \************************/
-(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_625__) {
+() {
 
-__nested_webpack_require_625__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_625__.d(__nested_webpack_exports__, {
-/* harmony export */   getKeys: () => (/* binding */ getKeys),
-/* harmony export */   getParamNames: () => (/* binding */ getParamNames),
-/* harmony export */   isArray: () => (/* binding */ isArray),
-/* harmony export */   isFunction: () => (/* binding */ isFunction),
-/* harmony export */   isObject: () => (/* binding */ isObject),
-/* harmony export */   isString: () => (/* binding */ isString),
-/* harmony export */   toCamelCase: () => (/* binding */ toCamelCase)
+
+
+/***/ },
+
+/***/ "./src/actions.ts"
+/*!************************!*\
+  !*** ./src/actions.ts ***!
+  \************************/
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_733__) {
+
+"use strict";
+__nested_webpack_require_733__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_733__.d(__nested_webpack_exports__, {
+/* harmony export */   addStateActions: () => (/* binding */ addStateActions)
 /* harmony export */ });
-const STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/gm;
-const ARGUMENT_NAMES = /([^\s,]+)/g;
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_733__(/*! ./types */ "./src/types.d.ts");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nested_webpack_require_733__.n(_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_733__(/*! . */ "./src/index.ts");
 
-function isFunction(x) {
-  return typeof x === "function";
-}
 
-function isObject(x) {
-  return Object.prototype.toString.call(x) === "[object Object]";
-}
-
-function isString(x) {
-  return typeof x === "string";
-}
-
-function isArray(x) {
-  return Array.isArray(x);
-}
-
-function getParamNames(fn) {
-  const fnStr = fn.toString().replace(STRIP_COMMENTS, "").split("=>")[0];
-  const names = fnStr
-    .slice(fnStr.indexOf("(") + 1, fnStr.indexOf(")"))
-    .match(ARGUMENT_NAMES);
-
-  if (names === null) {
-    return [];
-  }
-
-  return names;
-}
-
-function getKeys(obj, key) {
-  return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, v[key]]));
-}
-
-function toCamelCase(str, delimiter) {
-  const strArr = str.split(delimiter);
-  return `${strArr[0]}${strArr.slice(1).reduce((a, c) => `${a}${c.charAt(0).toUpperCase()}${c.slice(1)}`, "")}`;
+function addStateActions(namespace, actions) {
+    for (const [actionName, actionFn] of Object.entries(actions)) {
+        ___WEBPACK_IMPORTED_MODULE_1__.STATE[namespace(actionName)] = {
+            key: actionName,
+            namespace,
+            value: actionFn.bind(null, (0,___WEBPACK_IMPORTED_MODULE_1__.createStore)(namespace())),
+            isAction: true,
+            listeners: [],
+        };
+    }
+    return (0,___WEBPACK_IMPORTED_MODULE_1__.createStore)(namespace());
 }
 
 
 /***/ },
 
-/***/ "./src/index.js"
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_2396__) {
+/***/ "./src/constants.ts"
+/*!**************************!*\
+  !*** ./src/constants.ts ***!
+  \**************************/
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_2022__) {
 
-__nested_webpack_require_2396__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_2396__.d(__nested_webpack_exports__, {
-/* harmony export */   ACCESSORS: () => (/* binding */ ACCESSORS),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+"use strict";
+__nested_webpack_require_2022__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_2022__.d(__nested_webpack_exports__, {
+/* harmony export */   NAMESPACE_DELIMITER: () => (/* binding */ NAMESPACE_DELIMITER)
 /* harmony export */ });
-/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_2396__(/*! ./storage */ "./src/storage.js");
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_2396__(/*! ./helpers */ "./src/helpers.js");
-/* harmony import */ var _namespace__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_2396__(/*! ./namespace */ "./src/namespace.js");
-/* harmony import */ var _validation__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_2396__(/*! ./validation */ "./src/validation.js");
+const NAMESPACE_DELIMITER = "::";
 
 
+/***/ },
+
+/***/ "./src/helpers.ts"
+/*!************************!*\
+  !*** ./src/helpers.ts ***!
+  \************************/
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_2488__) {
+
+"use strict";
+__nested_webpack_require_2488__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_2488__.d(__nested_webpack_exports__, {
+/* harmony export */   filter: () => (/* binding */ filter),
+/* harmony export */   forEach: () => (/* binding */ forEach),
+/* harmony export */   getParamNames: () => (/* binding */ getParamNames),
+/* harmony export */   isArray: () => (/* binding */ isArray),
+/* harmony export */   isAsyncFunction: () => (/* binding */ isAsyncFunction),
+/* harmony export */   isFunction: () => (/* binding */ isFunction),
+/* harmony export */   isObject: () => (/* binding */ isObject),
+/* harmony export */   isString: () => (/* binding */ isString),
+/* harmony export */   map: () => (/* binding */ map),
+/* harmony export */   recreateStructure: () => (/* binding */ recreateStructure),
+/* harmony export */   uid: () => (/* binding */ uid)
+/* harmony export */ });
+const STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/gm;
+const ARGUMENT_NAMES = /([^\s,]+)/g;
+function isArray(obj) {
+    return getObjectType(obj) === "[object Array]";
+}
+function isString(obj) {
+    return getObjectType(obj) === "[object String]";
+}
+function isFunction(obj) {
+    return getObjectType(obj) === "[object Function]";
+}
+function isAsyncFunction(obj) {
+    return getObjectType(obj) === "[object AsyncFunction]";
+}
+function isObject(obj) {
+    return getObjectType(obj) === "[object Object]";
+}
+function getObjectType(obj) {
+    return Object.prototype.toString.call(obj);
+}
+function getParamNames(fn) {
+    const fnStr = fn.toString().replace(STRIP_COMMENTS, "").split("=>")[0];
+    const names = fnStr
+        .slice(fnStr.indexOf("(") + 1, fnStr.indexOf(")"))
+        .match(ARGUMENT_NAMES);
+    if (names === null) {
+        return [];
+    }
+    return names;
+}
+function map(obj, cb) {
+    const res = Object.entries(obj).map(([k, v]) => cb(k, v));
+    if (res[0]?.length === 2) {
+        return Object.fromEntries(res);
+    }
+    return res;
+}
+function forEach(obj, cb) {
+    Object.entries(obj || {}).forEach(([k, v]) => cb(k, v));
+}
+function filter(obj, cb) {
+    return Object.fromEntries(Object.entries(obj || {}).filter(([k, v]) => cb(k, v) === true));
+}
+function recreateStructure(value) {
+    let newValue = value;
+    if (isArray(value)) {
+        newValue = [];
+        value.forEach((v) => newValue.push(recreateStructure(v)));
+        return newValue;
+    }
+    if (isObject(value)) {
+        newValue = {};
+        for (let key in value) {
+            newValue[key] = recreateStructure(value[key]);
+        }
+        return newValue;
+    }
+    return newValue;
+}
+function uid() {
+    return Date.now().toString(36) + Math.random().toString(36).substr(2);
+}
+
+
+/***/ },
+
+/***/ "./src/index.ts"
+/*!**********************!*\
+  !*** ./src/index.ts ***!
+  \**********************/
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_5349__) {
+
+"use strict";
+__nested_webpack_require_5349__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_5349__.d(__nested_webpack_exports__, {
+/* harmony export */   STATE: () => (/* binding */ STATE),
+/* harmony export */   createPendingChanges: () => (/* binding */ createPendingChanges),
+/* harmony export */   createStore: () => (/* binding */ createStore),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   getState: () => (/* binding */ getState),
+/* harmony export */   getValues: () => (/* binding */ getValues),
+/* harmony export */   joinStateChanges: () => (/* binding */ joinStateChanges),
+/* harmony export */   resetState: () => (/* binding */ resetState),
+/* harmony export */   setState: () => (/* binding */ setState),
+/* harmony export */   setupValue: () => (/* binding */ setupValue)
+/* harmony export */ });
+/* harmony import */ var _types_d__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_5349__(/*! ./types.d */ "./src/types.d.ts");
+/* harmony import */ var _types_d__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nested_webpack_require_5349__.n(_types_d__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_5349__(/*! ./storage */ "./src/storage.ts");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_5349__(/*! ./helpers */ "./src/helpers.ts");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_5349__(/*! ./actions */ "./src/actions.ts");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_4__ = __nested_webpack_require_5349__(/*! ./constants */ "./src/constants.ts");
+/* harmony import */ var _listeners__WEBPACK_IMPORTED_MODULE_5__ = __nested_webpack_require_5349__(/*! ./listeners */ "./src/listeners.ts");
 
 
 
@@ -112,409 +206,364 @@ __nested_webpack_require_2396__.r(__nested_webpack_exports__);
 
 
 const STATE = {};
-const ACCESSORS = {};
-const COMPUTED_DEPENDENCIES = {};
-const COMPUTED_ARGUMENTS = {};
-
-const STORAGE = {
-  GET_TYPE: null,
-  IS_AVAILABE: null,
-  UPDATE_STATE: null,
-  SET_VALUE: null
-};
-
-setStorageUtils(_storage__WEBPACK_IMPORTED_MODULE_0__["default"]);
-
-async function addState (namespace, initialState, isPersistent) {
-  const storageType = STORAGE.GET_TYPE(isPersistent);
-  const defaultValues = Object.assign({}, initialState);
-  const namespacedValues = (0,_namespace__WEBPACK_IMPORTED_MODULE_2__.namespacify)(namespace(), initialState);
-
-  if (STORAGE.IS_AVAILABE(storageType)) {
-    await STORAGE.UPDATE_STATE(namespacedValues, storageType);
-  }
-
-  const accessors = {};
-  for (const key in initialState) {
-    _validation__WEBPACK_IMPORTED_MODULE_3__.isValid.Defining(namespace(key));
-    accessors[namespace(key)] = setupValue(
-      namespace(key),
-      namespacedValues[namespace(key)],
-      defaultValues[key],
-      storageType,
-    );
-  }
-
-  Object.assign(ACCESSORS, accessors);
-  return createStore(namespace());
-}
-
-function setupValue (key, value, defaultValue, storageType) {
-  const isComputedValue = (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.isFunction)(value);
-
-  if (isComputedValue) {
-    setupDependencies(key, value);
-  }
-
-  STATE[key] = {
-    value: isComputedValue ? value.apply(null, getArguments(key)) : value,
-    computeFn: value,
-    listeners: [],
-    defaultValue,
-  };
-
-  return createAccessor(key, storageType);
-}
-
-function setupDependencies(computedValueName, computeFn) {
-  const [, namespace] = (0,_namespace__WEBPACK_IMPORTED_MODULE_2__.splitFullKey)(computedValueName);
-  const paramNames = (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.getParamNames)(computeFn).map((name) => (0,_namespace__WEBPACK_IMPORTED_MODULE_2__.addNamespace)(namespace, name));
-  COMPUTED_ARGUMENTS[computedValueName] = paramNames;
-
-  paramNames.forEach((param) => {
-    if (COMPUTED_DEPENDENCIES[param]) {
-      COMPUTED_DEPENDENCIES[param].push(computedValueName);
-    } else {
-      COMPUTED_DEPENDENCIES[param] = [computedValueName];
+const STATE_CHANGED_PIECES = {};
+const STATE_PENDING_CHANGES = {};
+const STORAGE = {};
+setStorageUtils(_storage__WEBPACK_IMPORTED_MODULE_1__["default"]);
+async function addState(namespace, initialState, isPersistent) {
+    const storageType = STORAGE.GET_TYPE(isPersistent);
+    const defaultValues = Object.assign({}, initialState);
+    const values = (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.map)(initialState, (k, v) => [namespace(k), v]);
+    if (STORAGE.IS_AVAILABE(storageType)) {
+        await STORAGE.UPDATE_STATE(values, storageType);
     }
-  });
-}
-
-function getArguments(computedName) {
-  const values = getNamespaceValues(computedName);
-  
-  return COMPUTED_ARGUMENTS[computedName]
-    .map((name) => values[(0,_namespace__WEBPACK_IMPORTED_MODULE_2__.splitFullKey)(name)[0]])
-    .concat(values);
-}
-
-function createAccessor(key, storageType) {
-  const accessor = () => STATE[key].value;
-
-  Object.assign(accessor, {
-    valueOf: () => STATE[key].value,
-    toString: () => STATE[key].value,
-    set: async (value) => await setValue(key, value, storageType),
-    onChange: (cb) => STATE[key].listeners.push(cb),
-    removeListener: (removeCb) =>
-      (STATE[key].listeners = STATE[key].listeners.filter(
-        (cb) => cb !== removeCb,
-      )),
-    reset: () => setValue(key, STATE[key].defaultValue, storageType),
-  });
-
-  return new Proxy(accessor, {
-    get: (target, prop) => {
-      if (Object.keys(accessor).includes(prop)) {
-        return target[prop];
-      }
-
-      return STATE[key].value[prop];
-    },
-  });
-}
-
-async function setValue (key, value, storageType) {
-  if (STORAGE.IS_AVAILABE(storageType)) {
-    const isAutoUpdate = await STORAGE.SET_VALUE(storageType, key, value);
-    if (isAutoUpdate) {
-      return;
+    for (const key in initialState) {
+        const fullKey = namespace(key);
+        STATE[fullKey] = setupValue(key, namespace, values[fullKey], defaultValues[key], storageType);
     }
-  }
-
-  onStateChange({ [key]: { newValue: value } });
+    return createStore(namespace());
 }
-
-function onStateChange (changes) {
-  const realChanges = {};
-
-  for (const key in changes) {
-    const prevValue = STATE[key].value;
-    const newValue = changes[key].newValue;
-
-    if (prevValue !== newValue) {
-      STATE[key].value = newValue;
-      realChanges[key] = { newValue, prevValue };
-
-      updateDependencies(key, realChanges);
-    }
-  }
-
-  for (const key in realChanges) {
-    STATE[key].listeners.forEach(async (cb) => await cb(STATE[key].value, getNamespaceValues(key), realChanges[key]));
-  }
-}
-
-function updateDependencies (key, realChanges) {
-  const computedDependencies = COMPUTED_DEPENDENCIES[key];
-  if (computedDependencies) {
-    computedDependencies.forEach((name) => {
-      const prevValue = STATE[name].value;
-      const newValue = STATE[name].computeFn.apply(null, getArguments(name));
-      if (prevValue !== newValue) {
-        STATE[name].value = newValue;
-        realChanges[name] = { newValue, prevValue };
-        updateDependencies(name, realChanges);
-      }
+function setupValue(key, namespace, value, defaultValue, storageType) {
+    const fullKey = namespace(key);
+    const isComputedValue = (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.isFunction)(value);
+    const dependencies = isComputedValue
+        ? (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.getParamNames)(value)
+        : [];
+    dependencies.forEach((dependency) => {
+        const fullDependencyKey = namespace(dependency);
+        if (!STATE[fullDependencyKey]) {
+            STATE[fullDependencyKey] = {
+                dependants: [],
+                dependencies: [],
+                namespace,
+                storageType,
+            };
+        }
+        STATE[fullDependencyKey].dependants?.push(fullKey);
     });
-  }
-}
-
-function getState(namespace, arg) {
-  if ((0,_helpers__WEBPACK_IMPORTED_MODULE_1__.isString)(arg)) {
-    return createStore(arg);
-  }
-
-  if ((0,_helpers__WEBPACK_IMPORTED_MODULE_1__.isFunction)(arg)) {
-    return getNamespaceAccessors(namespace(""), arg);
-  }
-
-  return getNamespaceValues(namespace(""));
-}
-
-function getNamespaceValues(namespace) {
-  return recreateStructure((0,_helpers__WEBPACK_IMPORTED_MODULE_1__.getKeys)((0,_namespace__WEBPACK_IMPORTED_MODULE_2__.getByNamespace)(namespace, STATE), "value"));
-}
-
-function getNamespaceAccessors (namespace, cb) {
-  const accessors = (0,_namespace__WEBPACK_IMPORTED_MODULE_2__.getByNamespace)(namespace, ACCESSORS);
-  return cb.call(null, accessors, createStore(namespace()));
-}
-
-async function setState (namespace, changes) {
-  const noKeys = !Object.keys(changes).length;
-
-  if (noKeys) {
-    resetAllState();
-  } else {
-    for (const [k,v] of Object.entries(changes)) {
-      _validation__WEBPACK_IMPORTED_MODULE_3__.isValid.Setting(namespace(k));
-      await ACCESSORS[namespace(k)].set(v);
+    return {
+        key,
+        fullKey,
+        value: isComputedValue
+            ? value.apply(null, getArguments(dependencies, namespace))
+            : value,
+        computeFn: isComputedValue && value,
+        dependencies,
+        dependants: [],
+        listeners: [],
+        defaultValue,
+        storageType,
+        namespace,
     };
-  }
-
-  return createStore(namespace());
 }
-
-function resetAllState (namespace) {
-  Object.entries(ACCESSORS)
-    .filter(([k]) => k.startsWith(namespace()))
-    .forEach((k, { reset }) => reset());
-
-  return createStore(namespace());
+function getNamespaceState(namespace) {
+    return (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.filter)(STATE, (k, { key }) => k === namespace(key));
 }
-
-function addStateLitener (namespace, observables, cb) {
-  observables.forEach((key) => ACCESSORS[namespace(key)].onChange(cb));
-
-  return createStore(namespace());
+function getValues(namespace) {
+    return (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.map)(getNamespaceState(namespace), (k, { key, value }) => [
+        key,
+        value,
+    ]);
 }
-
-function removeStateListener(namespace, observables, cb) {
-  observables.forEach((key) =>
-    ACCESSORS[namespace(key)].removeListener(cb),
-  );
-
-  return createStore(namespace());
+function getArguments(dependencies, namespace) {
+    const values = getValues(namespace);
+    return dependencies.map((name) => values[name]);
 }
-
-function recreateStructure (value) {
-  let newValue = value;
-
-  if ((0,_helpers__WEBPACK_IMPORTED_MODULE_1__.isArray)(value)) {
-    newValue = [];
-    value.forEach((v) => newValue.push(recreateStructure(v)));
-    return newValue;
-  }
-
-  if ((0,_helpers__WEBPACK_IMPORTED_MODULE_1__.isObject)(value)) {
-    newValue = {};
-    for (let key in value) {
-      newValue[key] = recreateStructure(value[key]);
+async function joinStateChanges(changesPiece) {
+    for (const [updateId, { storageTypes, readyStorageTypes, changes },] of Object.entries(STATE_CHANGED_PIECES)) {
+        if (changesPiece[updateId]) {
+            const storageType = changesPiece[updateId].newValue;
+            readyStorageTypes[storageType] = true;
+            delete changesPiece[updateId];
+            Object.assign(changes, changesPiece);
+            if (STORAGE.IS_AVAILABE(storageType)) {
+                STORAGE.REMOVE_KEY(storageType, updateId);
+            }
+            for (const key in storageTypes) {
+                if (!readyStorageTypes[key]) {
+                    return;
+                }
+            }
+            delete STATE_CHANGED_PIECES[updateId];
+            await onStateChange(changes);
+        }
     }
-    return newValue;
-  }
-
-  return newValue;
 }
-
-function main () {
-  const arg1 = arguments[1];
-
-  if (!arg1 || (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.isFunction)(arg1) || (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.isString)(arg1)) {
-    return getState.apply(null, arguments);
-  }
-
-  if (Array.isArray(arg1)) {
-    return addStateLitener.apply(null, arguments);
-  }
-
-  if ((0,_helpers__WEBPACK_IMPORTED_MODULE_1__.isObject)(arg1)) {
-    return setState.apply(null, arguments);
-  }
+async function onStateChange(changes) {
+    const realChanges = {};
+    for (const key in changes) {
+        const prevValue = STATE[key].value;
+        const newValue = changes[key].newValue;
+        if (prevValue !== newValue) {
+            realChanges[key] = { newValue, prevValue };
+            STATE[key].value = newValue;
+        }
+        else {
+            realChanges[key] = { isSame: true };
+        }
+        updateDependencies(key, changes, realChanges);
+    }
+    await (0,_listeners__WEBPACK_IMPORTED_MODULE_5__.runStateChangeListeners)((0,_helpers__WEBPACK_IMPORTED_MODULE_2__.filter)(realChanges, (k, v) => !v.isSame));
 }
-
+function updateDependencies(key, changes, realChanges) {
+    STATE[key].dependants?.forEach((name) => {
+        const { dependencies, namespace } = STATE[name];
+        if (!isEveryDependencyReady(dependencies, namespace, Object.keys(changes), Object.keys(realChanges)) ||
+            realChanges[name]) {
+            return;
+        }
+        const prevValue = STATE[name].value;
+        const newValue = STATE[name].computeFn?.apply(null, getArguments(dependencies, namespace));
+        if (prevValue !== newValue) {
+            realChanges[name] = { newValue, prevValue };
+            STATE[name].value = newValue;
+            updateDependencies(name, changes, realChanges);
+        }
+    });
+}
+function isEveryDependencyReady(dependencies, namespace, changesKeys, realChangesKeys) {
+    return dependencies.every((name) => {
+        const fullKey = namespace(name);
+        return ((changesKeys.includes(fullKey) && realChangesKeys.includes(fullKey)) ||
+            !changesKeys.includes(fullKey));
+    });
+}
+function getState(namespace, arg) {
+    if ((0,_helpers__WEBPACK_IMPORTED_MODULE_2__.isString)(arg)) {
+        return createStore(arg);
+    }
+    return (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.recreateStructure)(getValues(namespace));
+}
+async function setState(namespace, changes) {
+    const storageChanges = {};
+    const updateId = (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.uid)();
+    const storageTypes = {};
+    (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.forEach)(changes, (k, v) => {
+        const fullKey = namespace(k);
+        const { storageType, computeFn, isAction } = STATE[fullKey];
+        if (computeFn || isAction) {
+            return;
+        }
+        if (!storageChanges[storageType]) {
+            storageChanges[storageType] = {};
+        }
+        storageTypes[storageType] = true;
+        storageChanges[storageType][fullKey] = v;
+    });
+    STATE_CHANGED_PIECES[updateId] = {
+        storageTypes,
+        readyStorageTypes: {},
+        changes: {},
+    };
+    for (let [storageType, changes] of Object.entries(storageChanges)) {
+        await setValues(storageType, { ...changes, [updateId]: storageType });
+    }
+    return createStore(namespace());
+}
+async function setValues(storageType, changes) {
+    if (STORAGE.IS_AVAILABE(storageType)) {
+        const isAutoUpdate = await STORAGE.SET_VALUES(storageType, changes);
+        if (isAutoUpdate) {
+            return;
+        }
+    }
+    joinStateChanges((0,_helpers__WEBPACK_IMPORTED_MODULE_2__.map)(changes, (k, newValue) => [k, { newValue }]));
+}
+async function resetState(namespace, keys) {
+    return setState(namespace, getDefaultValues(namespace, keys));
+}
+function getDefaultValues(namespace, keys) {
+    const namespaceState = getNamespaceState(namespace);
+    return (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.map)(keys
+        ? (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.filter)(namespaceState, (k, { key }) => keys.includes(key))
+        : namespaceState, (k, { key, defaultValue }) => [key, defaultValue]);
+}
+function createPendingChanges(namespace) {
+    const flush = () => {
+        const changes = STATE_PENDING_CHANGES[namespace()];
+        STATE_PENDING_CHANGES[namespace()] = {};
+        return changes;
+    };
+    return {
+        add: (changes) => Object.assign(STATE_PENDING_CHANGES[namespace()], changes),
+        reset: (keys) => Object.assign(STATE_PENDING_CHANGES[namespace()], getDefaultValues(namespace, keys)),
+        get: () => STATE_PENDING_CHANGES[namespace()],
+        flush,
+        commit: () => setState(namespace, flush()),
+    };
+}
+function main(namespace) {
+    if (!arguments[1] || (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.isString)(arguments[1])) {
+        return getState.apply(null, arguments);
+    }
+    if ((0,_helpers__WEBPACK_IMPORTED_MODULE_2__.isArray)(arguments[1]) ||
+        (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.isFunction)(arguments[1]) ||
+        (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.isAsyncFunction)(arguments[1])) {
+        return _listeners__WEBPACK_IMPORTED_MODULE_5__.addStateListener.apply(null, arguments);
+    }
+    if ((0,_helpers__WEBPACK_IMPORTED_MODULE_2__.isObject)(arguments[1])) {
+        return setState.apply(null, arguments);
+    }
+}
 function setStorageUtils(storageUtils) {
-  Object.assign(STORAGE, storageUtils);
+    Object.assign(STORAGE, storageUtils);
 }
-
-function createStore (_namespace) {
-  const namespace = (key) => (0,_namespace__WEBPACK_IMPORTED_MODULE_2__.addNamespace)(_namespace, key);
-
-  return Object.assign(main.bind(null, namespace), {
-    add: (state) => addState(namespace, state, false),
-    addPersistent: (state) => addState(namespace, state, true),
-    get: (arg) => getState(namespace, arg),
-    set: async (changes) => await setState(namespace, changes),
-    resetAll: () => resetAllState(namespace),
-    onChange: (keys, cb) => addStateLitener(namespace, keys, cb),
-    removeListener: (keys, cb) => removeStateListener(namespace, keys, cb),
-    setStorageUtils,
-    onStateChange,
-  });
+function addNamespace(namespace, str) {
+    return `${namespace}${((0,_helpers__WEBPACK_IMPORTED_MODULE_2__.isString)(str) && _constants__WEBPACK_IMPORTED_MODULE_4__.NAMESPACE_DELIMITER) || ""}${str || ""}`;
 }
-
+function createStore(_namespace) {
+    const namespace = ((key) => addNamespace(_namespace, key));
+    if (!STATE_PENDING_CHANGES[namespace()]) {
+        STATE_PENDING_CHANGES[namespace()] = {};
+    }
+    if (!_listeners__WEBPACK_IMPORTED_MODULE_5__.LISTENERS[namespace()]) {
+        _listeners__WEBPACK_IMPORTED_MODULE_5__.LISTENERS[namespace()] = [];
+    }
+    return Object.assign(main.bind(null, namespace), {
+        add: (state) => addState(namespace, state, false),
+        addPersistent: (state) => addState(namespace, state, true),
+        get: (newNamespace) => getState(namespace, newNamespace),
+        set: (changes) => setState(namespace, changes),
+        reset: (keys) => resetState(namespace, keys),
+        changes: createPendingChanges(namespace),
+        onChange: (keys, cb) => (0,_listeners__WEBPACK_IMPORTED_MODULE_5__.addStateListener)(namespace, keys, cb),
+        removeListener: (keys, cb) => (0,_listeners__WEBPACK_IMPORTED_MODULE_5__.removeStateListener)(namespace, keys, cb),
+        actions: (actions) => (0,_actions__WEBPACK_IMPORTED_MODULE_3__.addStateActions)(namespace, actions),
+        setStorageUtils,
+        joinStateChanges,
+        namespace,
+    });
+}
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (createStore(""));
 
 
 /***/ },
 
-/***/ "./src/namespace.js"
+/***/ "./src/listeners.ts"
 /*!**************************!*\
-  !*** ./src/namespace.js ***!
+  !*** ./src/listeners.ts ***!
   \**************************/
-(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_11368__) {
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_16870__) {
 
-__nested_webpack_require_11368__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_11368__.d(__nested_webpack_exports__, {
-/* harmony export */   addNamespace: () => (/* binding */ addNamespace),
-/* harmony export */   getByNamespace: () => (/* binding */ getByNamespace),
-/* harmony export */   namespacify: () => (/* binding */ namespacify),
-/* harmony export */   splitFullKey: () => (/* binding */ splitFullKey)
+"use strict";
+__nested_webpack_require_16870__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_16870__.d(__nested_webpack_exports__, {
+/* harmony export */   LISTENERS: () => (/* binding */ LISTENERS),
+/* harmony export */   addStateListener: () => (/* binding */ addStateListener),
+/* harmony export */   removeStateListener: () => (/* binding */ removeStateListener),
+/* harmony export */   runStateChangeListeners: () => (/* binding */ runStateChangeListeners)
 /* harmony export */ });
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_11368__(/*! ./helpers */ "./src/helpers.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_16870__(/*! ./types */ "./src/types.d.ts");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nested_webpack_require_16870__.n(_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_16870__(/*! . */ "./src/index.ts");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __nested_webpack_require_16870__(/*! ./constants */ "./src/constants.ts");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_3__ = __nested_webpack_require_16870__(/*! ./helpers */ "./src/helpers.ts");
 
 
-const NAMESPACE_DELIMITER = "::";
 
-function addNamespace(namespace, str) {
-  return `${namespace}${(0,_helpers__WEBPACK_IMPORTED_MODULE_0__.isString)(str) && NAMESPACE_DELIMITER || ""}${str || ""}`;
+
+const LISTENERS = {};
+async function runStateChangeListeners(realChanges) {
+    if (Object.keys(realChanges).length) {
+        const { namespace } = ___WEBPACK_IMPORTED_MODULE_1__.STATE[Object.keys(realChanges)[0]];
+        for (const [changeKey] of Object.entries(realChanges)) {
+            const { listeners, key } = ___WEBPACK_IMPORTED_MODULE_1__.STATE[changeKey];
+            for (const cb of listeners) {
+                const fn = cb.bind(null, [key], (0,___WEBPACK_IMPORTED_MODULE_1__.createStore)(namespace()));
+                if ((0,_helpers__WEBPACK_IMPORTED_MODULE_3__.isAsyncFunction)(cb)) {
+                    await fn();
+                }
+                else {
+                    fn();
+                }
+            }
+        }
+        const namespaceLength = `${namespace()}${_constants__WEBPACK_IMPORTED_MODULE_2__.NAMESPACE_DELIMITER}`.length;
+        const readableKeys = (0,_helpers__WEBPACK_IMPORTED_MODULE_3__.map)(realChanges, (k) => k.slice(namespaceLength));
+        for (const cb of LISTENERS[namespace()]) {
+            const fn = cb.bind(null, readableKeys, (0,___WEBPACK_IMPORTED_MODULE_1__.createStore)(namespace()));
+            if ((0,_helpers__WEBPACK_IMPORTED_MODULE_3__.isAsyncFunction)(cb)) {
+                await fn();
+            }
+            else {
+                fn();
+            }
+        }
+    }
 }
-
-function splitFullKey (str) {
-  const segments = str.split(NAMESPACE_DELIMITER);
-
-  return [
-    segments.slice(-1)[0],
-    segments.slice(0, -1).join(NAMESPACE_DELIMITER),
-  ];
+function addStateListener(namespace, observables, cb) {
+    if ((0,_helpers__WEBPACK_IMPORTED_MODULE_3__.isFunction)(observables) || (0,_helpers__WEBPACK_IMPORTED_MODULE_3__.isAsyncFunction)(observables)) {
+        LISTENERS[namespace()].push(observables);
+        return (0,___WEBPACK_IMPORTED_MODULE_1__.createStore)(namespace());
+    }
+    observables.forEach((key) => ___WEBPACK_IMPORTED_MODULE_1__.STATE[namespace(key)].listeners?.push(cb));
+    return (0,___WEBPACK_IMPORTED_MODULE_1__.createStore)(namespace());
 }
-
-function getByNamespace(str, obj) {
-  const namespace = splitFullKey(str)[1] + NAMESPACE_DELIMITER;
-
-  return Object.fromEntries(
-    Object.entries(obj)
-      .filter(([k, v]) => k.startsWith(namespace))
-      .map(([k, v]) => [k.slice(namespace.length), v]),
-  );
-}
-
-function namespacify (namespace, obj) {
-  return Object.fromEntries(
-    Object.entries(obj)
-      .map(([k,v]) => [addNamespace(namespace, k), v]
-  ));
+function removeStateListener(namespace, observables, removeCb) {
+    if ((0,_helpers__WEBPACK_IMPORTED_MODULE_3__.isFunction)(observables) || (0,_helpers__WEBPACK_IMPORTED_MODULE_3__.isAsyncFunction)(observables)) {
+        const removeIdx = LISTENERS[namespace()].findIndex((cb) => cb === observables);
+        LISTENERS[namespace()].splice(removeIdx, 1);
+        return (0,___WEBPACK_IMPORTED_MODULE_1__.createStore)(namespace());
+    }
+    observables.forEach((key) => {
+        const listeners = ___WEBPACK_IMPORTED_MODULE_1__.STATE[namespace(key)].listeners;
+        const removeIdx = listeners?.findIndex((cb) => cb === removeCb);
+        listeners?.splice(removeIdx, 1);
+    });
+    return (0,___WEBPACK_IMPORTED_MODULE_1__.createStore)(namespace());
 }
 
 
 /***/ },
 
-/***/ "./src/storage.js"
+/***/ "./src/storage.ts"
 /*!************************!*\
-  !*** ./src/storage.js ***!
+  !*** ./src/storage.ts ***!
   \************************/
-(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_12958__) {
+(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_20799__) {
 
-__nested_webpack_require_12958__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_12958__.d(__nested_webpack_exports__, {
+"use strict";
+__nested_webpack_require_20799__.r(__nested_webpack_exports__);
+/* harmony export */ __nested_webpack_require_20799__.d(__nested_webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-function updateFromLocalStorage(state) {
-  const stored = {};
-  for (const key in state) {
-    const value = localStorage.getItem(key);
-    if (value !== null) {
-      stored[key] = value;
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_20799__(/*! ./types */ "./src/types.d.ts");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nested_webpack_require_20799__.n(_types__WEBPACK_IMPORTED_MODULE_0__);
+
+async function updateFromLocalStorage(state) {
+    const stored = {};
+    for (const key in state) {
+        const value = localStorage.getItem(key);
+        if (value !== null) {
+            stored[key] = value;
+        }
     }
-  }
-
-  return Object.assign(state, stored);
+    return Object.assign(state, stored);
 }
-
 function getStorageType(isPersistent) {
-  return isPersistent && "localStorage";
+    return isPersistent ? "localStorage" : "";
 }
-
 function isStorageAvailable(storageType) {
-  return storageType;
+    return !!storageType;
 }
-
-async function setStorageValue(storageType, key, value) {
-  await window.localStorage.setItem(key, value);
-  return false;
+async function setStorageValue(storageType, changes) {
+    for (let [k, v] of Object.entries(changes)) {
+        localStorage.setItem(k, v);
+    }
+    return false;
 }
-
+function removeStorageKey(type, key) {
+    if (type) {
+        localStorage.removeItem(key);
+    }
+}
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  GET_TYPE: getStorageType,
-  IS_AVAILABE: isStorageAvailable,
-  UPDATE_STATE: updateFromLocalStorage,
-  SET_VALUE: setStorageValue,
+    GET_TYPE: getStorageType,
+    IS_AVAILABE: isStorageAvailable,
+    UPDATE_STATE: updateFromLocalStorage,
+    SET_VALUES: setStorageValue,
+    REMOVE_KEY: removeStorageKey,
 });
-
-
-/***/ },
-
-/***/ "./src/validation.js"
-/*!***************************!*\
-  !*** ./src/validation.js ***!
-  \***************************/
-(__unused_webpack_module, __nested_webpack_exports__, __nested_webpack_require_14126__) {
-
-__nested_webpack_require_14126__.r(__nested_webpack_exports__);
-/* harmony export */ __nested_webpack_require_14126__.d(__nested_webpack_exports__, {
-/* harmony export */   isValid: () => (/* binding */ isValid)
-/* harmony export */ });
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __nested_webpack_require_14126__(/*! . */ "./src/index.js");
-/* harmony import */ var _namespace__WEBPACK_IMPORTED_MODULE_1__ = __nested_webpack_require_14126__(/*! ./namespace */ "./src/namespace.js");
-
-
-
-
-const isValid = {
-  Setting: (fullKey) => {
-    if (!___WEBPACK_IMPORTED_MODULE_0__.ACCESSORS[fullKey]) {
-      const [key, namespace] = (0,_namespace__WEBPACK_IMPORTED_MODULE_1__.splitFullKey)(fullKey);
-      throw new Error(
-        `Setting "${key}" key in "${namespace}" namespace. DOES NOT EXIST`,
-      );
-    }
-
-    return true;
-  },
-
-  Defining: (fullKey) => {
-    if (___WEBPACK_IMPORTED_MODULE_0__.ACCESSORS[fullKey]) {
-      const [key, namespace] = (0,_namespace__WEBPACK_IMPORTED_MODULE_1__.splitFullKey)(fullKey);
-      throw new Error(
-        `Redefining "${key}" key in "${namespace}" namespace. ALREADY DEFINED`,
-      );
-    }
-
-    return true;
-  }
-
-};
 
 
 /***/ }
@@ -525,7 +574,7 @@ const isValid = {
 /******/ 	const __webpack_module_cache__ = {};
 /******/ 	
 /******/ 	// The require function
-/******/ 	function __nested_webpack_require_15518__(moduleId) {
+/******/ 	function __nested_webpack_require_22484__(moduleId) {
 /******/ 		// Check if module is in cache
 /******/ 		const cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
@@ -545,23 +594,35 @@ const isValid = {
 /******/ 			e.code = 'MODULE_NOT_FOUND';
 /******/ 			throw e;
 /******/ 		}
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __nested_webpack_require_15518__);
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __nested_webpack_require_22484__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__nested_webpack_require_22484__.n = (module) => {
+/******/ 			const getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__nested_webpack_require_22484__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter/value functions for harmony exports
-/******/ 		__nested_webpack_require_15518__.d = (exports, definition) => {
+/******/ 		__nested_webpack_require_22484__.d = (exports, definition) => {
 /******/ 			if(Array.isArray(definition)) {
 /******/ 				var i = 0;
 /******/ 				while(i < definition.length) {
 /******/ 					var key = definition[i++];
 /******/ 					var binding = definition[i++];
-/******/ 					if(!__nested_webpack_require_15518__.o(exports, key)) {
+/******/ 					if(!__nested_webpack_require_22484__.o(exports, key)) {
 /******/ 						if(binding === 0) {
 /******/ 							Object.defineProperty(exports, key, { enumerable: true, value: definition[i++] });
 /******/ 						} else {
@@ -571,7 +632,7 @@ const isValid = {
 /******/ 				}
 /******/ 			} else {
 /******/ 				for(var key in definition) {
-/******/ 					if(__nested_webpack_require_15518__.o(definition, key) && !__nested_webpack_require_15518__.o(exports, key)) {
+/******/ 					if(__nested_webpack_require_22484__.o(definition, key) && !__nested_webpack_require_22484__.o(exports, key)) {
 /******/ 						Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 					}
 /******/ 				}
@@ -581,13 +642,13 @@ const isValid = {
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
-/******/ 		__nested_webpack_require_15518__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 		__nested_webpack_require_22484__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__nested_webpack_require_15518__.r = (exports) => {
+/******/ 		__nested_webpack_require_22484__.r = (exports) => {
 /******/ 			if(Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
@@ -600,7 +661,7 @@ const isValid = {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	let __nested_webpack_exports__ = __nested_webpack_require_15518__("./src/index.js");
+/******/ 	let __nested_webpack_exports__ = __nested_webpack_require_22484__("./src/index.ts");
 /******/ 	__nested_webpack_exports__ = __nested_webpack_exports__["default"];
 /******/ 	
 /******/ 	return __nested_webpack_exports__;
@@ -759,7 +820,7 @@ function setupCommunication (actions, messagesId = generateId()) {
     actions.map((action) => [
       action,
       (payload, isRemoving) => {
-        if (isFunction(payload)) {
+        if (isFunction(payload) || isAsyncFunction(payload)) {
           return addAnswer(payload, isRemoving, action, answers);
         }
         return sendMessageForResult(action, payload, messagesId);
@@ -798,7 +859,8 @@ async function onMessage (message, actions = {}) {
   }
 
   if (actions[message.action]) {
-    const payload = await actions[message.action](message.payload);
+    const answerFunction = actions[message.action].bind(null, message.payload);
+    const payload = isAsyncFunction(answerFunction) ? (await answerFunction()) : answerFunction();
     sendMessage(message.action, payload, message.resultId, true);
   }
 }
@@ -844,7 +906,7 @@ function isBackgroundScript () {
 }
 
 function isTabHostedByExtension (tab) {
-  return window.location.href === tab.url;
+  return window.location.href === tab?.url;
 }
 
 function isListening (messagesId) {
@@ -877,8 +939,16 @@ function resumeListening(messagesId, sendToReceiver) {
   }
 }
 
-function isFunction(x) {
-  return typeof x === "function";
+function getObjectType(obj) {
+  return Object.prototype.toString.call(obj);
+}
+
+function isFunction(obj) {
+  return getObjectType(obj) === "[object Function]";
+}
+
+function isAsyncFunction(obj) {
+  return getObjectType(obj) === "[object AsyncFunction]";
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (setupCommunication);
@@ -1520,15 +1590,15 @@ __webpack_require__.r(__webpack_exports__);
   "popupState",
   "saveTabData",
   "removeSearch",
-  "closingTab",
   "getData",
   "addToRecent",
   "removeRecentSearch",
   "addFavoriteSearch",
   "removeFavoriteSearch",
   "setColors",
-  "closingWarning"
+  "closingWarning",
 ]));
+
 
 /***/ },
 
@@ -2264,16 +2334,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function focusInput (markup, num) {
+function focusInput(markup, num) {
   const childNum = num || 0;
-  setTimeout(() => markup.searchStrings.children[childNum].firstElementChild.focus());
+  setTimeout(() =>
+    markup.searchStrings.children[childNum].firstElementChild.focus(),
+  );
 }
 
-function getNextSearchId (curId, nextNum) {
+function getNextSearchId(curId, nextNum) {
   return (0,_common_helpers__WEBPACK_IMPORTED_MODULE_2__.adjustNumberToBoundaries)(+curId + nextNum, 0, _common_constants__WEBPACK_IMPORTED_MODULE_3__.COLORS.length - 1);
 }
 
-function getNextHighlightPosition (curPos, nextNum, foundResults) {
+function getNextHighlightPosition(curPos, nextNum, foundResults) {
   return (0,_common_helpers__WEBPACK_IMPORTED_MODULE_2__.adjustNumberToBoundaries)(+curPos + nextNum, 1, foundResults);
 }
 
@@ -2281,12 +2353,12 @@ function getNextHighlightPosition (curPos, nextNum, foundResults) {
   _markup__WEBPACK_IMPORTED_MODULE_5__["default"],
   {
     searchStrings: { _: [] },
-    searchHappened: { _:null },
-    highlightPosition: { _:0 },
-    foundResults: { _:0 },
-    caseSensitive: { _:false },
-    color: { _:null },
-    blinkSet: { _:null },
+    searchHappened: { _: null },
+    highlightPosition: { _: 0 },
+    foundResults: { _: 0 },
+    caseSensitive: { _: false },
+    color: { _: null },
+    blinkSet: { _: null },
 
     unfocusedInputs: (searchStrings) =>
       searchStrings.filter((input) => !input.focus),
@@ -2448,13 +2520,11 @@ function getNextHighlightPosition (curPos, nextNum, foundResults) {
 
         _page_store__WEBPACK_IMPORTED_MODULE_1__["default"].set({ searchIdEl: markup.searchId });
         _page_store__WEBPACK_IMPORTED_MODULE_1__["default"].onChange(["currentSearch"], (currentSearch) =>
-          set(currentSearch),
+          set(_page_store__WEBPACK_IMPORTED_MODULE_1__["default"].get()[currentSearch]),
         );
         _page_store__WEBPACK_IMPORTED_MODULE_1__["default"].onChange(
           ["popupOpen"],
-          (popupOpen) => {
-            popupOpen && focusInput(markup)
-          },
+          (popupOpen) => _page_store__WEBPACK_IMPORTED_MODULE_1__["default"].get()[popupOpen] && focusInput(markup),
         );
       }
     },
@@ -3067,21 +3137,12 @@ let __webpack_exports__ = {};
   !*** ./src/page-script.js ***!
   \****************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _page_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @page/store */ "./src/page/store.js");
-/* harmony import */ var _page_ui_components_Popup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @page/ui/components/Popup */ "./src/page/ui/components/Popup/index.js");
-/* harmony import */ var _common_messages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @common/messages */ "./src/common/messages.js");
-/* harmony import */ var _page_message_answers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @page/message-answers */ "./src/page/message-answers.js");
+/* harmony import */ var _page_ui_components_Popup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @page/ui/components/Popup */ "./src/page/ui/components/Popup/index.js");
+/* harmony import */ var _page_message_answers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @page/message-answers */ "./src/page/message-answers.js");
 
 
 
-
-
-window.onunload = () => {
-  const { tabId } = _page_store__WEBPACK_IMPORTED_MODULE_0__["default"].get();
-  _common_messages__WEBPACK_IMPORTED_MODULE_2__["default"].closingTab({ tabId });
-};
-
-_page_ui_components_Popup__WEBPACK_IMPORTED_MODULE_1__["default"].asPopup({
+_page_ui_components_Popup__WEBPACK_IMPORTED_MODULE_0__["default"].asPopup({
   handle: ".topbar",
   left: 20,
   top: 20,

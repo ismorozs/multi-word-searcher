@@ -1,12 +1,5 @@
-import Store from "@page/store";
 import Popup from "@page/ui/components/Popup";
-import Message from '@common/messages';
-import '@page/message-answers';
-
-window.onunload = () => {
-  const { tabId } = Store.get();
-  Message.closingTab({ tabId });
-};
+import "@page/message-answers";
 
 Popup.asPopup({
   handle: ".topbar",

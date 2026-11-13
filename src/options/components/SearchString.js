@@ -152,5 +152,13 @@ export default create(
     .remove::after {
       transform: rotate(-45deg);
     }
+
+    .add:active {
+      transform: scale(1.06) rotate(-45deg);
+    }
+
+    .remove:active {
+      transform: scale(1.06);
+    }
   `,
 );

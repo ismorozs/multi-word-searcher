@@ -1,21 +1,23 @@
-import create from 'simple-els/min';
-import Store from '@page/store';
-import { adjustNumberToBoundaries } from '@common/helpers';
-import { KEYBOARD_KEYS, COLORS } from '@common/constants';
-import Highlightings from '@page/highlightings';
-import markup from './markup';
-import styles from './styles.css';
+import create from "simple-els/min";
+import Store from "@page/store";
+import { adjustNumberToBoundaries } from "@common/helpers";
+import { KEYBOARD_KEYS, COLORS } from "@common/constants";
+import Highlightings from "@page/highlightings";
+import markup from "./markup";
+import styles from "./styles.css";
 
-function focusInput (markup, num) {
+function focusInput(markup, num) {
   const childNum = num || 0;
-  setTimeout(() => markup.searchStrings.children[childNum].firstElementChild.focus());
+  setTimeout(() =>
+    markup.searchStrings.children[childNum].firstElementChild.focus(),
+  );
 }
 
-function getNextSearchId (curId, nextNum) {
+function getNextSearchId(curId, nextNum) {
   return adjustNumberToBoundaries(+curId + nextNum, 0, COLORS.length - 1);
 }
 
-function getNextHighlightPosition (curPos, nextNum, foundResults) {
+function getNextHighlightPosition(curPos, nextNum, foundResults) {
   return adjustNumberToBoundaries(+curPos + nextNum, 1, foundResults);
 }
 
@@ -23,12 +25,12 @@ export default create(
   markup,
   {
     searchStrings: { _: [] },
-    searchHappened: { _:null },
-    highlightPosition: { _:0 },
-    foundResults: { _:0 },
-    caseSensitive: { _:false },
-    color: { _:null },
-    blinkSet: { _:null },
+    searchHappened: { _: null },
+    highlightPosition: { _: 0 },
+    foundResults: { _: 0 },
+    caseSensitive: { _: false },
+    color: { _: null },
+    blinkSet: { _: null },
 
     unfocusedInputs: (searchStrings) =>
       searchStrings.filter((input) => !input.focus),
@@ -190,13 +192,11 @@ export default create(
 
         Store.set({ searchIdEl: markup.searchId });
         Store.onChange(["currentSearch"], (currentSearch) =>
-          set(currentSearch),
+          set(Store.get()[currentSearch]),
         );
         Store.onChange(
           ["popupOpen"],
-          (popupOpen) => {
-            popupOpen && focusInput(markup)
-          },
+          (popupOpen) => Store.get()[popupOpen] && focusInput(markup),
         );
       }
     },

@@ -1,5 +1,5 @@
-import Varstor from 'varstor/webextension';
-import { COLORS, RECENT_SEARCHES_LIMIT } from '@common/constants';
+import Varstor from "varstor/webextension";
+import { COLORS, RECENT_SEARCHES_LIMIT } from "@common/constants";
 
 const EMPTY_OBJECT = { searches: [undefined] };
 
@@ -26,52 +26,61 @@ export default {
   removeFavoriteSearch,
 };
 
-function getTabState (tabId) {
-  return Varstor.get().tabs[ tabId ] || EMPTY_OBJECT;
+function getTabState(tabId) {
+  return Varstor.get().tabs[tabId] || EMPTY_OBJECT;
 }
 
-function initTabState (tabId) {
+function initTabState(tabId) {
   const { tabs } = Varstor.get();
   tabs[tabId] = {
     open: false,
     searches: Array(COLORS.length).fill(),
-    removeMenus: false,
     initialized: true,
+    active: true,
   };
   Varstor.set({ tabs });
 
   return tabs[tabId];
 }
 
-function setTabState (tabId, state) {
+function setTabState(tabId, state) {
   const { tabs } = Varstor.get();
   let prevTabState = tabs[tabId];
 
   if (!prevTabState) {
+    if (!state) {
+      return;
+    }
+
     prevTabState = initTabState(tabId);
   }
 
-  tabs[tabId] = state ? { ...prevTabState, ...state } : EMPTY_OBJECT;
+  if (typeof state === "undefined") {
+    delete tabs[tabId];
+  } else {
+    tabs[tabId] = { ...prevTabState, ...state };
+  }
+
   Varstor.set({ tabs });
 }
 
-async function setSearchInTab (tabId, searchId, string) {
+async function setSearchInTab(tabId, searchId, string) {
   const { tabs } = Varstor.get();
   if (tabs[tabId]) {
     tabs[tabId].searches[searchId] = string;
   }
-  await addRecentSearch(string)
+  await addRecentSearch(string);
   Varstor.set({ tabs });
 }
 
-async function getEmptySearchId ({ id }) {
+async function getEmptySearchId({ id }) {
   const { searches } = Varstor.get().tabs[id];
   const emptySlot = searches.findIndex((s) => !s);
 
   return emptySlot >= 0 ? emptySlot : searches.length - 1;
 }
 
-async function addRecentSearch (str) {
+async function addRecentSearch(str) {
   const { recentSearches } = Varstor.get();
 
   if (!str) {
@@ -84,7 +93,6 @@ async function addRecentSearch (str) {
     if (recentSearches.length === RECENT_SEARCHES_LIMIT) {
       recentSearches.pop();
     }
-
   } else {
     recentSearches.splice(recentIdx, 1);
   }
@@ -94,15 +102,15 @@ async function addRecentSearch (str) {
   await Varstor.set({ recentSearches });
 }
 
-function removeRecentSearch (str) {
+async function removeRecentSearch(str) {
   const { recentSearches } = Varstor.get();
 
-  Varstor.set({
+  await Varstor.set({
     recentSearches: str ? recentSearches.filter((s) => s !== str) : [],
   });
 }
 
-function addFavoriteSearch (str) {
+async function addFavoriteSearch(str) {
   const { favoriteSearches } = Varstor.get();
   const favoriteIdx = favoriteSearches.indexOf(str);
 
@@ -112,13 +120,13 @@ function addFavoriteSearch (str) {
 
   favoriteSearches.unshift(str);
 
-  Varstor.set({ favoriteSearches });
+  await Varstor.set({ favoriteSearches });
 }
 
-function removeFavoriteSearch (str) {
+async function removeFavoriteSearch(str) {
   const { favoriteSearches } = Varstor.get();
 
-  Varstor.set({
+  await Varstor.set({
     favoriteSearches: str ? favoriteSearches.filter((s) => s !== str) : [],
   });
 }
